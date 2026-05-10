@@ -1,0 +1,193 @@
+# Replication of "[Paper Title]"
+
+## [Author 1], [Author 2], and [Author 3]
+
+## Description
+
+- This replication package reproduces [all / selected] figures and tables reported in "[Paper Title]" and its supplementary materials.
+- All public scripts write console output and messages to per-script log files saved in `logs/` or `analyze/logs/`.
+- The file `session_info.log` records the R version, platform, loaded packages, and runtime from a successful full run.
+
+## Folder Tree
+
+Choose the tree that matches the project structure and delete the other one.
+
+### Compact Structure
+
+Use this structure when the project is small enough that data, scripts, figures, tables, and outputs can live in one project root.
+
+```text
+replication_package/
+|-- project.Rproj
+|-- master.R
+|-- README.md
+|-- session_info.log
+|
+|-- data/
+|   `-- [public input data]
+|
+|-- documents/
+|   |-- paper/
+|   `-- questionnaires/
+|
+|-- functions/
+|   `-- logging.R
+|
+|-- scripts/
+|   |-- 01_prepare_data.R
+|   |-- 02_analyze_results.R
+|   `-- 03_make_figures_tables.R
+|
+|-- figures/
+|   `-- [generated figures]
+|
+|-- tables/
+|   `-- [generated tables]
+|
+|-- output/
+|   `-- [reproducible intermediate files]
+|
+`-- logs/
+    `-- [one log file per public script]
+```
+
+### Build/Analyze Structure
+
+Use this structure when data construction is complex, conceptually separate from analysis, or depends on restricted/non-reproducible upstream sources.
+
+```text
+replication_package/
+|-- project.Rproj
+|-- master.R
+|-- README.md
+|-- session_info.log
+|
+|-- build/
+|   |-- data/
+|   |   `-- [raw or received inputs, when distributable]
+|   |-- documents/
+|   |   `-- [source documentation and provenance files]
+|   |-- scripts/
+|   |   `-- [scripts that create analysis-ready data]
+|   |-- output/
+|   |   `-- analysis_ready/
+|   `-- logs/
+|
+`-- analyze/
+    |-- functions/
+    |-- scripts/
+    |-- figures/
+    |-- tables/
+    |-- output/
+    `-- logs/
+```
+
+## Files Included In This Package
+
+- **`master.R`**  
+  Master script that runs the public replication path.
+
+- **`README.md`**  
+  Documentation describing the replication package, directory structure, how to run the project, data restrictions, and the figure/table crosswalk.
+
+- **`project.Rproj`**  
+  RStudio project file. Optional but recommended.
+
+- **`data/` or `build/data/`**  
+  Public raw or received input data. Describe each important input file here.
+
+- **`build/output/analysis_ready/`**  
+  For build/analyze packages, this folder contains the analysis-ready data used by the public replication path.
+
+- **`documents/` or `build/documents/`**  
+  Supporting documentation such as questionnaires, codebooks, data dictionaries, source notes, and accepted manuscript files.
+
+- **`functions/` or `analyze/functions/`**  
+  Reusable R functions sourced by the scripts.
+
+- **`scripts/` or `analyze/scripts/`**  
+  Numbered public scripts that reproduce the results.
+
+- **`figures/` or `analyze/figures/`**  
+  Generated figures.
+
+- **`tables/` or `analyze/tables/`**  
+  Generated tables.
+
+- **`output/` or `analyze/output/`**  
+  Reproducible intermediate objects.
+
+- **`logs/` or `analyze/logs/`**  
+  Per-script log files created during execution.
+
+## Data Sources And Restrictions
+
+Describe all data sources used in the package.
+
+| Source | Location | Redistributable? | Notes |
+|---|---|---|---|
+| [Source name] | `[path/to/file]` | Yes/No | [License, access, or provenance notes.] |
+
+If any source is restricted, proprietary, confidential, licensed, or otherwise non-redistributable, explain:
+
+- why the source cannot be redistributed;
+- which scripts originally used it;
+- which public analysis-ready file replaces it;
+- whether licensed users can rebuild the data;
+- whether published results can be reproduced without access to the restricted source.
+
+## How To Run
+
+1. Open the project directory. Recommended: open `project.Rproj` in RStudio.
+2. From the project root, run:
+
+```r
+source("master.R")
+```
+
+Alternatively, run individual public scripts in order:
+
+```r
+source("scripts/01_prepare_data.R")
+source("scripts/02_analyze_results.R")
+source("scripts/03_make_figures_tables.R")
+```
+
+For build/analyze packages, use paths such as:
+
+```r
+source("analyze/scripts/00_list_inputs.R")
+source("analyze/scripts/01_analyze_results.R")
+source("analyze/scripts/02_make_figures_tables.R")
+```
+
+## Session Information
+
+The file `session_info.log` records the R version, platform, loaded packages, and runtime from a successful full run of the replication package.
+
+## Replication Guide: Figures And Tables
+
+Every manuscript and appendix figure/table should appear in the crosswalk below. Embedded previews are optional; the crosswalk is required.
+
+### Manuscript Figures And Tables
+
+| Paper item | Output | Script | Log | Notes |
+|---|---|---|---|---|
+| Figure 1 | No output file | No code | Not applicable | Conceptual figure. |
+| Figure 2 | `figures/[figure_file].pdf` | `scripts/[script_name].R` | `logs/[script_name].log` | [Brief description.] |
+| Table 1 | `tables/[table_file].csv` | `scripts/[script_name].R` | `logs/[script_name].log` | [Brief description.] |
+
+### Appendix / Supplementary Figures And Tables
+
+| Paper item | Output | Script | Log | Notes |
+|---|---|---|---|---|
+| Figure A.1 | `figures/[appendix_figure].pdf` | `scripts/[script_name].R` | `logs/[script_name].log` | [Brief description.] |
+| Table A.1 | `tables/[appendix_table].csv` | `scripts/[script_name].R` | `logs/[script_name].log` | [Brief description.] |
+
+## Recommended Citation
+
+If you use or adapt the analysis code, please cite the replication data archive associated with the published article.
+
+## Last Verified
+
+- **[Month Year]**

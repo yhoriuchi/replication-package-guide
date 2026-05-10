@@ -1,0 +1,36 @@
+.DS_Store
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+*.Rproj.user/
+
+# The Markdown README is authoritative for this instruction site.
+README.html
+README.pdf
+
+# R Markdown / knitr caches
+*_cache/
+*_files/
+.knitr/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+~$*
+
+# Files generated when testing the lightweight templates
+templates/compact/session_info.log
+templates/compact/logs/*.log
+templates/compact/output/*
+templates/compact/figures/*
+templates/compact/tables/*
+templates/build-analyze/session_info.log
+templates/build-analyze/build/logs/*.log
+templates/build-analyze/build/output/analysis_ready/*
+templates/build-analyze/analyze/logs/*.log
+templates/build-analyze/analyze/output/*
+templates/build-analyze/analyze/figures/*
+templates/build-analyze/analyze/tables/*
+!templates/**/.gitkeep
