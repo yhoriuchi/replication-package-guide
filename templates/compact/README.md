@@ -42,6 +42,18 @@ replication_package/
 - `tables/`: generated tables.
 - `logs/`: one log file per script.
 
+## Paper Source And Consistency Checks
+
+State whether the paper source files were available during preparation. If the paper was written in Overleaf and synced through Dropbox, note whether this replication package was prepared inside or alongside the synced Overleaf folder.
+
+Paper source status:
+
+- [Paper source files were available and checked against the replication outputs.]
+- [Paper source files were not included in the public archive but were used during package preparation.]
+- [Paper source files were not available for this replication package.]
+
+The consistency check should verify that every figure, table, and in-text number reported in the paper can be traced to the scripts, logs, generated tables, or generated figures in this package.
+
 ## How To Run
 
 From a fresh R session at the project root:

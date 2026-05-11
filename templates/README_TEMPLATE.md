@@ -136,6 +136,23 @@ If any source is restricted, proprietary, confidential, licensed, or otherwise n
 - whether licensed users can rebuild the data;
 - whether published results can be reproduced without access to the restricted source.
 
+## Paper Source And Consistency Checks
+
+State whether the paper source files were available during preparation. If the paper was written in Overleaf and synced through Dropbox, note whether the replication package was prepared inside or alongside the synced Overleaf folder.
+
+Paper source status:
+
+- [Paper source files were available and checked against the replication outputs.]
+- [Paper source files were not included in the public archive but were used during package preparation.]
+- [Paper source files were not available for this replication package.]
+
+The consistency check should verify:
+
+- every figure and table cited in the paper or appendix appears in the crosswalk below;
+- every figure/table path in the paper points to the corresponding replicated output;
+- every in-text estimate, standard error, p-value, sample size, sampling date, completion time, response rate, and descriptive statistic can be traced to a script, log file, generated table, or generated figure;
+- conceptual figures, hand-made tables, or non-replicated items are clearly identified in the crosswalk.
+
 ## How To Run
 
 1. Open the project directory. Recommended: open `project.Rproj` in RStudio.

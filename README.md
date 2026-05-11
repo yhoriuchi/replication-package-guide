@@ -3,7 +3,7 @@
 **Author:** Yusaku Horiuchi  
 **Affiliation:** Syde P. Deeb Eminent Scholar in Political Science, Florida State University  
 **Created:** May 10, 2026  
-**Last revised:** May 10, 2026
+**Last revised:** May 11, 2026
 
 This repository is an instruction page and template collection for building high-quality replication packages for social science research projects. It is designed to be read by humans and by coding agents such as Codex or Claude Code before they prepare, audit, or repair a replication package.
 
@@ -38,21 +38,33 @@ For a new replication package:
 9. Confirm that `session_info.log` and one log per public script were created.
 10. Commit only one README file: `README.md`.
 
+## Recommended Paper Integration
+
+When preparing a replication package with Codex, Claude Code, or another coding agent, set the agent's working directory so it can see both:
+
+- the R replication package; and
+- the paper source files, such as Overleaf/LaTeX files, manuscript tables, figure references, bibliography files, and appendix files.
+
+For Overleaf users, one practical workflow is to use Overleaf's Dropbox integration and create the replication package inside, or immediately beside, the synced Overleaf project folder. This lets the agent inspect the manuscript source and the replication package in one workspace.
+
+This integration makes the most important final check much easier: consistency between the paper and the replication package. The agent should verify that:
+
+- every figure and table cited in the paper or appendix appears in the README crosswalk;
+- every figure/table path in the paper points to the corresponding replicated output;
+- every in-text number reported in the paper, including estimates, standard errors, p-values, sample sizes, sampling dates, completion times, response rates, and descriptive statistics, can be traced to a script, log file, generated table, or generated figure;
+- the values in the paper match the values produced by the replication scripts;
+- any conceptual figure, hand-made table, or non-replicated item is clearly identified in the README crosswalk.
+
+For public release, include paper source files only when appropriate and permitted. If the paper source cannot be included in the public archive, use it during preparation for the consistency check and document in `README.md` that the manuscript source was checked against the replication outputs.
+
 ## Agent Instruction
 
 When asking Codex or Claude Code to prepare a replication package, use this prompt:
 
 ```text
-Please read the Replication Package Guide in this repository before making changes.
-Then inspect my project and prepare a complete replication package.
-
-First decide whether the project should use the compact structure or the build/analyze structure.
-Use the compact structure when the project is small and all public inputs can be shared directly.
-Use the build/analyze structure when data construction is complex, uses restricted sources, involves scraping/APIs, or produces analysis-ready datasets that should be treated as the public replication inputs.
-
-Every replication package must include master.R, script-specific log files, session_info.log, a self-contained README, and a complete crosswalk for all figures and tables reported in the paper or appendix.
-Do not use absolute paths. Do not require manual steps unless they are documented as unavoidable.
-
+Please read the Replication Package Guide in this repository before making changes. Then inspect my project and prepare a complete replication package. If the paper source files are available in the working directory, also check consistency between the paper and the replication outputs.
+First decide whether the project should use the compact structure or the build/analyze structure. Use the compact structure when the project is small and all public inputs can be shared directly. Use the build/analyze structure when data construction is complex, uses restricted sources, involves scraping/APIs, or produces analysis-ready datasets that should be treated as the public replication inputs.
+Every replication package must include master.R, script-specific log files, session_info.log, a self-contained README, and a complete crosswalk for all figures and tables reported in the paper or appendix. Check that every figure, table, and in-text numerical claim in the paper can be traced to the replication package, including estimates, standard errors, p-values, sample sizes, sampling dates, completion times, response rates, and descriptive statistics. Do not use absolute paths. Do not require manual steps unless they are documented as unavoidable.
 Use templates/compact/ or templates/build-analyze/ as the starting structure. Use the selected template's README.md, or templates/README_TEMPLATE.md, as the starting point for README.md. Replace all placeholder text with project-specific documentation.
 ```
 
@@ -71,6 +83,7 @@ The package should satisfy these requirements:
 - Raw or received data should be treated as read-only.
 - Generated files should be reproducible from scripts, except when restricted data prevent public rebuilding.
 - All reported numerical results should appear in logs, tables, figures, or the README crosswalk.
+- When paper source files are available, the replication package should be checked against the manuscript and appendix for consistency in figures, tables, and in-text numerical claims.
 - Restricted, proprietary, or non-redistributable data must be documented explicitly.
 
 ## Choosing A Structure
@@ -184,6 +197,7 @@ Every replication README should include:
 - instructions for running individual scripts, if useful;
 - explanation of all data sources;
 - note on restricted or omitted data, if relevant;
+- note on whether paper source files were checked against replication outputs;
 - description of logs and session information;
 - figure/table crosswalk in paper order;
 - optional figure/table previews when useful;
@@ -481,6 +495,20 @@ It should explain:
 
 The public package should be designed so that users can reproduce published results without restricted access whenever legally and ethically possible.
 
+## Paper Consistency Checks
+
+When manuscript source files are available, treat them as part of the working context for package preparation. This is especially useful for Overleaf projects synced through Dropbox, because the paper source files and the R replication package can be inspected together.
+
+The final consistency pass should check:
+
+- figure and table labels in the paper against the README crosswalk;
+- manuscript figure/table file paths against generated outputs;
+- in-text estimates, standard errors, p-values, sample sizes, sampling dates, completion times, response rates, and descriptive statistics against logs and generated tables;
+- appendix items against scripts, outputs, and logs;
+- notes for any conceptual, hand-made, or non-replicated items.
+
+If the paper source files are not included in the public replication archive, state in `README.md` whether they were used during preparation for consistency checks.
+
 ## Software Environment
 
 At minimum, include `session_info.log` from a successful full run.
@@ -505,6 +533,7 @@ Before releasing a replication package, verify:
 - The README folder tree matches the actual package.
 - The README crosswalk lists every figure and table in paper order.
 - Every figure/table has an output path, script path, and log path.
+- Every reported number in the paper source has been checked against logs, tables, figures, or scripts when the paper source is available.
 - All reported text numbers can be traced to a log, table, figure, or script.
 - All restricted data sources are documented.
 - All temporary, personal, and cache files are removed.
@@ -517,16 +546,18 @@ Before releasing a replication package, verify:
 When an agent prepares a package, it should follow this sequence:
 
 1. Inspect the project files and identify all scripts, data inputs, figures, tables, and documents.
-2. Decide whether to use the compact or build/analyze structure.
-3. Move or copy files into the chosen structure without deleting original work until the user approves.
-4. Create or repair `master.R`.
-5. Add per-script logging.
-6. Run the public replication path.
-7. Record `session_info.log`.
-8. Build the README figure/table crosswalk.
-9. Add embedded previews only if they make the README easier to inspect.
-10. Re-run the package after documentation changes.
-11. Report any files that cannot be reproduced because of restricted data or missing inputs.
+2. Inspect the paper source files when they are available in the same working directory.
+3. Decide whether to use the compact or build/analyze structure.
+4. Move or copy files into the chosen structure without deleting original work until the user approves.
+5. Create or repair `master.R`.
+6. Add per-script logging.
+7. Run the public replication path.
+8. Record `session_info.log`.
+9. Build the README figure/table crosswalk.
+10. Check paper-replication consistency for figures, tables, and in-text numerical claims.
+11. Add embedded previews only if they make the README easier to inspect.
+12. Re-run the package after documentation changes.
+13. Report any files that cannot be reproduced because of restricted data or missing inputs.
 
 ## Minimal Release Contents
 
