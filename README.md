@@ -3,7 +3,7 @@
 **Author:** Yusaku Horiuchi  
 **Affiliation:** Syde P. Deeb Eminent Scholar in Political Science, Florida State University  
 **Created:** May 10, 2026  
-**Last revised:** May 11, 2026
+**Last revised:** May 14, 2026
 
 This repository is an instruction page and template collection for building high-quality replication packages for social science research projects. It is designed to be read by humans and by coding agents such as Codex or Claude Code before they prepare, audit, or repair a replication package.
 
@@ -24,6 +24,10 @@ After pushing this repository to GitHub, the repository landing page can serve a
 If you later want a formal website, enable GitHub Pages or render this Markdown file into a static page. Keep this Markdown file as the authoritative source so agents and humans are always reading the same instructions.
 
 ## How To Use This Repository
+
+Before asking an AI agent to polish a replication package for publication, clean the project as much as possible yourself. AI is useful for checking, reorganizing, documenting, and catching inconsistencies, but it should not be treated as a substitute for the author's judgment about which files, scripts, data sources, and results are actually part of the replication record.
+
+At minimum, remove clearly obsolete files, label exploratory scripts, identify the scripts that generate reported results, gather the paper source files when available, and decide which data can legally be shared. The cleaner the starting point, the more reliable the AI-assisted audit will be.
 
 For a new replication package:
 
@@ -57,15 +61,73 @@ This integration makes the most important final check much easier: consistency b
 
 For public release, include paper source files only when appropriate and permitted. If the paper source cannot be included in the public archive, use it during preparation for the consistency check and document in `README.md` that the manuscript source was checked against the replication outputs.
 
-## Agent Instruction
+## Common Agent Prompts
 
-When asking Codex or Claude Code to prepare a replication package, use this prompt:
+Use these copy-paste prompts with Codex, Claude Code, or another coding agent. Each prompt assumes the agent can read this guide and inspect the project files. Use one prompt at a time so the task is specific and easy to verify.
+
+### Prepare Or Reorganize A Replication Package
 
 ```text
-Please read the Replication Package Guide in this repository before making changes. Then inspect my project and prepare a complete replication package. If the paper source files are available in the working directory, also check consistency between the paper and the replication outputs.
+Please read the Replication Package Guide before making changes. Then inspect my project and prepare a complete replication package. If the paper source files are available in the working directory, also check consistency between the paper and the replication outputs.
 First decide whether the project should use the compact structure or the build/analyze structure. Use the compact structure when the project is small and all public inputs can be shared directly. Use the build/analyze structure when data construction is complex, uses restricted sources, involves scraping/APIs, or produces analysis-ready datasets that should be treated as the public replication inputs.
 Every replication package must include master.R, script-specific log files, session_info.log, a self-contained README, and a complete crosswalk for all figures and tables reported in the paper or appendix. Check that every figure, table, and in-text numerical claim in the paper can be traced to the replication package, including estimates, standard errors, p-values, sample sizes, sampling dates, completion times, response rates, and descriptive statistics. Do not use absolute paths. Do not require manual steps unless they are documented as unavoidable.
 Use templates/compact/ or templates/build-analyze/ as the starting structure. Use the selected template's README.md, or templates/README_TEMPLATE.md, as the starting point for README.md. Replace all placeholder text with project-specific documentation.
+```
+
+### Add Or Repair Script Logs
+
+```text
+Please read the Replication Package Guide, then inspect all public R scripts in this project. Add or repair per-script logging so every public script writes a matching log file to logs/ or analyze/logs/.
+Each log should record the script name, start and end time, important row counts, sample sizes, reported estimates or test results, warnings, and any other numbers reported in the paper.
+Use the project's existing logging style if one exists. Do not change substantive analysis code unless needed to make logging reliable. After editing, run the public replication path and confirm that every public script produces its expected log file.
+```
+
+### Prepare Or Repair README.md
+
+```text
+Please read the Replication Package Guide and prepare or repair the project's single authoritative README.md. Use templates/README_TEMPLATE.md as the model.
+The README must include the paper title and authors, description, folder tree, files included, data sources and restrictions, paper source consistency status, how to run master.R, session information, recommended citation, last verified date, and a paper-order crosswalk for every figure and table.
+Do not create additional README files. Do not include README.html or README.pdf in the repository. Embedded figure/table previews are optional; the crosswalk is required.
+```
+
+### Remove Unnecessary Files And Script Parts
+
+```text
+Please read the Replication Package Guide, then audit the project for files and code that should not be in the public replication package.
+Identify and remove temporary files, caches, old exploratory outputs, obsolete scripts, unused helper functions, personal files, absolute-path artifacts, and generated files that can be recreated by scripts. Keep source data, public scripts, documentation, final outputs, logs, and files needed to reproduce results.
+Before deleting anything substantial, list what you plan to remove and why. Do not remove raw data, analysis-ready public inputs, manuscript source files, or scripts needed for reported results unless I explicitly approve.
+```
+
+### Check Paper And Log Consistency
+
+```text
+Please read the Replication Package Guide, then compare the paper source files with the replication package outputs and logs.
+Check every figure, table, and in-text numerical claim in the paper and appendix, including estimates, standard errors, p-values, confidence intervals, sample sizes, sampling dates, field dates, completion times, response rates, missing-data counts, and descriptive statistics.
+For each reported item, verify that the value in the paper matches a script, log file, generated table, or generated figure. Report any mismatch with the paper source location, the replication source location, the paper value, and the replication value. Do not silently change paper text or analysis code; explain the discrepancy first.
+```
+
+### Review Code For Coding Errors
+
+```text
+Please read the Replication Package Guide, then review the public replication scripts for coding errors that could affect reported results.
+Focus on data filtering, merges, joins, recoding, factor levels, missing-data handling, weights, clustered or robust standard errors, random seeds, model formulas, multiple-testing adjustments, output paths, and whether scripts run in the documented order from a clean R session.
+Prioritize bugs, reproducibility risks, and missing tests or logs. Report findings with file paths, line references, severity, and suggested fixes. Make fixes only when they are clearly safe and within the replication package standard.
+```
+
+### Check Overleaf Reporting Errors
+
+```text
+Please read the Replication Package Guide, then inspect the Overleaf/LaTeX source files and compare them with the replication package.
+Check figure references, table references, labels, captions, file paths, appendix numbering, citations to results, and all in-text numerical claims. Verify that the manuscript points to the correct generated figures and tables and that the reported values match logs or generated outputs.
+Report likely reporting errors with the TeX file path, label or nearby text, the value or reference in the paper, the corresponding replication source, and a recommended correction. Do not rewrite the manuscript unless I explicitly ask you to make the edits.
+```
+
+### Final Pre-Release Audit
+
+```text
+Please read the Replication Package Guide and perform a final pre-release audit of this replication package.
+Verify that source("master.R") runs from a fresh R session; every public script creates a log; session_info.log exists; README.md is the only README file; the figure/table crosswalk is complete; paper source consistency has been checked when source files are available; no absolute paths, personal files, caches, or temporary files remain; and restricted data are documented.
+Return a concise release-readiness report with pass/fail items, remaining risks, and exact files that need attention.
 ```
 
 ## Core Standard
