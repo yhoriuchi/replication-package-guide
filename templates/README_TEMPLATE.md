@@ -1,6 +1,6 @@
 # Replication of "[Paper Title]"
 
-## [Author 1], [Author 2], and [Author 3]
+**Authors:** [Author 1], [Author 2], and [Author 3]
 
 ## Description
 
@@ -181,6 +181,14 @@ source("analyze/scripts/02_make_figures_tables.R")
 ## Session Information
 
 The file `session_info.log` records the R version, platform, loaded packages, and runtime from a successful full run of the replication package.
+
+The master script updates the computing environment block below after a successful full run.
+
+### Computing Environment
+
+Software: R version [version]
+Platform: [R platform]
+Computer Operating System: [operating system and version]
 
 ## Replication Guide: Figures And Tables
 

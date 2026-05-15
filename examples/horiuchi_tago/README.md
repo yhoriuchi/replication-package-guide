@@ -160,6 +160,14 @@ Every public script writes a matching log file in `logs/`. Each log records the 
 
 The file `session_info.log` records the full-run start time, end time, elapsed time, scripts run, R version, platform, attached packages, and loaded namespaces.
 
+The master script updates the computing environment block below after a successful full run.
+
+### Computing Environment
+
+Software: R version 4.6.0
+Platform: x86_64-apple-darwin20
+Computer Operating System: macOS Tahoe 26.4
+
 ## Verification
 
 Verified on May 14, 2026 by running:

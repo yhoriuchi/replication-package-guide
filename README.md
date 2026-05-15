@@ -3,7 +3,7 @@
 **Author:** Yusaku Horiuchi  
 **Affiliation:** Syde P. Deeb Eminent Scholar in Political Science, Florida State University  
 **Created:** May 10, 2026  
-**Last revised:** May 14, 2026
+**Last revised:** May 15, 2026
 
 [![Page views](https://hits.sh/yhoriuchi.github.io/replication-package-guide.svg?label=page%20views&color=007ec6)](https://hits.sh/yhoriuchi.github.io/replication-package-guide/)
 
@@ -99,7 +99,7 @@ Use the project's existing logging style if one exists. Do not change substantiv
 
 ```text
 Please read the Replication Package Guide and prepare or repair the project's single authoritative README.md. Use templates/README_TEMPLATE.md as the model.
-The README must include the paper title and authors, description, folder tree, files included, data sources and restrictions, paper source consistency status, how to run master.R, session information, recommended citation, last verified date, and a paper-order crosswalk for every figure and table.
+The README must include the paper title and authors, description, folder tree, files included, data sources and restrictions, paper source consistency status, how to run master.R, computing environment, session information, recommended citation, last verified date, and a paper-order crosswalk for every figure and table.
 Do not create additional README files. Do not include README.html or README.pdf in the repository. Embedded figure/table previews are optional; the crosswalk is required.
 ```
 
@@ -268,6 +268,7 @@ Every replication README should include:
 - short description of what the package reproduces;
 - folder tree;
 - software requirements;
+- computing environment summary;
 - instructions for running `master.R`;
 - instructions for running individual scripts, if useful;
 - explanation of all data sources;
@@ -496,6 +497,66 @@ safe_source <- function(file) {
   source(file, echo = FALSE, print.eval = FALSE)
 }
 
+update_readme_environment <- function(readme = "README.md") {
+  if (!file.exists(readme)) return(invisible(FALSE))
+
+  session <- sessionInfo()
+  r_version <- paste("R version", paste(R.version$major, R.version$minor, sep = "."))
+  operating_system <- session$running
+
+  if (length(operating_system) == 0 || is.na(operating_system[1]) || !nzchar(operating_system[1])) {
+    sys <- Sys.info()
+    operating_system <- paste(sys[["sysname"]], sys[["release"]])
+  }
+
+  environment_block <- c(
+    "### Computing Environment",
+    "",
+    paste("Software:", r_version),
+    paste("Platform:", session$platform),
+    paste("Computer Operating System:", operating_system),
+    ""
+  )
+
+  lines <- readLines(readme, warn = FALSE)
+  existing <- which(grepl("^#{1,6} Computing Environment$", lines))
+
+  if (length(existing) > 0) {
+    start <- existing[1]
+    following_heading <- which(seq_along(lines) > start & grepl("^#{1,6} ", lines))
+    end <- if (length(following_heading) > 0) following_heading[1] - 1 else length(lines)
+    before <- if (start > 1) lines[seq_len(start - 1)] else character()
+    after <- if (end < length(lines)) lines[(end + 1):length(lines)] else character()
+    lines <- c(before, environment_block, after)
+  } else {
+    session_heading <- which(grepl("^## .*Session Information$", lines))
+
+    if (length(session_heading) > 0) {
+      following_section <- which(seq_along(lines) > session_heading[1] & grepl("^## ", lines))
+      insert_before <- if (length(following_section) > 0) following_section[1] else length(lines) + 1
+      before <- if (insert_before > 1) lines[seq_len(insert_before - 1)] else character()
+      after <- if (insert_before <= length(lines)) lines[insert_before:length(lines)] else character()
+
+      if (length(before) > 0 && nzchar(tail(before, 1))) before <- c(before, "")
+      lines <- c(before, environment_block, after)
+    } else {
+      if (length(lines) > 0 && nzchar(tail(lines, 1))) lines <- c(lines, "")
+
+      lines <- c(
+        lines,
+        "## Session Information",
+        "",
+        "The file `session_info.log` records the R version, platform, loaded packages, and runtime from a successful full run.",
+        "",
+        environment_block
+      )
+    }
+  }
+
+  writeLines(lines, readme, useBytes = TRUE)
+  invisible(TRUE)
+}
+
 scripts <- c(
   "scripts/01_prepare_data.R",
   "scripts/02_estimate_main_results.R",
@@ -520,6 +581,8 @@ cat("Elapsed: ", format(end_time - start_time), "\n\n", sep = "")
 cat("Session Information\n")
 print(sessionInfo())
 sink()
+
+update_readme_environment("README.md")
 ```
 
 For large packages, `master.R` should normally run the public analysis path only:
@@ -586,7 +649,19 @@ If the paper source files are not included in the public replication archive, st
 
 ## Software Environment
 
-At minimum, include `session_info.log` from a successful full run.
+At minimum, include a short computing environment summary in `README.md` and `session_info.log` from a successful full run. The template `master.R` files automatically refresh this block after writing `session_info.log`.
+
+Suggested README format:
+
+```text
+### Computing Environment
+
+Software: R version [version]
+Platform: [R platform]
+Computer Operating System: [operating system and version]
+```
+
+The values should come from the run that produced `session_info.log`. For example, use the `R version`, `Platform`, and `Running under` lines printed by `sessionInfo()`.
 
 For stronger reproducibility, also consider:
 

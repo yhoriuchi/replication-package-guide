@@ -20,6 +20,66 @@ safe_source <- function(file) {
   source(file, echo = FALSE, print.eval = FALSE)
 }
 
+update_readme_environment <- function(readme = "README.md") {
+  if (!file.exists(readme)) return(invisible(FALSE))
+
+  session <- sessionInfo()
+  r_version <- paste("R version", paste(R.version$major, R.version$minor, sep = "."))
+  operating_system <- session$running
+
+  if (length(operating_system) == 0 || is.na(operating_system[1]) || !nzchar(operating_system[1])) {
+    sys <- Sys.info()
+    operating_system <- paste(sys[["sysname"]], sys[["release"]])
+  }
+
+  environment_block <- c(
+    "### Computing Environment",
+    "",
+    paste("Software:", r_version),
+    paste("Platform:", session$platform),
+    paste("Computer Operating System:", operating_system),
+    ""
+  )
+
+  lines <- readLines(readme, warn = FALSE)
+  existing <- which(grepl("^#{1,6} Computing Environment$", lines))
+
+  if (length(existing) > 0) {
+    start <- existing[1]
+    following_heading <- which(seq_along(lines) > start & grepl("^#{1,6} ", lines))
+    end <- if (length(following_heading) > 0) following_heading[1] - 1 else length(lines)
+    before <- if (start > 1) lines[seq_len(start - 1)] else character()
+    after <- if (end < length(lines)) lines[(end + 1):length(lines)] else character()
+    lines <- c(before, environment_block, after)
+  } else {
+    session_heading <- which(grepl("^## .*Session Information$", lines))
+
+    if (length(session_heading) > 0) {
+      following_section <- which(seq_along(lines) > session_heading[1] & grepl("^## ", lines))
+      insert_before <- if (length(following_section) > 0) following_section[1] else length(lines) + 1
+      before <- if (insert_before > 1) lines[seq_len(insert_before - 1)] else character()
+      after <- if (insert_before <= length(lines)) lines[insert_before:length(lines)] else character()
+
+      if (length(before) > 0 && nzchar(tail(before, 1))) before <- c(before, "")
+      lines <- c(before, environment_block, after)
+    } else {
+      if (length(lines) > 0 && nzchar(tail(lines, 1))) lines <- c(lines, "")
+
+      lines <- c(
+        lines,
+        "## Session Information",
+        "",
+        "The file `session_info.log` records the R version, platform, loaded packages, and runtime from a successful full run.",
+        "",
+        environment_block
+      )
+    }
+  }
+
+  writeLines(lines, readme, useBytes = TRUE)
+  invisible(TRUE)
+}
+
 scripts <- c(
   "scripts/step01_read_data.R",
   "scripts/step02_check_manipulation.R",
@@ -50,3 +110,5 @@ cat("\n")
 cat("Session Information\n")
 print(sessionInfo())
 sink()
+
+update_readme_environment("README.md")
