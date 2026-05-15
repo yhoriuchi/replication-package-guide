@@ -22,9 +22,15 @@ Use standard Markdown as the authoritative instruction format. Markdown is easie
 
 ## Using This As A Site
 
-After pushing this repository to GitHub, the repository landing page can serve as the instruction site because GitHub renders this `README.md` automatically. For the cleanest agent instruction, give Codex or Claude Code the repository URL and ask it to read the root `README.md` before changing any files.
+The public guide is available at:
 
-If you later want a formal website, enable GitHub Pages or render this Markdown file into a static page. Keep this Markdown file as the authoritative source so agents and humans are always reading the same instructions.
+<https://yhoriuchi.github.io/replication-package-guide/>
+
+When using Codex, Claude Code, or another coding agent, give the agent this URL and ask it to read the guide before changing any files. The GitHub repository is available at:
+
+<https://github.com/yhoriuchi/replication-package-guide>
+
+Keep this Markdown file as the authoritative source so the public page, repository, agents, and human readers use the same instructions.
 
 ## How To Use This Repository
 
