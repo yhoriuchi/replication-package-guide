@@ -5,6 +5,8 @@
 **Created:** May 10, 2026  
 **Last revised:** May 14, 2026
 
+[![Page views](https://hits.sh/yhoriuchi.github.io/replication-package-guide.svg?label=page%20views&color=007ec6)](https://hits.sh/yhoriuchi.github.io/replication-package-guide/)
+
 This repository is an instruction page and template collection for building high-quality replication packages for social science research projects. It is designed to be read by humans and by coding agents such as Codex or Claude Code before they prepare, audit, or repair a replication package.
 
 The lightweight templates in this repository illustrate the recommended package designs:
