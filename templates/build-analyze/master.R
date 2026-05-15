@@ -40,21 +40,41 @@ update_readme_environment <- function(readme = "README.md") {
     "",
     paste("Software:", r_version),
     paste("Platform:", session$platform),
-    paste("Computer Operating System:", operating_system),
-    ""
+    paste("Computer Operating System:", operating_system)
   )
 
   lines <- readLines(readme, warn = FALSE)
   existing <- which(grepl("^#{1,6} Computing Environment$", lines))
 
+  trim_blank_edges <- function(x) {
+    if (length(x) == 0) return(x)
+
+    nonblank <- which(nzchar(x))
+    if (length(nonblank) == 0) return(character())
+
+    x[seq.int(min(nonblank), max(nonblank))]
+  }
+
   if (length(existing) > 0) {
     start <- existing[1]
     following_heading <- which(seq_along(lines) > start & grepl("^#{1,6} ", lines))
     end <- if (length(following_heading) > 0) following_heading[1] - 1 else length(lines)
+    existing_block <- if (start < end) lines[(start + 1):end] else character()
+    extra_environment_lines <- existing_block[
+      !grepl("^(Software:|Platform:|Computer Operating System:)", existing_block)
+    ]
+    extra_environment_lines <- trim_blank_edges(extra_environment_lines)
+
+    if (length(extra_environment_lines) > 0) {
+      environment_block <- c(environment_block, "", extra_environment_lines)
+    }
+    environment_block <- c(environment_block, "")
+
     before <- if (start > 1) lines[seq_len(start - 1)] else character()
     after <- if (end < length(lines)) lines[(end + 1):length(lines)] else character()
     lines <- c(before, environment_block, after)
   } else {
+    environment_block <- c(environment_block, "")
     session_heading <- which(grepl("^## .*Session Information$", lines))
 
     if (length(session_heading) > 0) {

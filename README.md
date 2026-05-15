@@ -9,6 +9,8 @@
 
 This repository is an instruction page and template collection for building high-quality replication packages for social science research projects. It is designed to be read by humans and by coding agents such as Codex or Claude Code before they prepare, audit, or repair a replication package.
 
+The guide and templates assume an R-based workflow, with `master.R`, R scripts, and `session_info.log` as the default examples. The underlying standard is not limited to R. If a project uses Stata, Python, Julia, MATLAB, or another toolchain, users can ask an agentic AI to read this guide and prepare an analogous replication package with the appropriate single entry point, logs, software-environment record, and figure/table crosswalk.
+
 The lightweight templates in this repository illustrate the recommended package designs:
 
 - `templates/README_TEMPLATE.md`: a copyable starting point for a project's one and only `README.md`.
@@ -514,21 +516,41 @@ update_readme_environment <- function(readme = "README.md") {
     "",
     paste("Software:", r_version),
     paste("Platform:", session$platform),
-    paste("Computer Operating System:", operating_system),
-    ""
+    paste("Computer Operating System:", operating_system)
   )
 
   lines <- readLines(readme, warn = FALSE)
   existing <- which(grepl("^#{1,6} Computing Environment$", lines))
 
+  trim_blank_edges <- function(x) {
+    if (length(x) == 0) return(x)
+
+    nonblank <- which(nzchar(x))
+    if (length(nonblank) == 0) return(character())
+
+    x[seq.int(min(nonblank), max(nonblank))]
+  }
+
   if (length(existing) > 0) {
     start <- existing[1]
     following_heading <- which(seq_along(lines) > start & grepl("^#{1,6} ", lines))
     end <- if (length(following_heading) > 0) following_heading[1] - 1 else length(lines)
+    existing_block <- if (start < end) lines[(start + 1):end] else character()
+    extra_environment_lines <- existing_block[
+      !grepl("^(Software:|Platform:|Computer Operating System:)", existing_block)
+    ]
+    extra_environment_lines <- trim_blank_edges(extra_environment_lines)
+
+    if (length(extra_environment_lines) > 0) {
+      environment_block <- c(environment_block, "", extra_environment_lines)
+    }
+    environment_block <- c(environment_block, "")
+
     before <- if (start > 1) lines[seq_len(start - 1)] else character()
     after <- if (end < length(lines)) lines[(end + 1):length(lines)] else character()
     lines <- c(before, environment_block, after)
   } else {
+    environment_block <- c(environment_block, "")
     session_heading <- which(grepl("^## .*Session Information$", lines))
 
     if (length(session_heading) > 0) {
@@ -649,7 +671,7 @@ If the paper source files are not included in the public replication archive, st
 
 ## Software Environment
 
-At minimum, include a short computing environment summary in `README.md` and `session_info.log` from a successful full run. The template `master.R` files automatically refresh this block after writing `session_info.log`.
+At minimum, include a short computing environment summary in `README.md` and `session_info.log` from a successful full run. The template `master.R` files automatically refresh the software, platform, and operating-system lines after writing `session_info.log`.
 
 Suggested README format:
 
@@ -659,9 +681,12 @@ Suggested README format:
 Software: R version [version]
 Platform: [R platform]
 Computer Operating System: [operating system and version]
+Additional details: [RAM, processor/GPU, external tools, or other project-specific requirements when relevant.]
 ```
 
 The values should come from the run that produced `session_info.log`. For example, use the `R version`, `Platform`, and `Running under` lines printed by `sessionInfo()`.
+
+Some projects should report additional computing details when they affect reproducibility or runtime, such as RAM, CPU/GPU, external command-line tools, licensed software, high-performance-computing settings, or non-R language versions.
 
 For stronger reproducibility, also consider:
 

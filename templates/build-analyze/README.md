@@ -122,13 +122,14 @@ This section maps every reported figure and table to the analysis script and log
 
 The file `session_info.log` records the R version, platform, loaded packages, and runtime from a successful full run.
 
-The master script updates the computing environment block below after a successful full run.
+The master script updates the software, platform, and operating-system lines below after a successful full run. Add project-specific hardware or software details when they affect reproducibility.
 
 ### Computing Environment
 
 Software: R version [version]
 Platform: [R platform]
 Computer Operating System: [operating system and version]
+Additional details: [RAM, processor/GPU, external tools, or other project-specific requirements when relevant.]
 
 ## Last Verified
 

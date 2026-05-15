@@ -160,7 +160,7 @@ Every public script writes a matching log file in `logs/`. Each log records the 
 
 The file `session_info.log` records the full-run start time, end time, elapsed time, scripts run, R version, platform, attached packages, and loaded namespaces.
 
-The master script updates the computing environment block below after a successful full run.
+The master script updates the software, platform, and operating-system lines below after a successful full run.
 
 ### Computing Environment
 
