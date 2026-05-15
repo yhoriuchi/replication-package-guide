@@ -5,6 +5,7 @@ This folder contains lightweight starter structures, not full replication packag
 - `README_TEMPLATE.md`: copy this to an existing project root as `README.md`, then replace placeholders and delete the unused folder-tree option.
 - `compact/`: use for smaller projects where data, analysis scripts, figures, and tables can live in one project root.
 - `build-analyze/`: use for larger projects where data construction should be separated from the public analysis workflow.
+- `../examples/horiuchi_tago/`: a finished compact package example that illustrates how the guide can look in practice.
 
 Each structure template includes example `.Rproj`, `README.md`, `master.R`, script stubs, logging helpers, and placeholder folders tracked with `.gitkeep` files.
 

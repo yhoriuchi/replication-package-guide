@@ -12,8 +12,11 @@ The lightweight templates in this repository illustrate the recommended package 
 - `templates/README_TEMPLATE.md`: a copyable starting point for a project's one and only `README.md`.
 - `templates/compact/`: compact project structure for smaller projects.
 - `templates/build-analyze/`: larger project structure with separate `build/` and `analyze/` stages.
+- `examples/horiuchi_tago/`: a finished compact replication package example.
 
 The structure templates intentionally contain only folder structure and essential example files such as `.Rproj`, `README.md`, `master.R`, script stubs, and logging helpers. They do not include full replication packages or large data files.
+
+The example package shows what a completed compact package can look like after applying the guide. It includes a real `README.md`, `master.R`, numbered scripts, logs, generated figures and outputs, and a paper-source consistency note.
 
 Use standard Markdown as the authoritative instruction format. Markdown is easiest for agents to read, easiest to host on GitHub or another static site, and does not require R to render. Each replication package should commit one and only one README file: `README.md`.
 
@@ -41,6 +44,8 @@ For a new replication package:
 8. Run `source("master.R")` from a fresh R session.
 9. Confirm that `session_info.log` and one log per public script were created.
 10. Commit only one README file: `README.md`.
+
+To see a concrete finished package, inspect `examples/horiuchi_tago/`. It is included as an example, not as a template to copy blindly.
 
 ## Recommended Paper Integration
 
