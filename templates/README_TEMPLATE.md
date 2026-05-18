@@ -193,22 +193,76 @@ Additional details: [RAM, processor/GPU, external tools, or other project-specif
 
 ## Replication Guide: Figures And Tables
 
-Every manuscript and appendix figure/table should appear in the crosswalk below. Embedded previews are optional; the crosswalk is required.
+Every manuscript and appendix figure/table should appear in the crosswalk below. Embedded previews are optional; the crosswalk is required. Use description-list entries instead of a wide table so long output paths remain readable.
 
 ### Manuscript Figures And Tables
 
-| Paper item | Output | Script | Log | Notes |
-|---|---|---|---|---|
-| Figure 1 | No output file | No code | Not applicable | Conceptual figure. |
-| Figure 2 | `figures/[figure_file].pdf` | `scripts/[script_name].R` | `logs/[script_name].log` | [Brief description.] |
-| Table 1 | `tables/[table_file].csv` | `scripts/[script_name].R` | `logs/[script_name].log` | [Brief description.] |
+<dl>
+<dt>Manuscript item</dt>
+<dd>Figure 1</dd>
+<dt>Output</dt>
+<dd>No output file</dd>
+<dt>Script</dt>
+<dd>No code</dd>
+<dt>Log</dt>
+<dd>Not applicable</dd>
+<dt>Notes</dt>
+<dd>Conceptual figure.</dd>
+</dl>
+
+<dl>
+<dt>Manuscript item</dt>
+<dd>Figure 2</dd>
+<dt>Output</dt>
+<dd><code>figures/[figure_file].pdf</code></dd>
+<dt>Script</dt>
+<dd><code>scripts/[script_name].R</code></dd>
+<dt>Log</dt>
+<dd><code>logs/[script_name].log</code></dd>
+<dt>Notes</dt>
+<dd>[Brief description.]</dd>
+</dl>
+
+<dl>
+<dt>Manuscript item</dt>
+<dd>Table 1</dd>
+<dt>Output</dt>
+<dd><code>tables/[table_file].csv</code></dd>
+<dt>Script</dt>
+<dd><code>scripts/[script_name].R</code></dd>
+<dt>Log</dt>
+<dd><code>logs/[script_name].log</code></dd>
+<dt>Notes</dt>
+<dd>[Brief description.]</dd>
+</dl>
 
 ### Appendix / Supplementary Figures And Tables
 
-| Paper item | Output | Script | Log | Notes |
-|---|---|---|---|---|
-| Figure A.1 | `figures/[appendix_figure].pdf` | `scripts/[script_name].R` | `logs/[script_name].log` | [Brief description.] |
-| Table A.1 | `tables/[appendix_table].csv` | `scripts/[script_name].R` | `logs/[script_name].log` | [Brief description.] |
+<dl>
+<dt>Manuscript item</dt>
+<dd>Figure A.1</dd>
+<dt>Output</dt>
+<dd><code>figures/[appendix_figure].pdf</code></dd>
+<dt>Script</dt>
+<dd><code>scripts/[script_name].R</code></dd>
+<dt>Log</dt>
+<dd><code>logs/[script_name].log</code></dd>
+<dt>Notes</dt>
+<dd>[Brief description.]</dd>
+</dl>
+
+<dl>
+<dt>Manuscript item</dt>
+<dd>Table A.1</dd>
+<dt>Output</dt>
+<dd><code>tables/[appendix_table].csv</code></dd>
+<dt>Script</dt>
+<dd><code>scripts/[script_name].R</code></dd>
+<dt>Log</dt>
+<dd><code>logs/[script_name].log</code></dd>
+<dt>Notes</dt>
+<dd>[Brief description.]</dd>
+</dl>
 
 ## Recommended Citation
 

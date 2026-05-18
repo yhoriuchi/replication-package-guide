@@ -141,18 +141,72 @@ The manuscript source files in the parent Overleaf directory were checked while 
 
 ### Manuscript
 
-| Paper item | Output | Script | Log | Notes |
-|---|---|---|---|---|
-| Figure `fig:h1bar`: support by authority condition | `figures/barchart1.pdf` | `scripts/step04_test_hypotheses.R` | `logs/step04_test_hypotheses.log` | Included in the manuscript through `figures_tex/barchart1.tex`. |
-| Table `tb:regression`: effects of authority, outcome, and casualties | `output/regression_table.tex`; `output/regression_table.txt` | `scripts/step04_test_hypotheses.R` | `logs/step04_test_hypotheses.log` | The manuscript uses a separately formatted LaTeX table in the paper source. The generated outputs reproduce the regression estimates. |
-| Figure `fig:h2bar`: support by casualty condition | `figures/barchart2.pdf` | `scripts/step04_test_hypotheses.R` | `logs/step04_test_hypotheses.log` | Included in the manuscript through `figures_tex/barchart2.tex`. |
+<dl>
+<dt>Manuscript item</dt>
+<dd>Figure <code>fig:h1bar</code>: support by authority condition</dd>
+<dt>Output</dt>
+<dd><code>figures/barchart1.pdf</code></dd>
+<dt>Script</dt>
+<dd><code>scripts/step04_test_hypotheses.R</code></dd>
+<dt>Log</dt>
+<dd><code>logs/step04_test_hypotheses.log</code></dd>
+<dt>Notes</dt>
+<dd>Included in the manuscript through <code>figures_tex/barchart1.tex</code>.</dd>
+</dl>
+
+<dl>
+<dt>Manuscript item</dt>
+<dd>Table <code>tb:regression</code>: effects of authority, outcome, and casualties</dd>
+<dt>Output</dt>
+<dd><code>output/regression_table.tex</code>; <code>output/regression_table.txt</code></dd>
+<dt>Script</dt>
+<dd><code>scripts/step04_test_hypotheses.R</code></dd>
+<dt>Log</dt>
+<dd><code>logs/step04_test_hypotheses.log</code></dd>
+<dt>Notes</dt>
+<dd>The manuscript uses a separately formatted LaTeX table in the paper source. The generated outputs reproduce the regression estimates.</dd>
+</dl>
+
+<dl>
+<dt>Manuscript item</dt>
+<dd>Figure <code>fig:h2bar</code>: support by casualty condition</dd>
+<dt>Output</dt>
+<dd><code>figures/barchart2.pdf</code></dd>
+<dt>Script</dt>
+<dd><code>scripts/step04_test_hypotheses.R</code></dd>
+<dt>Log</dt>
+<dd><code>logs/step04_test_hypotheses.log</code></dd>
+<dt>Notes</dt>
+<dd>Included in the manuscript through <code>figures_tex/barchart2.tex</code>.</dd>
+</dl>
 
 ### Supporting Information
 
-| Paper item | Output | Script | Log | Notes |
-|---|---|---|---|---|
-| Table `tb:manipulation`: results of manipulation checks | Values reported in `logs/step02_check_manipulation.log` | `scripts/step02_check_manipulation.R` | `logs/step02_check_manipulation.log` | The manuscript source contains a separately formatted LaTeX table. The public script prints the underlying counts and percentages. |
-| Figure `fig:comparison2`: sample vs. population, Study 2 | `figures/population_vs_sample.pdf` | `scripts/step03_check_quotas.R` | `logs/step03_check_quotas.log` | Included in the supporting information through `appendix_other_results.tex`. |
+<dl>
+<dt>Manuscript item</dt>
+<dd>Table <code>tb:manipulation</code>: results of manipulation checks</dd>
+<dt>Output</dt>
+<dd>Values reported in <code>logs/step02_check_manipulation.log</code></dd>
+<dt>Script</dt>
+<dd><code>scripts/step02_check_manipulation.R</code></dd>
+<dt>Log</dt>
+<dd><code>logs/step02_check_manipulation.log</code></dd>
+<dt>Notes</dt>
+<dd>The manuscript source contains a separately formatted LaTeX table. The public script prints the underlying counts and percentages.</dd>
+</dl>
+
+<dl>
+<dt>Manuscript item</dt>
+<dd>Figure <code>fig:comparison2</code>: sample vs. population, Study 2</dd>
+<dt>Output</dt>
+<dd><code>figures/population_vs_sample.pdf</code></dd>
+<dt>Script</dt>
+<dd><code>scripts/step03_check_quotas.R</code></dd>
+<dt>Log</dt>
+<dd><code>logs/step03_check_quotas.log</code></dd>
+<dt>Notes</dt>
+<dd>Included in the supporting information through <code>appendix_other_results.tex</code>.</dd>
+</dl>
 
 ## Logs And Session Information
 

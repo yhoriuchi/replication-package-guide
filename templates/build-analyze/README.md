@@ -102,21 +102,63 @@ In a public replication package, users should not be required to rerun the build
 
 ## Analysis Stage
 
-This section maps every reported figure and table to the analysis script and log that produced it. Embedded previews are optional.
+This section maps every reported figure and table to the analysis script and log that produced it. Embedded previews are optional. Use description-list entries instead of a wide table so long output paths remain readable.
 
 ### Manuscript Figures And Tables
 
-| Paper item | Output | Script | Log | Notes |
-|---|---|---|---|---|
-| Figure 1 | No output file | No code | Not applicable | Conceptual figure. |
-| Figure 2 | `analyze/figures/example_figure.png` | `analyze/scripts/02_make_figures_tables.R` | `analyze/logs/02_make_figures_tables.log` | Example figure. |
-| Table 1 | `analyze/tables/example_results.csv` | `analyze/scripts/02_make_figures_tables.R` | `analyze/logs/02_make_figures_tables.log` | Example table. |
+<dl>
+<dt>Manuscript item</dt>
+<dd>Figure 1</dd>
+<dt>Output</dt>
+<dd>No output file</dd>
+<dt>Script</dt>
+<dd>No code</dd>
+<dt>Log</dt>
+<dd>Not applicable</dd>
+<dt>Notes</dt>
+<dd>Conceptual figure.</dd>
+</dl>
+
+<dl>
+<dt>Manuscript item</dt>
+<dd>Figure 2</dd>
+<dt>Output</dt>
+<dd><code>analyze/figures/example_figure.png</code></dd>
+<dt>Script</dt>
+<dd><code>analyze/scripts/02_make_figures_tables.R</code></dd>
+<dt>Log</dt>
+<dd><code>analyze/logs/02_make_figures_tables.log</code></dd>
+<dt>Notes</dt>
+<dd>Example figure.</dd>
+</dl>
+
+<dl>
+<dt>Manuscript item</dt>
+<dd>Table 1</dd>
+<dt>Output</dt>
+<dd><code>analyze/tables/example_results.csv</code></dd>
+<dt>Script</dt>
+<dd><code>analyze/scripts/02_make_figures_tables.R</code></dd>
+<dt>Log</dt>
+<dd><code>analyze/logs/02_make_figures_tables.log</code></dd>
+<dt>Notes</dt>
+<dd>Example table.</dd>
+</dl>
 
 ### Appendix / Supplementary Figures And Tables
 
-| Paper item | Output | Script | Log | Notes |
-|---|---|---|---|---|
-| Figure A.1 | `[path/to/output]` | `[path/to/script.R]` | `[path/to/log.log]` | Replace or delete this row. |
+<dl>
+<dt>Manuscript item</dt>
+<dd>Figure A.1</dd>
+<dt>Output</dt>
+<dd><code>[path/to/output]</code></dd>
+<dt>Script</dt>
+<dd><code>[path/to/script.R]</code></dd>
+<dt>Log</dt>
+<dd><code>[path/to/log.log]</code></dd>
+<dt>Notes</dt>
+<dd>Replace or delete this entry.</dd>
+</dl>
 
 ## Session Information
 

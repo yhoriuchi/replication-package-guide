@@ -85,21 +85,63 @@ Additional details: [RAM, processor/GPU, external tools, or other project-specif
 
 ## Replication Guide: Figures And Tables
 
-Update this crosswalk so every manuscript and appendix figure/table has an output file, script, and log. Embedded previews are optional.
+Update this crosswalk so every manuscript and appendix figure/table has an output file, script, and log. Embedded previews are optional. Use description-list entries instead of a wide table so long output paths remain readable.
 
 ### Manuscript Figures And Tables
 
-| Paper item | Output | Script | Log | Notes |
-|---|---|---|---|---|
-| Figure 1 | No output file | No code | Not applicable | Conceptual figure. |
-| Figure 2 | `figures/example_figure.png` | `scripts/03_make_figures_tables.R` | `logs/03_make_figures_tables.log` | Example figure. |
-| Table 1 | `tables/example_results.csv` | `scripts/03_make_figures_tables.R` | `logs/03_make_figures_tables.log` | Example table. |
+<dl>
+<dt>Manuscript item</dt>
+<dd>Figure 1</dd>
+<dt>Output</dt>
+<dd>No output file</dd>
+<dt>Script</dt>
+<dd>No code</dd>
+<dt>Log</dt>
+<dd>Not applicable</dd>
+<dt>Notes</dt>
+<dd>Conceptual figure.</dd>
+</dl>
+
+<dl>
+<dt>Manuscript item</dt>
+<dd>Figure 2</dd>
+<dt>Output</dt>
+<dd><code>figures/example_figure.png</code></dd>
+<dt>Script</dt>
+<dd><code>scripts/03_make_figures_tables.R</code></dd>
+<dt>Log</dt>
+<dd><code>logs/03_make_figures_tables.log</code></dd>
+<dt>Notes</dt>
+<dd>Example figure.</dd>
+</dl>
+
+<dl>
+<dt>Manuscript item</dt>
+<dd>Table 1</dd>
+<dt>Output</dt>
+<dd><code>tables/example_results.csv</code></dd>
+<dt>Script</dt>
+<dd><code>scripts/03_make_figures_tables.R</code></dd>
+<dt>Log</dt>
+<dd><code>logs/03_make_figures_tables.log</code></dd>
+<dt>Notes</dt>
+<dd>Example table.</dd>
+</dl>
 
 ### Appendix / Supplementary Figures And Tables
 
-| Paper item | Output | Script | Log | Notes |
-|---|---|---|---|---|
-| Figure A.1 | `[path/to/output]` | `[path/to/script.R]` | `[path/to/log.log]` | Replace or delete this row. |
+<dl>
+<dt>Manuscript item</dt>
+<dd>Figure A.1</dd>
+<dt>Output</dt>
+<dd><code>[path/to/output]</code></dd>
+<dt>Script</dt>
+<dd><code>[path/to/script.R]</code></dd>
+<dt>Log</dt>
+<dd><code>[path/to/log.log]</code></dd>
+<dt>Notes</dt>
+<dd>Replace or delete this entry.</dd>
+</dl>
 
 ## Recommended Citation
 

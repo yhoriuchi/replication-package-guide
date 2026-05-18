@@ -305,13 +305,35 @@ For figures:
 - include the log file for that script;
 - note when a figure is conceptual or otherwise has no code.
 
-Example:
+Use a description-list style instead of a wide table, especially when
+paths are long:
 
 ```markdown
-| Paper item | Output | Script | Log | Notes |
-|---|---|---|---|---|
-| Figure 1 | No output file | No code | Not applicable | Conceptual figure. |
-| Figure 2 | `figures/main_effect.pdf` | `scripts/02_analyze_main_results.R` | `logs/02_analyze_main_results.log` | Main treatment effect. |
+<dl>
+<dt>Manuscript item</dt>
+<dd>Figure 1</dd>
+<dt>Output</dt>
+<dd>No output file</dd>
+<dt>Script</dt>
+<dd>No code</dd>
+<dt>Log</dt>
+<dd>Not applicable</dd>
+<dt>Notes</dt>
+<dd>Conceptual figure.</dd>
+</dl>
+
+<dl>
+<dt>Manuscript item</dt>
+<dd>Figure 2</dd>
+<dt>Output</dt>
+<dd><code>figures/main_effect.pdf</code></dd>
+<dt>Script</dt>
+<dd><code>scripts/02_analyze_main_results.R</code></dd>
+<dt>Log</dt>
+<dd><code>logs/02_analyze_main_results.log</code></dd>
+<dt>Notes</dt>
+<dd>Main treatment effect.</dd>
+</dl>
 ```
 
 For tables:
@@ -325,28 +347,67 @@ For tables:
 Example:
 
 ```markdown
-| Paper item | Output | Script | Log | Notes |
-|---|---|---|---|---|
-| Table 1 | `tables/main_results.csv` | `scripts/03_make_tables.R` | `logs/03_make_tables.log` | Main regression table. |
+<dl>
+<dt>Manuscript item</dt>
+<dd>Table 1</dd>
+<dt>Output</dt>
+<dd><code>tables/main_results.csv</code></dd>
+<dt>Script</dt>
+<dd><code>scripts/03_make_tables.R</code></dd>
+<dt>Log</dt>
+<dd><code>logs/03_make_tables.log</code></dd>
+<dt>Notes</dt>
+<dd>Main regression table.</dd>
+</dl>
 ```
 
-For compact projects, this can be one table. For large projects, separate manuscript and appendix items if that makes the README easier to scan:
+For compact projects, this can be one crosswalk section. For large projects, separate manuscript and appendix items if that makes the README easier to scan:
 
 ```markdown
 ## Replication Guide: Figures And Tables
 
 ### Manuscript
 
-| Paper item | Output | Script | Log | Notes |
-|---|---|---|---|---|
-| Figure 1 | `figures/main_effect.pdf` | `scripts/02_analyze_main_results.R` | `logs/02_analyze_main_results.log` | Main result. |
-| Table 1 | `tables/main_results.csv` | `scripts/03_make_tables.R` | `logs/03_make_tables.log` | Main regression table. |
+<dl>
+<dt>Manuscript item</dt>
+<dd>Figure 1</dd>
+<dt>Output</dt>
+<dd><code>figures/main_effect.pdf</code></dd>
+<dt>Script</dt>
+<dd><code>scripts/02_analyze_main_results.R</code></dd>
+<dt>Log</dt>
+<dd><code>logs/02_analyze_main_results.log</code></dd>
+<dt>Notes</dt>
+<dd>Main result.</dd>
+</dl>
+
+<dl>
+<dt>Manuscript item</dt>
+<dd>Table 1</dd>
+<dt>Output</dt>
+<dd><code>tables/main_results.csv</code></dd>
+<dt>Script</dt>
+<dd><code>scripts/03_make_tables.R</code></dd>
+<dt>Log</dt>
+<dd><code>logs/03_make_tables.log</code></dd>
+<dt>Notes</dt>
+<dd>Main regression table.</dd>
+</dl>
 
 ### Appendix
 
-| Paper item | Output | Script | Log | Notes |
-|---|---|---|---|---|
-| Figure A.1 | `figures/appendix_balance.pdf` | `scripts/04_appendix_checks.R` | `logs/04_appendix_checks.log` | Balance check. |
+<dl>
+<dt>Manuscript item</dt>
+<dd>Figure A.1</dd>
+<dt>Output</dt>
+<dd><code>figures/appendix_balance.pdf</code></dd>
+<dt>Script</dt>
+<dd><code>scripts/04_appendix_checks.R</code></dd>
+<dt>Log</dt>
+<dd><code>logs/04_appendix_checks.log</code></dd>
+<dt>Notes</dt>
+<dd>Balance check.</dd>
+</dl>
 ```
 
 ## Script Naming
