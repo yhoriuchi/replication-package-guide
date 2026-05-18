@@ -399,39 +399,31 @@ For figures:
 - include the LaTeX label as a separate field when manuscript source files are available;
 - note when a figure is conceptual or otherwise has no code.
 
-Use a description-list style instead of a wide table, especially when
-paths are long:
+Use a heading-plus-bullet style instead of a wide table, especially when paths are long:
 
 ```markdown
-<dl>
-<dt>Manuscript item</dt>
-<dd>Figure 1</dd>
-<dt>Output</dt>
-<dd>No output file</dd>
-<dt>Script</dt>
-<dd>No code</dd>
-<dt>Log</dt>
-<dd>Not applicable</dd>
-<dt>LaTeX label</dt>
-<dd><code>fig:conceptual_framework</code></dd>
-<dt>Notes</dt>
-<dd>Conceptual figure.</dd>
-</dl>
+#### Figure: Conceptual Framework
 
-<dl>
-<dt>Manuscript item</dt>
-<dd>Figure 2</dd>
-<dt>Output</dt>
-<dd><code>figures/main_effect.pdf</code></dd>
-<dt>Script</dt>
-<dd><code>scripts/02_analyze_main_results.R</code></dd>
-<dt>Log</dt>
-<dd><code>logs/02_analyze_main_results.log</code></dd>
-<dt>LaTeX label</dt>
-<dd><code>fig:main_effect</code></dd>
-<dt>Notes</dt>
-<dd>Main treatment effect.</dd>
-</dl>
+- Paper item: manuscript figure.
+- Output: No output file.
+- Script: No code.
+- Log: Not applicable.
+- LaTeX label:
+  - `fig:conceptual_framework`
+- Notes: conceptual figure.
+
+#### Figure: Main Treatment Effect
+
+- Paper item: manuscript figure.
+- Output:
+  - `figures/main_effect.pdf`
+- Script:
+  - `scripts/02_analyze_main_results.R`
+- Log:
+  - `logs/02_analyze_main_results.log`
+- LaTeX label:
+  - `fig:main_effect`
+- Notes: main treatment effect.
 ```
 
 For tables:
@@ -446,35 +438,21 @@ For tables:
 Example:
 
 ```markdown
-<dl>
-<dt>Manuscript item</dt>
-<dd>Tables 1 and 2</dd>
-<dt>Output</dt>
-<dd>
-<ul>
-<li><code>tables/main_results.csv</code></li>
-<li><code>tables/robustness_results.csv</code></li>
-</ul>
-</dd>
-<dt>Script</dt>
-<dd><code>scripts/03_make_tables.R</code></dd>
-<dt>Log</dt>
-<dd>
-<ul>
-<li><code>logs/03_make_tables.log</code></li>
-<li><code>logs/04_robustness_tables.log</code></li>
-</ul>
-</dd>
-<dt>LaTeX label</dt>
-<dd>
-<ul>
-<li><code>tab:main_results</code></li>
-<li><code>tab:robustness_results</code></li>
-</ul>
-</dd>
-<dt>Notes</dt>
-<dd>Main and robustness regression tables.</dd>
-</dl>
+#### Tables: Main And Robustness Results
+
+- Paper item: manuscript tables.
+- Output:
+  - `tables/main_results.csv`
+  - `tables/robustness_results.csv`
+- Script:
+  - `scripts/03_make_tables.R`
+- Log:
+  - `logs/03_make_tables.log`
+  - `logs/04_robustness_tables.log`
+- LaTeX label:
+  - `tab:main_results`
+  - `tab:robustness_results`
+- Notes: main and robustness regression tables.
 ```
 
 For compact projects, this can be one crosswalk section. For large projects, separate manuscript and appendix items if that makes the README easier to scan:
@@ -484,52 +462,46 @@ For compact projects, this can be one crosswalk section. For large projects, sep
 
 ### Manuscript
 
-<dl>
-<dt>Manuscript item</dt>
-<dd>Figure 1</dd>
-<dt>Output</dt>
-<dd><code>figures/main_effect.pdf</code></dd>
-<dt>Script</dt>
-<dd><code>scripts/02_analyze_main_results.R</code></dd>
-<dt>Log</dt>
-<dd><code>logs/02_analyze_main_results.log</code></dd>
-<dt>LaTeX label</dt>
-<dd><code>fig:main_effect</code></dd>
-<dt>Notes</dt>
-<dd>Main result.</dd>
-</dl>
+#### Figure: Main Effect
 
-<dl>
-<dt>Manuscript item</dt>
-<dd>Table 1</dd>
-<dt>Output</dt>
-<dd><code>tables/main_results.csv</code></dd>
-<dt>Script</dt>
-<dd><code>scripts/03_make_tables.R</code></dd>
-<dt>Log</dt>
-<dd><code>logs/03_make_tables.log</code></dd>
-<dt>LaTeX label</dt>
-<dd><code>tab:main_results</code></dd>
-<dt>Notes</dt>
-<dd>Main regression table.</dd>
-</dl>
+- Paper item: manuscript figure.
+- Output:
+  - `figures/main_effect.pdf`
+- Script:
+  - `scripts/02_analyze_main_results.R`
+- Log:
+  - `logs/02_analyze_main_results.log`
+- LaTeX label:
+  - `fig:main_effect`
+- Notes: main result.
+
+#### Table: Main Results
+
+- Paper item: manuscript table.
+- Output:
+  - `tables/main_results.csv`
+- Script:
+  - `scripts/03_make_tables.R`
+- Log:
+  - `logs/03_make_tables.log`
+- LaTeX label:
+  - `tab:main_results`
+- Notes: main regression table.
 
 ### Appendix
 
-<dl>
-<dt>Manuscript item</dt>
-<dd>Figure A.1</dd>
-<dt>Output</dt>
-<dd><code>figures/appendix_balance.pdf</code></dd>
-<dt>Script</dt>
-<dd><code>scripts/04_appendix_checks.R</code></dd>
-<dt>Log</dt>
-<dd><code>logs/04_appendix_checks.log</code></dd>
-<dt>LaTeX label</dt>
-<dd><code>fig:appendix_balance</code></dd>
-<dt>Notes</dt>
-<dd>Balance check.</dd>
-</dl>
+#### Figure: Appendix Balance
+
+- Paper item: appendix figure.
+- Output:
+  - `figures/appendix_balance.pdf`
+- Script:
+  - `scripts/04_appendix_checks.R`
+- Log:
+  - `logs/04_appendix_checks.log`
+- LaTeX label:
+  - `fig:appendix_balance`
+- Notes: balance check.
 ```
 
 ## Script Naming

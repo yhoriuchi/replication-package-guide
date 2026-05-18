@@ -102,71 +102,60 @@ In a public replication package, users should not be required to rerun the build
 
 ## Analysis Stage
 
-This section maps every reported figure and table to the analysis script and log that produced it. Embedded previews are optional. Use description-list entries instead of a wide table so long output paths remain readable. Do not put LaTeX labels in parentheses next to figure/table titles. Add `LaTeX label` after `Log` and before `Notes`. If a field lists multiple outputs, scripts, logs, or labels, use indented sub-items inside that field.
+This section maps every reported figure and table to the analysis script and log that produced it. Embedded previews are optional. Use a heading-plus-bullet structure instead of a wide table so long output paths remain readable. Do not put LaTeX labels in parentheses next to figure/table titles. Add `LaTeX label` after `Log` and before `Notes`. If a field lists multiple outputs, scripts, logs, or labels, use indented sub-items inside that field.
 
 ### Manuscript Figures And Tables
 
-<dl>
-<dt>Manuscript item</dt>
-<dd>Figure 1</dd>
-<dt>Output</dt>
-<dd>No output file</dd>
-<dt>Script</dt>
-<dd>No code</dd>
-<dt>Log</dt>
-<dd>Not applicable</dd>
-<dt>LaTeX label</dt>
-<dd><code>fig:[label]</code></dd>
-<dt>Notes</dt>
-<dd>Conceptual figure.</dd>
-</dl>
+#### Figure: Conceptual Figure
 
-<dl>
-<dt>Manuscript item</dt>
-<dd>Figure 2</dd>
-<dt>Output</dt>
-<dd><code>analyze/figures/example_figure.png</code></dd>
-<dt>Script</dt>
-<dd><code>analyze/scripts/02_make_figures_tables.R</code></dd>
-<dt>Log</dt>
-<dd><code>analyze/logs/02_make_figures_tables.log</code></dd>
-<dt>LaTeX label</dt>
-<dd><code>fig:example_figure</code></dd>
-<dt>Notes</dt>
-<dd>Example figure.</dd>
-</dl>
+- Paper item: manuscript figure.
+- Output: No output file.
+- Script: No code.
+- Log: Not applicable.
+- LaTeX label:
+  - `fig:[label]`
+- Notes: conceptual figure.
 
-<dl>
-<dt>Manuscript item</dt>
-<dd>Table 1</dd>
-<dt>Output</dt>
-<dd><code>analyze/tables/example_results.csv</code></dd>
-<dt>Script</dt>
-<dd><code>analyze/scripts/02_make_figures_tables.R</code></dd>
-<dt>Log</dt>
-<dd><code>analyze/logs/02_make_figures_tables.log</code></dd>
-<dt>LaTeX label</dt>
-<dd><code>tab:example_results</code></dd>
-<dt>Notes</dt>
-<dd>Example table.</dd>
-</dl>
+#### Figure: Example Figure
+
+- Paper item: manuscript figure.
+- Output:
+  - `analyze/figures/example_figure.png`
+- Script:
+  - `analyze/scripts/02_make_figures_tables.R`
+- Log:
+  - `analyze/logs/02_make_figures_tables.log`
+- LaTeX label:
+  - `fig:example_figure`
+- Notes: example figure.
+
+#### Table: Example Results
+
+- Paper item: manuscript table.
+- Output:
+  - `analyze/tables/example_results.csv`
+- Script:
+  - `analyze/scripts/02_make_figures_tables.R`
+- Log:
+  - `analyze/logs/02_make_figures_tables.log`
+- LaTeX label:
+  - `tab:example_results`
+- Notes: example table.
 
 ### Appendix / Supplementary Figures And Tables
 
-<dl>
-<dt>Manuscript item</dt>
-<dd>Figure A.1</dd>
-<dt>Output</dt>
-<dd><code>[path/to/output]</code></dd>
-<dt>Script</dt>
-<dd><code>[path/to/script.R]</code></dd>
-<dt>Log</dt>
-<dd><code>[path/to/log.log]</code></dd>
-<dt>LaTeX label</dt>
-<dd><code>fig:[appendix_label]</code></dd>
-<dt>Notes</dt>
-<dd>Replace or delete this entry.</dd>
-</dl>
+#### Figure: Appendix Figure
+
+- Paper item: appendix figure.
+- Output:
+  - `[path/to/output]`
+- Script:
+  - `[path/to/script.R]`
+- Log:
+  - `[path/to/log.log]`
+- LaTeX label:
+  - `fig:[appendix_label]`
+- Notes: replace or delete this entry.
 
 ## Session Information
 

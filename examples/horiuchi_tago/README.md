@@ -141,72 +141,73 @@ The manuscript source files in the parent Overleaf directory were checked while 
 
 ### Manuscript
 
-<dl>
-<dt>Manuscript item</dt>
-<dd>Figure <code>fig:h1bar</code>: support by authority condition</dd>
-<dt>Output</dt>
-<dd><code>figures/barchart1.pdf</code></dd>
-<dt>Script</dt>
-<dd><code>scripts/step04_test_hypotheses.R</code></dd>
-<dt>Log</dt>
-<dd><code>logs/step04_test_hypotheses.log</code></dd>
-<dt>Notes</dt>
-<dd>Included in the manuscript through <code>figures_tex/barchart1.tex</code>.</dd>
-</dl>
+#### Figure: Support By Authority Condition
 
-<dl>
-<dt>Manuscript item</dt>
-<dd>Table <code>tb:regression</code>: effects of authority, outcome, and casualties</dd>
-<dt>Output</dt>
-<dd><code>output/regression_table.tex</code>; <code>output/regression_table.txt</code></dd>
-<dt>Script</dt>
-<dd><code>scripts/step04_test_hypotheses.R</code></dd>
-<dt>Log</dt>
-<dd><code>logs/step04_test_hypotheses.log</code></dd>
-<dt>Notes</dt>
-<dd>The manuscript uses a separately formatted LaTeX table in the paper source. The generated outputs reproduce the regression estimates.</dd>
-</dl>
+- Paper item: manuscript figure.
+- Output:
+  - `figures/barchart1.pdf`
+- Script:
+  - `scripts/step04_test_hypotheses.R`
+- Log:
+  - `logs/step04_test_hypotheses.log`
+- LaTeX label:
+  - `fig:h1bar`
+- Notes: included in the manuscript through `figures_tex/barchart1.tex`.
 
-<dl>
-<dt>Manuscript item</dt>
-<dd>Figure <code>fig:h2bar</code>: support by casualty condition</dd>
-<dt>Output</dt>
-<dd><code>figures/barchart2.pdf</code></dd>
-<dt>Script</dt>
-<dd><code>scripts/step04_test_hypotheses.R</code></dd>
-<dt>Log</dt>
-<dd><code>logs/step04_test_hypotheses.log</code></dd>
-<dt>Notes</dt>
-<dd>Included in the manuscript through <code>figures_tex/barchart2.tex</code>.</dd>
-</dl>
+#### Table: Effects Of Authority, Outcome, And Casualties
+
+- Paper item: manuscript table.
+- Output:
+  - `output/regression_table.tex`
+  - `output/regression_table.txt`
+- Script:
+  - `scripts/step04_test_hypotheses.R`
+- Log:
+  - `logs/step04_test_hypotheses.log`
+- LaTeX label:
+  - `tb:regression`
+- Notes: the manuscript uses a separately formatted LaTeX table in the paper source. The generated outputs reproduce the regression estimates.
+
+#### Figure: Support By Casualty Condition
+
+- Paper item: manuscript figure.
+- Output:
+  - `figures/barchart2.pdf`
+- Script:
+  - `scripts/step04_test_hypotheses.R`
+- Log:
+  - `logs/step04_test_hypotheses.log`
+- LaTeX label:
+  - `fig:h2bar`
+- Notes: included in the manuscript through `figures_tex/barchart2.tex`.
 
 ### Supporting Information
 
-<dl>
-<dt>Manuscript item</dt>
-<dd>Table <code>tb:manipulation</code>: results of manipulation checks</dd>
-<dt>Output</dt>
-<dd>Values reported in <code>logs/step02_check_manipulation.log</code></dd>
-<dt>Script</dt>
-<dd><code>scripts/step02_check_manipulation.R</code></dd>
-<dt>Log</dt>
-<dd><code>logs/step02_check_manipulation.log</code></dd>
-<dt>Notes</dt>
-<dd>The manuscript source contains a separately formatted LaTeX table. The public script prints the underlying counts and percentages.</dd>
-</dl>
+#### Table: Results Of Manipulation Checks
 
-<dl>
-<dt>Manuscript item</dt>
-<dd>Figure <code>fig:comparison2</code>: sample vs. population, Study 2</dd>
-<dt>Output</dt>
-<dd><code>figures/population_vs_sample.pdf</code></dd>
-<dt>Script</dt>
-<dd><code>scripts/step03_check_quotas.R</code></dd>
-<dt>Log</dt>
-<dd><code>logs/step03_check_quotas.log</code></dd>
-<dt>Notes</dt>
-<dd>Included in the supporting information through <code>appendix_other_results.tex</code>.</dd>
-</dl>
+- Paper item: supporting information table.
+- Output:
+  - values reported in `logs/step02_check_manipulation.log`
+- Script:
+  - `scripts/step02_check_manipulation.R`
+- Log:
+  - `logs/step02_check_manipulation.log`
+- LaTeX label:
+  - `tb:manipulation`
+- Notes: the manuscript source contains a separately formatted LaTeX table. The public script prints the underlying counts and percentages.
+
+#### Figure: Sample Vs. Population, Study 2
+
+- Paper item: supporting information figure.
+- Output:
+  - `figures/population_vs_sample.pdf`
+- Script:
+  - `scripts/step03_check_quotas.R`
+- Log:
+  - `logs/step03_check_quotas.log`
+- LaTeX label:
+  - `fig:comparison2`
+- Notes: included in the supporting information through `appendix_other_results.tex`.
 
 ## Logs And Session Information
 
