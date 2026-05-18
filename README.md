@@ -3,7 +3,7 @@
 **Author:** Yusaku Horiuchi  
 **Affiliation:** Syde P. Deeb Eminent Scholar in Political Science, Florida State University  
 **Created:** May 10, 2026  
-**Last revised:** May 15, 2026
+**Last revised:** May 18, 2026
 
 [![Page views](https://hits.sh/yhoriuchi.github.io/replication-package-guide.svg?label=page%20views&color=007ec6)](https://hits.sh/yhoriuchi.github.io/replication-package-guide/)
 
