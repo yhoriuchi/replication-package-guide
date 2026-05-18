@@ -194,7 +194,7 @@ Additional details: [RAM, processor/GPU, external tools, or other project-specif
 
 ## Replication Guide: Figures And Tables
 
-Every manuscript and appendix figure/table should appear in the crosswalk below. Embedded previews are optional; the crosswalk is required. Use description-list entries instead of a wide table so long output paths remain readable.
+Every manuscript and appendix figure/table should appear in the crosswalk below. Embedded previews are optional; the crosswalk is required. Use description-list entries instead of a wide table so long output paths remain readable. Do not put LaTeX labels in parentheses next to figure/table titles. Add `LaTeX label` after `Log` and before `Notes`. If a field lists multiple outputs, scripts, logs, or labels, use indented sub-items inside that field.
 
 ### Manuscript Figures And Tables
 
@@ -207,6 +207,8 @@ Every manuscript and appendix figure/table should appear in the crosswalk below.
 <dd>No code</dd>
 <dt>Log</dt>
 <dd>Not applicable</dd>
+<dt>LaTeX label</dt>
+<dd><code>fig:[label]</code></dd>
 <dt>Notes</dt>
 <dd>Conceptual figure.</dd>
 </dl>
@@ -220,6 +222,8 @@ Every manuscript and appendix figure/table should appear in the crosswalk below.
 <dd><code>scripts/[script_name].R</code></dd>
 <dt>Log</dt>
 <dd><code>logs/[script_name].log</code></dd>
+<dt>LaTeX label</dt>
+<dd><code>fig:[label]</code></dd>
 <dt>Notes</dt>
 <dd>[Brief description.]</dd>
 </dl>
@@ -233,6 +237,8 @@ Every manuscript and appendix figure/table should appear in the crosswalk below.
 <dd><code>scripts/[script_name].R</code></dd>
 <dt>Log</dt>
 <dd><code>logs/[script_name].log</code></dd>
+<dt>LaTeX label</dt>
+<dd><code>tab:[label]</code></dd>
 <dt>Notes</dt>
 <dd>[Brief description.]</dd>
 </dl>
@@ -248,6 +254,8 @@ Every manuscript and appendix figure/table should appear in the crosswalk below.
 <dd><code>scripts/[script_name].R</code></dd>
 <dt>Log</dt>
 <dd><code>logs/[script_name].log</code></dd>
+<dt>LaTeX label</dt>
+<dd><code>fig:[appendix_label]</code></dd>
 <dt>Notes</dt>
 <dd>[Brief description.]</dd>
 </dl>
@@ -261,6 +269,8 @@ Every manuscript and appendix figure/table should appear in the crosswalk below.
 <dd><code>scripts/[script_name].R</code></dd>
 <dt>Log</dt>
 <dd><code>logs/[script_name].log</code></dd>
+<dt>LaTeX label</dt>
+<dd><code>tab:[appendix_label]</code></dd>
 <dt>Notes</dt>
 <dd>[Brief description.]</dd>
 </dl>

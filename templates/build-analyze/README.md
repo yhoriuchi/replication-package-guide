@@ -102,7 +102,7 @@ In a public replication package, users should not be required to rerun the build
 
 ## Analysis Stage
 
-This section maps every reported figure and table to the analysis script and log that produced it. Embedded previews are optional. Use description-list entries instead of a wide table so long output paths remain readable.
+This section maps every reported figure and table to the analysis script and log that produced it. Embedded previews are optional. Use description-list entries instead of a wide table so long output paths remain readable. Do not put LaTeX labels in parentheses next to figure/table titles. Add `LaTeX label` after `Log` and before `Notes`. If a field lists multiple outputs, scripts, logs, or labels, use indented sub-items inside that field.
 
 ### Manuscript Figures And Tables
 
@@ -115,6 +115,8 @@ This section maps every reported figure and table to the analysis script and log
 <dd>No code</dd>
 <dt>Log</dt>
 <dd>Not applicable</dd>
+<dt>LaTeX label</dt>
+<dd><code>fig:[label]</code></dd>
 <dt>Notes</dt>
 <dd>Conceptual figure.</dd>
 </dl>
@@ -128,6 +130,8 @@ This section maps every reported figure and table to the analysis script and log
 <dd><code>analyze/scripts/02_make_figures_tables.R</code></dd>
 <dt>Log</dt>
 <dd><code>analyze/logs/02_make_figures_tables.log</code></dd>
+<dt>LaTeX label</dt>
+<dd><code>fig:example_figure</code></dd>
 <dt>Notes</dt>
 <dd>Example figure.</dd>
 </dl>
@@ -141,6 +145,8 @@ This section maps every reported figure and table to the analysis script and log
 <dd><code>analyze/scripts/02_make_figures_tables.R</code></dd>
 <dt>Log</dt>
 <dd><code>analyze/logs/02_make_figures_tables.log</code></dd>
+<dt>LaTeX label</dt>
+<dd><code>tab:example_results</code></dd>
 <dt>Notes</dt>
 <dd>Example table.</dd>
 </dl>
@@ -156,6 +162,8 @@ This section maps every reported figure and table to the analysis script and log
 <dd><code>[path/to/script.R]</code></dd>
 <dt>Log</dt>
 <dd><code>[path/to/log.log]</code></dd>
+<dt>LaTeX label</dt>
+<dd><code>fig:[appendix_label]</code></dd>
 <dt>Notes</dt>
 <dd>Replace or delete this entry.</dd>
 </dl>

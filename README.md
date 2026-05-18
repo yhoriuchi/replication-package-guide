@@ -157,7 +157,7 @@ Use the project's existing logging style if one exists. Do not change substantiv
 
 ```text
 Please read the Replication Package Guide and prepare or repair the project's single authoritative README.md. Use templates/README_TEMPLATE.md as the model.
-The README must include the paper title and authors, description, folder tree, files included, data sources and restrictions, paper source consistency status, how to run master.R, computing environment, session information, recommended citation, last verified date, and a paper-order crosswalk for every figure and table.
+The README must include the paper title and authors, description, folder tree, files included, data sources and restrictions, paper source consistency status, how to run master.R, computing environment, session information, recommended citation, last verified date, and a paper-order crosswalk for every figure and table. In the crosswalk, do not put LaTeX labels in parentheses next to figure/table titles; add a separate "LaTeX label" field after "Log" and before "Notes". If a field lists multiple outputs, scripts, logs, or labels, use indented sub-bullets instead of inline comma- or semicolon-separated paths.
 Do not create additional README files. Do not include README.html or README.pdf in the repository. Embedded figure/table previews are optional; the crosswalk is required.
 ```
 
@@ -353,12 +353,50 @@ Commit only `README.md`. If an archive or journal requires HTML or PDF documenta
 
 The README must include a crosswalk that maps every reported figure and table to its output file, script, and log. Embedded previews are optional. Use them only when they make the package easier to inspect; they are not required when the crosswalk is complete.
 
+Crosswalk formatting rules:
+
+- Do not put LaTeX labels in parentheses next to the figure or table title. Keep the title line readable, such as `Figure: Study 1 pooled means`.
+- Add the LaTeX label as its own field after `Log` and before `Notes`.
+- If `Output`, `Script`, `Log`, `LaTeX label`, or another field contains multiple files or labels, list them as indented sub-items within that field. Do not put multiple file paths on one line separated by commas or semicolons.
+
+If using a heading-plus-bullet style, use this pattern:
+
+```markdown
+#### Figure: Study 1 pooled means
+
+- Paper item: manuscript figure.
+- Output:
+  - `figures/study1/pooled_means.pdf`
+- Script:
+  - `scripts/06_study1_pooled_means.R`
+- Log:
+  - `logs/06_study1_pooled_means.log`
+- LaTeX label:
+  - `fig:study1_pooled_means`
+- Notes: pooled outcome means by treatment condition.
+```
+
+For a field with multiple files or labels, keep the same field name and put each item on its own indented line:
+
+```markdown
+- Output:
+  - `tables/study1/main_effects.tex`
+  - `tables/study1/postgraduate_main_effects.tex`
+- Log:
+  - `logs/07_study1_regression_tables.log`
+  - `logs/15_postgraduate_education_tables.log`
+- LaTeX label:
+  - `tab:study1_main_effects`
+  - `tab:study1_postgraduate_main_effects`
+```
+
 For figures:
 
 - save the publication format required by the journal, such as `.pdf` or `.eps`;
 - include the output path in the crosswalk;
 - include the script that produced the figure;
 - include the log file for that script;
+- include the LaTeX label as a separate field when manuscript source files are available;
 - note when a figure is conceptual or otherwise has no code.
 
 Use a description-list style instead of a wide table, especially when
@@ -374,6 +412,8 @@ paths are long:
 <dd>No code</dd>
 <dt>Log</dt>
 <dd>Not applicable</dd>
+<dt>LaTeX label</dt>
+<dd><code>fig:conceptual_framework</code></dd>
 <dt>Notes</dt>
 <dd>Conceptual figure.</dd>
 </dl>
@@ -387,6 +427,8 @@ paths are long:
 <dd><code>scripts/02_analyze_main_results.R</code></dd>
 <dt>Log</dt>
 <dd><code>logs/02_analyze_main_results.log</code></dd>
+<dt>LaTeX label</dt>
+<dd><code>fig:main_effect</code></dd>
 <dt>Notes</dt>
 <dd>Main treatment effect.</dd>
 </dl>
@@ -398,22 +440,40 @@ For tables:
 - save publication output when needed, such as `.tex`, `.html`, or `.docx`;
 - include the output path in the crosswalk;
 - include the script that produced the table;
-- include the log file for that script.
+- include the log file for that script;
+- include the LaTeX label as a separate field when manuscript source files are available.
 
 Example:
 
 ```markdown
 <dl>
 <dt>Manuscript item</dt>
-<dd>Table 1</dd>
+<dd>Tables 1 and 2</dd>
 <dt>Output</dt>
-<dd><code>tables/main_results.csv</code></dd>
+<dd>
+<ul>
+<li><code>tables/main_results.csv</code></li>
+<li><code>tables/robustness_results.csv</code></li>
+</ul>
+</dd>
 <dt>Script</dt>
 <dd><code>scripts/03_make_tables.R</code></dd>
 <dt>Log</dt>
-<dd><code>logs/03_make_tables.log</code></dd>
+<dd>
+<ul>
+<li><code>logs/03_make_tables.log</code></li>
+<li><code>logs/04_robustness_tables.log</code></li>
+</ul>
+</dd>
+<dt>LaTeX label</dt>
+<dd>
+<ul>
+<li><code>tab:main_results</code></li>
+<li><code>tab:robustness_results</code></li>
+</ul>
+</dd>
 <dt>Notes</dt>
-<dd>Main regression table.</dd>
+<dd>Main and robustness regression tables.</dd>
 </dl>
 ```
 
@@ -433,6 +493,8 @@ For compact projects, this can be one crosswalk section. For large projects, sep
 <dd><code>scripts/02_analyze_main_results.R</code></dd>
 <dt>Log</dt>
 <dd><code>logs/02_analyze_main_results.log</code></dd>
+<dt>LaTeX label</dt>
+<dd><code>fig:main_effect</code></dd>
 <dt>Notes</dt>
 <dd>Main result.</dd>
 </dl>
@@ -446,6 +508,8 @@ For compact projects, this can be one crosswalk section. For large projects, sep
 <dd><code>scripts/03_make_tables.R</code></dd>
 <dt>Log</dt>
 <dd><code>logs/03_make_tables.log</code></dd>
+<dt>LaTeX label</dt>
+<dd><code>tab:main_results</code></dd>
 <dt>Notes</dt>
 <dd>Main regression table.</dd>
 </dl>
@@ -461,6 +525,8 @@ For compact projects, this can be one crosswalk section. For large projects, sep
 <dd><code>scripts/04_appendix_checks.R</code></dd>
 <dt>Log</dt>
 <dd><code>logs/04_appendix_checks.log</code></dd>
+<dt>LaTeX label</dt>
+<dd><code>fig:appendix_balance</code></dd>
 <dt>Notes</dt>
 <dd>Balance check.</dd>
 </dl>

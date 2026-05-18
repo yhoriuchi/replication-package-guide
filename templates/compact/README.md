@@ -85,7 +85,7 @@ Additional details: [RAM, processor/GPU, external tools, or other project-specif
 
 ## Replication Guide: Figures And Tables
 
-Update this crosswalk so every manuscript and appendix figure/table has an output file, script, and log. Embedded previews are optional. Use description-list entries instead of a wide table so long output paths remain readable.
+Update this crosswalk so every manuscript and appendix figure/table has an output file, script, and log. Embedded previews are optional. Use description-list entries instead of a wide table so long output paths remain readable. Do not put LaTeX labels in parentheses next to figure/table titles. Add `LaTeX label` after `Log` and before `Notes`. If a field lists multiple outputs, scripts, logs, or labels, use indented sub-items inside that field.
 
 ### Manuscript Figures And Tables
 
@@ -98,6 +98,8 @@ Update this crosswalk so every manuscript and appendix figure/table has an outpu
 <dd>No code</dd>
 <dt>Log</dt>
 <dd>Not applicable</dd>
+<dt>LaTeX label</dt>
+<dd><code>fig:[label]</code></dd>
 <dt>Notes</dt>
 <dd>Conceptual figure.</dd>
 </dl>
@@ -111,6 +113,8 @@ Update this crosswalk so every manuscript and appendix figure/table has an outpu
 <dd><code>scripts/03_make_figures_tables.R</code></dd>
 <dt>Log</dt>
 <dd><code>logs/03_make_figures_tables.log</code></dd>
+<dt>LaTeX label</dt>
+<dd><code>fig:example_figure</code></dd>
 <dt>Notes</dt>
 <dd>Example figure.</dd>
 </dl>
@@ -124,6 +128,8 @@ Update this crosswalk so every manuscript and appendix figure/table has an outpu
 <dd><code>scripts/03_make_figures_tables.R</code></dd>
 <dt>Log</dt>
 <dd><code>logs/03_make_figures_tables.log</code></dd>
+<dt>LaTeX label</dt>
+<dd><code>tab:example_results</code></dd>
 <dt>Notes</dt>
 <dd>Example table.</dd>
 </dl>
@@ -139,6 +145,8 @@ Update this crosswalk so every manuscript and appendix figure/table has an outpu
 <dd><code>[path/to/script.R]</code></dd>
 <dt>Log</dt>
 <dd><code>[path/to/log.log]</code></dd>
+<dt>LaTeX label</dt>
+<dd><code>fig:[appendix_label]</code></dd>
 <dt>Notes</dt>
 <dd>Replace or delete this entry.</dd>
 </dl>
