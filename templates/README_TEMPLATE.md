@@ -150,6 +150,7 @@ The consistency check should verify:
 
 - every figure and table cited in the paper or appendix appears in the crosswalk below;
 - every figure/table path in the paper points to the corresponding replicated output;
+- manuscript-ready figures and tables are checked against the corresponding generated files, scripts, and logs, especially when publication tables are manually edited after generation;
 - every in-text estimate, standard error, p-value, sample size, sampling date, completion time, response rate, and descriptive statistic can be traced to a script, log file, generated table, or generated figure;
 - conceptual figures, hand-made tables, or non-replicated items are clearly identified in the crosswalk.
 

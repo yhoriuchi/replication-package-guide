@@ -66,13 +66,69 @@ When preparing a replication package with Codex, Claude Code, or another coding 
 
 For Overleaf users, one practical workflow is to use Overleaf's Dropbox integration and create the replication package inside, or immediately beside, the synced Overleaf project folder. This lets the agent inspect the manuscript source and the replication package in one workspace.
 
+Recommended layout for an Overleaf project with a replication package:
+
+```text
+Dropbox/Apps/Overleaf/[Paper Title]/
+|-- main.tex
+|-- sections/
+|-- references.bib
+|-- figures/                  # manuscript-ready figures used by LaTeX
+|-- tables/                   # manuscript-ready tables used by LaTeX
+`-- analysis/                 # replication package or future replication package
+    |-- README.md
+    |-- master.R
+    |-- project.Rproj
+    |-- scripts/
+    |-- data/
+    |-- logs/
+    |-- output/
+    |-- figures/              # generated replication figures, if kept separately
+    `-- tables/               # generated replication tables, if kept separately
+```
+
+In this layout, `figures/` and `tables/` at the Overleaf project root are the manuscript-ready files included by LaTeX and submitted with the paper. The `analysis/` folder contains the reproducible workflow. It can later become the core of the public replication package. If R generates a table that is then manually edited for publication, keep the generated version in `analysis/tables/` or `analysis/output/`, keep the edited manuscript-ready version in root-level `tables/`, and document that relationship in the README crosswalk. When assembling the public archive, make sure the final package includes or clearly traces the manuscript-ready files as well as the generated source files.
+
+Keep local and session files out of both Git and sync. Use `.gitignore` for Git, and use Dropbox ignore rules for Dropbox. Dropbox currently supports a local `rules.dropboxignore` file in the Dropbox root folder; matching new files are not uploaded to dropbox.com, do not sync to other devices, and do not count toward storage. The rule file is local to each computer and applies going forward, so files already synced may need to be removed and recreated after rules are added. See Dropbox's help page on [preventing files from syncing](https://help.dropbox.com/sync/how-to-prevent-files-from-syncing).
+
+Suggested Dropbox ignore rules for R/RStudio local files:
+
+```text
+# R and RStudio local/session files
+**/.Rproj.user/
+**/.Rhistory
+**/.RData
+**/.Ruserdata
+
+# macOS and temporary files
+**/.DS_Store
+**/*.tmp
+**/*.temp
+**/*.bak
+
+# package/cache folders that should not sync through Overleaf
+**/renv/library/
+**/renv/staging/
+**/*_cache/
+**/*_files/
+```
+
+Do not ignore the entire `analysis/` folder if the agent needs to inspect it or if it will become the replication package. Ignore only machine-specific caches, histories, package libraries, and temporary files. The `.Rproj` file, scripts, public data, generated logs, and reproducibility metadata such as `renv.lock` should usually remain visible.
+
 This integration makes the most important final check much easier: consistency between the paper and the replication package. The agent should verify that:
 
 - every figure and table cited in the paper or appendix appears in the README crosswalk;
-- every figure/table path in the paper points to the corresponding replicated output;
+- every figure/table path in the paper points to the intended manuscript-ready file in root-level `figures/` or `tables/`;
+- every manuscript-ready figure or table can be traced back to the R-generated source file, script, and log, especially when files are copied, renamed, or manually edited after generation;
 - every in-text number reported in the paper, including estimates, standard errors, p-values, sample sizes, sampling dates, completion times, response rates, and descriptive statistics, can be traced to a script, log file, generated table, or generated figure;
 - the values in the paper match the values produced by the replication scripts;
 - any conceptual figure, hand-made table, or non-replicated item is clearly identified in the README crosswalk.
+
+Recommended agent request:
+
+```text
+Please inspect both the R replication package and the Overleaf/LaTeX source. Check whether every manuscript-ready figure and table used by Overleaf matches the corresponding R-generated figure or table, and flag any copied, renamed, manually edited, stale, or unmatched file.
+```
 
 For public release, include paper source files only when appropriate and permitted. If the paper source cannot be included in the public archive, use it during preparation for the consistency check and document in `README.md` that the manuscript source was checked against the replication outputs.
 
@@ -133,7 +189,7 @@ Prioritize bugs, reproducibility risks, and missing tests or logs. Report findin
 
 ```text
 Please read the Replication Package Guide, then inspect the Overleaf/LaTeX source files and compare them with the replication package.
-Check figure references, table references, labels, captions, file paths, appendix numbering, citations to results, and all in-text numerical claims. Verify that the manuscript points to the correct generated figures and tables and that the reported values match logs or generated outputs.
+Check figure references, table references, labels, captions, file paths, appendix numbering, citations to results, and all in-text numerical claims. Verify that the manuscript points to the correct manuscript-ready figures and tables, that those files match the corresponding R-generated outputs or documented manual edits, and that the reported values match logs or generated outputs.
 Report likely reporting errors with the TeX file path, label or nearby text, the value or reference in the paper, the corresponding replication source, and a recommended correction. Do not rewrite the manuscript unless I explicitly ask you to make the edits.
 ```
 
@@ -723,7 +779,8 @@ When manuscript source files are available, treat them as part of the working co
 The final consistency pass should check:
 
 - figure and table labels in the paper against the README crosswalk;
-- manuscript figure/table file paths against generated outputs;
+- manuscript figure/table file paths against the manuscript-ready files included by LaTeX;
+- manuscript-ready figures and tables against the corresponding R-generated files, scripts, and logs, especially when tables are manually edited after generation;
 - in-text estimates, standard errors, p-values, sample sizes, sampling dates, completion times, response rates, and descriptive statistics against logs and generated tables;
 - appendix items against scripts, outputs, and logs;
 - notes for any conceptual, hand-made, or non-replicated items.
