@@ -49,6 +49,7 @@ After a successful run, `master.R` writes `session_info.log`.
 ```text
 r/
 |-- README.md
+|-- .gitignore
 |-- master.R
 |-- R.Rproj
 |-- session_info.log
@@ -92,6 +93,9 @@ r/
 
 - **`R.Rproj`**
   RStudio project file.
+
+- **`.gitignore`**
+  Git ignore rules for local/session files and machine-specific caches.
 
 - **`data/`**
   Public survey input data and quota-comparison files.

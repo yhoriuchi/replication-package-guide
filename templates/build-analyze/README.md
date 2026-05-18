@@ -31,6 +31,7 @@ source("analyze/scripts/02_make_figures_tables.R")
 ```text
 r/
 |-- README.md
+|-- .gitignore
 |-- master.R
 |-- project.Rproj
 |-- session_info.log
@@ -62,6 +63,9 @@ r/
 
 - **`project.Rproj`**
   RStudio project file. Optional but recommended.
+
+- **`.gitignore`**
+  Git ignore rules for local/session files and machine-specific caches.
 
 - **`session_info.log`**
   Full-run session information from a successful replication run.

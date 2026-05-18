@@ -44,6 +44,7 @@ Use this structure when the project is small enough that data, scripts, figures,
 ```text
 r/
 |-- project.Rproj
+|-- .gitignore
 |-- master.R
 |-- README.md
 |-- session_info.log
@@ -83,6 +84,7 @@ Use this structure when data construction is complex, conceptually separate from
 ```text
 r/
 |-- project.Rproj
+|-- .gitignore
 |-- master.R
 |-- README.md
 |-- session_info.log
@@ -117,6 +119,9 @@ r/
 
 - **`project.Rproj`**
   RStudio project file. Optional but recommended.
+
+- **`.gitignore`**
+  Git ignore rules for local/session files and machine-specific caches.
 
 - **`session_info.log`**
   Full-run session information from a successful replication run.

@@ -7,7 +7,7 @@ This folder contains lightweight starter structures, not full replication packag
 - `build-analyze/`: use for larger projects where data construction should be separated from the public analysis workflow.
 - `../examples/horiuchi_tago/`: a finished compact package example that illustrates how the guide can look in practice.
 
-Each structure template includes example `.Rproj`, `README.md`, `master.R`, script stubs, logging helpers, and placeholder folders tracked with `.gitkeep` files.
+Each structure template includes example `.Rproj`, `.gitignore`, `README.md`, `master.R`, script stubs, logging helpers, and placeholder folders tracked with `.gitkeep` files.
 
 To test either template, open the template folder as the project root and run:
 

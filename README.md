@@ -17,8 +17,9 @@ The lightweight templates in this repository illustrate the recommended package 
 - `templates/compact/`: compact project structure for smaller projects.
 - `templates/build-analyze/`: larger project structure with separate `build/` and `analyze/` stages.
 - `examples/horiuchi_tago/`: a finished compact replication package example.
+- `rules.dropboxignore`: a downloadable Dropbox-root ignore file for R/RStudio local and session files.
 
-The structure templates intentionally contain only folder structure and essential example files such as `.Rproj`, `README.md`, `master.R`, script stubs, and logging helpers. They do not include full replication packages or large data files.
+The structure templates intentionally contain only folder structure and essential example files such as `.Rproj`, `.gitignore`, `README.md`, `master.R`, script stubs, and logging helpers. They do not include full replication packages or large data files.
 
 The example package shows what a completed compact package can look like after applying the guide. It includes a real `README.md`, `master.R`, numbered scripts, logs, generated figures and outputs, and a paper-source consistency note.
 
@@ -77,6 +78,7 @@ Dropbox/Apps/Overleaf/[Paper Title]/
 |-- tables/                   # manuscript-ready tables used by LaTeX
 `-- r/                        # replication package or future replication package
     |-- README.md
+    |-- .gitignore
     |-- master.R
     |-- project.Rproj
     |-- scripts/
@@ -91,9 +93,14 @@ This example shows the compact structure. For larger projects, use the same `r/`
 
 In this layout, `figures/` and `tables/` at the Overleaf project root are the manuscript-ready files included by LaTeX and submitted with the paper. The `r/` folder contains the reproducible workflow. It can later become the core of the public replication package. If R generates a table that is then manually edited for publication, keep the generated version in `r/tables/` or `r/output/`, keep the edited manuscript-ready version in root-level `tables/`, and document that relationship in the README crosswalk. When assembling the public archive, make sure the final package includes or clearly traces the manuscript-ready files as well as the generated source files.
 
-Keep local and session files out of both Git and sync. Use `.gitignore` for Git, and use Dropbox ignore rules for Dropbox. Dropbox currently supports a local `rules.dropboxignore` file in the Dropbox root folder; matching new files are not uploaded to dropbox.com, do not sync to other devices, and do not count toward storage. The rule file is local to each computer and applies going forward, so files already synced may need to be removed and recreated after rules are added. See Dropbox's help page on [preventing files from syncing](https://help.dropbox.com/sync/how-to-prevent-files-from-syncing).
+Keep local and session files out of both Git and Dropbox sync. Use two ignore files because Git and Dropbox are separate systems:
 
-Suggested Dropbox ignore rules for R/RStudio local files:
+- `rules.dropboxignore` belongs in the root Dropbox folder, such as `~/Dropbox/rules.dropboxignore`. It tells Dropbox what not to upload or sync anywhere under that Dropbox folder.
+- `.gitignore` belongs inside each replication package or Git repository, such as `Dropbox/Apps/Overleaf/[Paper Title]/r/.gitignore`. It tells Git what not to commit for that package.
+
+The simplest setup is to download or copy this repository's [`rules.dropboxignore`](rules.dropboxignore) file into the root Dropbox folder, then copy the same base rules into the `.gitignore` file inside each `r/` replication package. If an `r/.gitignore` already exists, append these rules rather than replacing project-specific rules.
+
+Suggested base rules for both `rules.dropboxignore` and project-level `.gitignore` files:
 
 ```text
 # R and RStudio local/session files
@@ -108,14 +115,19 @@ Suggested Dropbox ignore rules for R/RStudio local files:
 **/*.temp
 **/*.bak
 
-# package/cache folders that should not sync through Overleaf
+# package/cache folders
 **/renv/library/
 **/renv/staging/
 **/*_cache/
 **/*_files/
+
+# R graphics leftovers
+**/Rplots.pdf
 ```
 
-Do not ignore the entire `r/` folder if the agent needs to inspect it or if it will become the replication package. Ignore only machine-specific caches, histories, package libraries, and temporary files. The `.Rproj` file, scripts, public data, generated logs, and reproducibility metadata such as `renv.lock` should usually remain visible.
+Dropbox ignore rules apply only going forward. Files that already synced may need to be removed and recreated after `rules.dropboxignore` is added. Git ignore rules also do not automatically untrack files that were already committed; after checking carefully, remove such files from Git tracking with `git rm --cached [file]`.
+
+Do not ignore the entire `r/` folder if the agent needs to inspect it or if it will become the replication package. Ignore only machine-specific caches, histories, package libraries, and temporary files. The `.Rproj` file, scripts, public data, generated logs, and reproducibility metadata such as `renv.lock` should usually remain visible. See Dropbox's help page on [preventing files from syncing](https://help.dropbox.com/sync/how-to-prevent-files-from-syncing) for Dropbox-specific details.
 
 This integration makes the most important final check much easier: consistency between the paper and the replication package. The agent should verify that:
 
@@ -249,6 +261,7 @@ Recommended for smaller packages. See `templates/compact/` for a lightweight sta
 ```text
 r/
 |-- README.md
+|-- .gitignore
 |-- master.R
 |-- project.Rproj               # optional but recommended
 |-- session_info.log
@@ -290,6 +303,7 @@ Recommended for larger packages. See `templates/build-analyze/` for a lightweigh
 ```text
 r/
 |-- README.md
+|-- .gitignore
 |-- master.R
 |-- project.Rproj               # optional but recommended
 |-- session_info.log
@@ -840,6 +854,7 @@ For a compact package:
 
 ```text
 README.md
+.gitignore
 master.R
 session_info.log
 data/
@@ -856,6 +871,7 @@ For a large package:
 
 ```text
 README.md
+.gitignore
 master.R
 session_info.log
 build/
