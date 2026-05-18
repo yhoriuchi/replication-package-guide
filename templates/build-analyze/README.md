@@ -8,6 +8,24 @@
 - All public analysis scripts write console output and messages to per-script log files saved in `analyze/logs/`.
 - This build/analyze template is for larger projects where data construction is separated from analysis, but the package still has one and only one authoritative `README.md`.
 
+## How To Run
+
+From a fresh R session at the project root:
+
+```r
+source("master.R")
+```
+
+The public replication path should normally use files in `build/output/analysis_ready/` and run scripts in `analyze/scripts/`.
+
+Alternatively, run individual public analysis scripts in order:
+
+```r
+source("analyze/scripts/00_list_inputs.R")
+source("analyze/scripts/01_analyze_results.R")
+source("analyze/scripts/02_make_figures_tables.R")
+```
+
 ## Folder Tree
 
 ```text
@@ -34,31 +52,87 @@ r/
     `-- logs/
 ```
 
-## Data Sources
+## Files Included In This Package
+
+- **`master.R`**
+  Public entry point for the full replication run.
+
+- **`README.md`**
+  One authoritative documentation file.
+
+- **`project.Rproj`**
+  RStudio project file. Optional but recommended.
+
+- **`session_info.log`**
+  Full-run session information from a successful replication run.
+
+- **`build/data/`**
+  Raw or received input data, when redistributable.
+
+- **`build/documents/`**
+  Source documentation, codebooks, provenance notes, or data dictionaries.
+
+- **`build/scripts/`**
+  Scripts that create analysis-ready files.
+
+- **`build/output/analysis_ready/`**
+  Public analysis-ready files used by the analysis stage.
+
+- **`analyze/scripts/`**
+  Public scripts that reproduce reported results from analysis-ready inputs.
+
+- **`analyze/functions/`**
+  Reusable helper functions sourced by analysis scripts.
+
+- **`analyze/figures/`, `analyze/tables/`, and `analyze/output/`**
+  Generated figures, generated tables, and reproducible intermediate objects.
+
+- **`build/logs/` and `analyze/logs/`**
+  Per-script log files created during execution.
+
+## Data Sources And Restrictions
 
 List raw, received, public, and analysis-ready data sources here.
 
-| Source | Location | Redistributable? | Notes |
-|---|---|---|---|
-| Example source | `build/data/` | Yes | Replace with actual source documentation. |
-
-## Restricted Data
-
-Use this section when the project has restricted, proprietary, confidential, licensed, or otherwise non-redistributable inputs.
+- **Example source**
+  - Location: `build/data/`
+  - Redistributable: Yes
+  - Notes: replace with actual source documentation.
 
 For each restricted source, document:
 
-- source name;
-- owner or vendor;
-- reason the data cannot be redistributed;
-- scripts that originally used the source;
-- public analysis-ready files that replace the source;
-- whether licensed users can rebuild the data;
-- whether published results can be reproduced without access to the restricted source.
+- **[Restricted source name]**
+  - Location: `[restricted/path-or-description]`
+  - Redistributable: No
+  - Restriction: [Why the source cannot be redistributed.]
+  - Scripts using this source: `build/scripts/[script_name].R`
+  - Public replacement: `build/output/analysis_ready/[file_name]`
+  - Licensed rebuild: [Whether licensed users can rebuild the data.]
+  - Public reproducibility: [Whether published results can be reproduced without access to the restricted source.]
 
-| Source | Restriction | Build scripts | Public replacement | Notes |
-|---|---|---|---|---|
-| None in template | Not applicable | Not applicable | Not applicable | Replace this row. |
+## Build Stage
+
+This section documents how analysis-ready data are created.
+
+In a public replication package, users should not be required to rerun the build stage when it depends on restricted data, APIs, scraping, or expensive upstream collection. In those cases, include the redistributable analysis-ready files in `build/output/analysis_ready/` and document the original build process here.
+
+- **Example build step**
+  - Script: `build/scripts/01_build_analysis_ready_data.R`
+  - Output: `build/output/analysis_ready/example_analysis_data.rds`
+  - Log: `build/logs/01_build_analysis_ready_data.log`
+  - Purpose: toy template build step.
+
+## Analysis Stage
+
+List public analysis scripts, helper files, or generated outputs when useful. Keep this section concise; the paper-order mapping belongs in `Figures And Tables`.
+
+- **Example analysis**
+  - Script: `analyze/scripts/02_make_figures_tables.R`
+  - Output:
+    - `analyze/figures/example_figure.png`
+    - `analyze/tables/example_results.csv`
+  - Log: `analyze/logs/02_make_figures_tables.log`
+  - Purpose: example figure and table generation.
 
 ## Paper Source And Consistency Checks
 
@@ -70,92 +144,70 @@ Paper source status:
 - [Paper source files were not included in the public archive but were used during package preparation.]
 - [Paper source files were not available for this replication package.]
 
-The consistency check should verify that every figure, table, and in-text number reported in the paper can be traced to the scripts, logs, generated tables, or generated figures in this package.
+The consistency check should verify:
 
-## How To Run
+- every figure and table cited in the paper or appendix appears in `Figures And Tables`;
+- every figure/table path in the paper points to the corresponding replicated output;
+- manuscript-ready figures and tables are checked against the corresponding generated files, scripts, and logs, especially when publication tables are manually edited after generation;
+- every in-text estimate, standard error, p-value, sample size, sampling date, completion time, response rate, and descriptive statistic can be traced to a script, log file, generated table, or generated figure;
+- conceptual figures, hand-made tables, or non-replicated items are clearly identified in `Figures And Tables`.
 
-From a fresh R session at the project root:
+## Figures And Tables
 
-```r
-source("master.R")
-```
+Every manuscript and appendix figure/table should appear below in paper order. Use one `####` entry for each individual figure or table number used in the manuscript or appendix, even when multiple entries are generated by the same script.
 
-The public replication path should normally use files in `build/output/analysis_ready/` and run scripts in `analyze/scripts/`.
+### Manuscript
 
-Alternatively, run individual public analysis scripts in order:
+#### Figure 1
 
-```r
-source("analyze/scripts/00_list_inputs.R")
-source("analyze/scripts/01_analyze_results.R")
-source("analyze/scripts/02_make_figures_tables.R")
-```
-
-## Build Stage
-
-This section documents how analysis-ready data are created.
-
-In a public replication package, users should not be required to rerun the build stage when it depends on restricted data, APIs, scraping, or expensive upstream collection. In those cases, include the redistributable analysis-ready files in `build/output/analysis_ready/` and document the original build process here.
-
-| Script | Output | Log | Purpose |
-|---|---|---|---|
-| `build/scripts/01_build_analysis_ready_data.R` | `build/output/analysis_ready/example_analysis_data.rds` | `build/logs/01_build_analysis_ready_data.log` | Toy template build step. |
-
-## Analysis Stage
-
-This section maps every reported figure and table to the analysis script and log that produced it. Embedded previews are optional. Use a heading-plus-bullet structure instead of a wide table so long output paths remain readable. Do not put LaTeX labels in parentheses next to figure/table titles. Add `LaTeX label` after `Log` and before `Notes`. If a field lists multiple outputs, scripts, logs, or labels, use indented sub-items inside that field.
-
-### Manuscript Figures And Tables
-
-#### Figure: Conceptual Figure
-
-- Paper item: manuscript figure.
 - Output: No output file.
 - Script: No code.
 - Log: Not applicable.
-- LaTeX label:
+- LaTeX Label:
   - `fig:[label]`
 - Notes: conceptual figure.
 
-#### Figure: Example Figure
+#### Figure 2
 
-- Paper item: manuscript figure.
 - Output:
   - `analyze/figures/example_figure.png`
 - Script:
   - `analyze/scripts/02_make_figures_tables.R`
 - Log:
   - `analyze/logs/02_make_figures_tables.log`
-- LaTeX label:
+- LaTeX Label:
   - `fig:example_figure`
 - Notes: example figure.
 
-#### Table: Example Results
+#### Table 1
 
-- Paper item: manuscript table.
 - Output:
   - `analyze/tables/example_results.csv`
 - Script:
   - `analyze/scripts/02_make_figures_tables.R`
 - Log:
   - `analyze/logs/02_make_figures_tables.log`
-- LaTeX label:
+- LaTeX Label:
   - `tab:example_results`
 - Notes: example table.
 
-### Appendix / Supplementary Figures And Tables
+### Appendix
 
-#### Figure: Appendix Figure
+#### Figure A.1
 
-- Paper item: appendix figure.
 - Output:
   - `[path/to/output]`
 - Script:
   - `[path/to/script.R]`
 - Log:
   - `[path/to/log.log]`
-- LaTeX label:
+- LaTeX Label:
   - `fig:[appendix_label]`
 - Notes: replace or delete this entry.
+
+## Software Requirements
+
+List required software and packages. Include installation instructions if useful.
 
 ## Session Information
 
@@ -170,6 +222,16 @@ Platform: [R platform]
 Computer Operating System: [operating system and version]
 Additional details: [RAM, processor/GPU, external tools, or other project-specific requirements when relevant.]
 
+## Recommended Citation
+
+If you use or adapt the analysis code, please cite the replication data archive associated with the published article.
+
 ## Last Verified
 
-Replace with the date of the last successful full run.
+Verified on [Month Day, Year] by running:
+
+```r
+source("master.R")
+```
+
+from the project root.

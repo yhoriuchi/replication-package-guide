@@ -1,9 +1,9 @@
 # Replication Package Guide
 
-**Author:** Yusaku Horiuchi  
-**Affiliation:** Syde P. Deeb Eminent Scholar in Political Science, Florida State University  
-**Created:** May 10, 2026  
-**Last revised:** May 18, 2026
+- **Author:** Yusaku Horiuchi
+- **Affiliation:** Syde P. Deeb Eminent Scholar in Political Science, Florida State University
+- **Created:** May 10, 2026
+- **Last revised:** May 18, 2026
 
 [![Page views](https://hits.sh/yhoriuchi.github.io/replication-package-guide.svg?label=page%20views&color=007ec6)](https://hits.sh/yhoriuchi.github.io/replication-package-guide/)
 
@@ -159,7 +159,8 @@ Use the project's existing logging style if one exists. Do not change substantiv
 
 ```text
 Please read the Replication Package Guide and prepare or repair the project's single authoritative README.md. Use templates/README_TEMPLATE.md as the model.
-The README must include the paper title and authors, description, folder tree, files included, data sources and restrictions, paper source consistency status, how to run master.R, computing environment, session information, recommended citation, last verified date, and a paper-order crosswalk for every figure and table. In the crosswalk, do not put LaTeX labels in parentheses next to figure/table titles; add a separate "LaTeX label" field after "Log" and before "Notes". If a field lists multiple outputs, scripts, logs, or labels, use indented sub-bullets instead of inline comma- or semicolon-separated paths.
+Use the guide's standard section order: Description; How To Run; Folder Tree; Files Included In This Package; Data Sources And Restrictions; Build Stage if needed; Analysis Stage; Paper Source And Consistency Checks; Figures And Tables; Software Requirements; Session Information; Recommended Citation; Last Verified.
+The `## Figures And Tables` crosswalk must use `### Manuscript` and `### Appendix` subsections. Add one `####` entry for each individual figure or table number used in the manuscript or appendix, even when multiple entries are produced by the same script. Each entry should contain exactly these five fields, in this order: `Output`, `Script`, `Log`, `LaTeX Label`, and `Notes`. Do not put LaTeX labels in the `####` heading. If a field lists multiple files or labels, use indented sub-bullets instead of inline comma- or semicolon-separated paths.
 Do not create additional README files. Do not include README.html or README.pdf in the repository. Embedded figure/table previews are optional; the crosswalk is required.
 ```
 
@@ -324,187 +325,130 @@ The README is the user's map. It should be complete enough that a reader can und
 
 Every replication README should include:
 
-- citation and paper title;
+- paper title and authors;
 - short description of what the package reproduces;
-- folder tree;
-- software requirements;
-- computing environment summary;
 - instructions for running `master.R`;
 - instructions for running individual scripts, if useful;
-- explanation of all data sources;
-- note on restricted or omitted data, if relevant;
-- note on whether paper source files were checked against replication outputs;
-- description of logs and session information;
+- folder tree;
+- files included in the package;
+- data sources and restrictions;
+- build-stage documentation, if using the build/analyze structure;
+- analysis-stage documentation;
+- paper source and consistency-check status;
 - figure/table crosswalk in paper order;
 - optional figure/table previews when useful;
+- software requirements;
+- session information and computing environment summary;
+- recommended citation;
 - final verification date.
 
-Use exactly one `README.md` regardless of package size. For build/analyze packages, keep the documentation in one file and organize it with internal sections:
+Use exactly one `README.md` regardless of package size. Do not commit generated `README.html` or `README.pdf` files unless an archive or journal specifically requires them.
 
-- Overview and how to run.
-- Directory structure.
-- Data sources and restricted-data notes.
-- Build-stage documentation.
-- Analysis-stage documentation.
-- Paper-order figure/table crosswalk.
-- Session information and verification date.
+Use this section order unless a project-specific reason makes another order clearer:
 
-Commit only `README.md`. If an archive or journal requires HTML or PDF documentation, generate those files from `README.md` at release time and make clear that `README.md` remains the source.
+1. `## Description`
+2. `## How To Run`
+3. `## Folder Tree`
+4. `## Files Included In This Package`
+5. `## Data Sources And Restrictions`
+6. `## Build Stage`, for build/analyze packages only
+7. `## Analysis Stage`
+8. `## Paper Source And Consistency Checks`
+9. `## Figures And Tables`
+10. `## Software Requirements`
+11. `## Session Information`
+12. `## Recommended Citation`
+13. `## Last Verified`
 
-## Figure And Table Crosswalk
+Commit only one README-style documentation file: `README.md`. If an archive or journal requires HTML or PDF documentation, generate those files from `README.md` at release time and make clear that `README.md` remains the source.
 
-The README must include a crosswalk that maps every reported figure and table to its output file, script, and log. Embedded previews are optional. Use them only when they make the package easier to inspect; they are not required when the crosswalk is complete.
+## Data Sources And Restrictions
 
-Crosswalk formatting rules:
-
-- Do not put LaTeX labels in parentheses next to the figure or table title. Keep the title line readable, such as `Figure: Study 1 pooled means`.
-- Add the LaTeX label as its own field after `Log` and before `Notes`.
-- If `Output`, `Script`, `Log`, `LaTeX label`, or another field contains multiple files or labels, list them as indented sub-items within that field. Do not put multiple file paths on one line separated by commas or semicolons.
-
-If using a heading-plus-bullet style, use this pattern:
+Use Markdown lists rather than a wide table for data sources. Long file paths and restriction notes are easier to scan when each source gets its own entry.
 
 ```markdown
-#### Figure: Study 1 pooled means
+## Data Sources And Restrictions
 
-- Paper item: manuscript figure.
-- Output:
-  - `figures/study1/pooled_means.pdf`
-- Script:
-  - `scripts/06_study1_pooled_means.R`
-- Log:
-  - `logs/06_study1_pooled_means.log`
-- LaTeX label:
-  - `fig:study1_pooled_means`
-- Notes: pooled outcome means by treatment condition.
+- **[Source name]**
+  - Location: `[path/to/file-or-folder]`
+  - Redistributable: Yes/No
+  - Notes: [License, access, provenance, or other source notes.]
 ```
 
-For a field with multiple files or labels, keep the same field name and put each item on its own indented line:
+If any source is restricted, proprietary, confidential, licensed, or otherwise non-redistributable, explain in the same entry:
 
 ```markdown
-- Output:
-  - `tables/study1/main_effects.tex`
-  - `tables/study1/postgraduate_main_effects.tex`
-- Log:
-  - `logs/07_study1_regression_tables.log`
-  - `logs/15_postgraduate_education_tables.log`
-- LaTeX label:
-  - `tab:study1_main_effects`
-  - `tab:study1_postgraduate_main_effects`
+- **[Restricted source name]**
+  - Location: `[restricted/path-or-description]`
+  - Redistributable: No
+  - Restriction: [Why the source cannot be redistributed.]
+  - Scripts using this source: `[path/to/script.R]`
+  - Public replacement: `[path/to/analysis_ready_file]`
+  - Licensed rebuild: [Whether licensed users can rebuild the data.]
+  - Public reproducibility: [Whether published results can be reproduced without access to the restricted source.]
 ```
 
-For figures:
+## Figures And Tables
 
-- save the publication format required by the journal, such as `.pdf` or `.eps`;
-- include the output path in the crosswalk;
-- include the script that produced the figure;
-- include the log file for that script;
-- include the LaTeX label as a separate field when manuscript source files are available;
-- note when a figure is conceptual or otherwise has no code.
+The README must include a paper-order crosswalk that maps every reported manuscript and appendix figure/table to its output file, script, log, LaTeX Label, and notes. Embedded previews are optional; they are not a substitute for the crosswalk.
 
-Use a heading-plus-bullet style instead of a wide table, especially when paths are long:
+Use this structure:
 
 ```markdown
-#### Figure: Conceptual Framework
-
-- Paper item: manuscript figure.
-- Output: No output file.
-- Script: No code.
-- Log: Not applicable.
-- LaTeX label:
-  - `fig:conceptual_framework`
-- Notes: conceptual figure.
-
-#### Figure: Main Treatment Effect
-
-- Paper item: manuscript figure.
-- Output:
-  - `figures/main_effect.pdf`
-- Script:
-  - `scripts/02_analyze_main_results.R`
-- Log:
-  - `logs/02_analyze_main_results.log`
-- LaTeX label:
-  - `fig:main_effect`
-- Notes: main treatment effect.
-```
-
-For tables:
-
-- save machine-readable output when possible, such as `.csv`;
-- save publication output when needed, such as `.tex`, `.html`, or `.docx`;
-- include the output path in the crosswalk;
-- include the script that produced the table;
-- include the log file for that script;
-- include the LaTeX label as a separate field when manuscript source files are available.
-
-Example:
-
-```markdown
-#### Tables: Main And Robustness Results
-
-- Paper item: manuscript tables.
-- Output:
-  - `tables/main_results.csv`
-  - `tables/robustness_results.csv`
-- Script:
-  - `scripts/03_make_tables.R`
-- Log:
-  - `logs/03_make_tables.log`
-  - `logs/04_robustness_tables.log`
-- LaTeX label:
-  - `tab:main_results`
-  - `tab:robustness_results`
-- Notes: main and robustness regression tables.
-```
-
-For compact projects, this can be one crosswalk section. For large projects, separate manuscript and appendix items if that makes the README easier to scan:
-
-```markdown
-## Replication Guide: Figures And Tables
+## Figures And Tables
 
 ### Manuscript
 
-#### Figure: Main Effect
+#### Figure 1
 
-- Paper item: manuscript figure.
 - Output:
   - `figures/main_effect.pdf`
 - Script:
   - `scripts/02_analyze_main_results.R`
 - Log:
   - `logs/02_analyze_main_results.log`
-- LaTeX label:
+- LaTeX Label:
   - `fig:main_effect`
-- Notes: main result.
+- Notes: main treatment effect.
 
-#### Table: Main Results
+#### Table 1
 
-- Paper item: manuscript table.
 - Output:
+  - `tables/main_results.tex`
   - `tables/main_results.csv`
 - Script:
   - `scripts/03_make_tables.R`
 - Log:
   - `logs/03_make_tables.log`
-- LaTeX label:
+- LaTeX Label:
   - `tab:main_results`
-- Notes: main regression table.
+- Notes: manuscript-ready LaTeX table and machine-readable CSV generated from the same model output.
 
 ### Appendix
 
-#### Figure: Appendix Balance
+#### Figure A.1
 
-- Paper item: appendix figure.
 - Output:
   - `figures/appendix_balance.pdf`
 - Script:
   - `scripts/04_appendix_checks.R`
 - Log:
   - `logs/04_appendix_checks.log`
-- LaTeX label:
+- LaTeX Label:
   - `fig:appendix_balance`
-- Notes: balance check.
+- Notes: appendix balance check.
 ```
+
+Formatting rules:
+
+- Use `## Figures And Tables` as the section heading.
+- Use `### Manuscript` and `### Appendix` as subsections. If the paper calls the appendix "Supplementary Materials," still use `### Appendix` unless journal requirements make another title clearer.
+- Add one `####` entry for every individual figure or table number used in the manuscript or appendix. Use the manuscript number as the heading, such as `#### Figure 1`, `#### Table 2`, `#### Figure A.1`, or `#### Table S.3`.
+- Do not group multiple figures or tables under one `####` heading. If a single R script generates two figures, create two separate `####` entries and repeat the same script and log paths in both entries.
+- Do not put descriptive titles or LaTeX labels in the `####` heading. Put descriptive context in `Notes` and put labels in `LaTeX Label`.
+- Each `####` entry should contain exactly five fields, in this order: `Output`, `Script`, `Log`, `LaTeX Label`, and `Notes`.
+- If a field contains multiple files or labels, list them as indented sub-items. Do not put multiple file paths on one line separated by commas or semicolons.
+- Use `No output file`, `No code`, or `Not applicable` when an item is conceptual, hand-made, or retained from the manuscript source rather than generated by public scripts.
 
 ## Script Naming
 
@@ -798,9 +742,7 @@ Data rules:
 
 ## Restricted Data
 
-If any source cannot be redistributed, include a restricted-data section in `README.md`.
-
-It should explain:
+If any source cannot be redistributed, document it inside `## Data Sources And Restrictions` using the restricted-source fields described above. The entry should explain:
 
 - source name;
 - owner or vendor;
@@ -865,7 +807,7 @@ Before releasing a replication package, verify:
 - `session_info.log` exists and comes from a successful full run.
 - The README folder tree matches the actual package.
 - The README crosswalk lists every figure and table in paper order.
-- Every figure/table has an output path, script path, and log path.
+- Every figure/table has an output path, script path, and log path, or an explicit `No output file`, `No code`, or `Not applicable` entry.
 - Every reported number in the paper source has been checked against logs, tables, figures, or scripts when the paper source is available.
 - All reported text numbers can be traced to a log, table, figure, or script.
 - All restricted data sources are documented.
