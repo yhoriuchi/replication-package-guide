@@ -17,7 +17,7 @@ Choose the tree that matches the project structure and delete the other one.
 Use this structure when the project is small enough that data, scripts, figures, tables, and outputs can live in one project root.
 
 ```text
-replication_package/
+r/
 |-- project.Rproj
 |-- master.R
 |-- README.md
@@ -56,7 +56,7 @@ replication_package/
 Use this structure when data construction is complex, conceptually separate from analysis, or depends on restricted/non-reproducible upstream sources.
 
 ```text
-replication_package/
+r/
 |-- project.Rproj
 |-- master.R
 |-- README.md

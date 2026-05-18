@@ -66,7 +66,7 @@ When preparing a replication package with Codex, Claude Code, or another coding 
 
 For Overleaf users, one practical workflow is to use Overleaf's Dropbox integration and create the replication package inside, or immediately beside, the synced Overleaf project folder. This lets the agent inspect the manuscript source and the replication package in one workspace.
 
-Recommended layout for an Overleaf project with a replication package:
+Recommended layout for an Overleaf project with a compact replication package:
 
 ```text
 Dropbox/Apps/Overleaf/[Paper Title]/
@@ -75,7 +75,7 @@ Dropbox/Apps/Overleaf/[Paper Title]/
 |-- references.bib
 |-- figures/                  # manuscript-ready figures used by LaTeX
 |-- tables/                   # manuscript-ready tables used by LaTeX
-`-- analysis/                 # replication package or future replication package
+`-- r/                        # replication package or future replication package
     |-- README.md
     |-- master.R
     |-- project.Rproj
@@ -87,7 +87,9 @@ Dropbox/Apps/Overleaf/[Paper Title]/
     `-- tables/               # generated replication tables, if kept separately
 ```
 
-In this layout, `figures/` and `tables/` at the Overleaf project root are the manuscript-ready files included by LaTeX and submitted with the paper. The `analysis/` folder contains the reproducible workflow. It can later become the core of the public replication package. If R generates a table that is then manually edited for publication, keep the generated version in `analysis/tables/` or `analysis/output/`, keep the edited manuscript-ready version in root-level `tables/`, and document that relationship in the README crosswalk. When assembling the public archive, make sure the final package includes or clearly traces the manuscript-ready files as well as the generated source files.
+This example shows the compact structure. For larger projects, use the same `r/` root folder but follow the build/analyze structure described below.
+
+In this layout, `figures/` and `tables/` at the Overleaf project root are the manuscript-ready files included by LaTeX and submitted with the paper. The `r/` folder contains the reproducible workflow. It can later become the core of the public replication package. If R generates a table that is then manually edited for publication, keep the generated version in `r/tables/` or `r/output/`, keep the edited manuscript-ready version in root-level `tables/`, and document that relationship in the README crosswalk. When assembling the public archive, make sure the final package includes or clearly traces the manuscript-ready files as well as the generated source files.
 
 Keep local and session files out of both Git and sync. Use `.gitignore` for Git, and use Dropbox ignore rules for Dropbox. Dropbox currently supports a local `rules.dropboxignore` file in the Dropbox root folder; matching new files are not uploaded to dropbox.com, do not sync to other devices, and do not count toward storage. The rule file is local to each computer and applies going forward, so files already synced may need to be removed and recreated after rules are added. See Dropbox's help page on [preventing files from syncing](https://help.dropbox.com/sync/how-to-prevent-files-from-syncing).
 
@@ -113,7 +115,7 @@ Suggested Dropbox ignore rules for R/RStudio local files:
 **/*_files/
 ```
 
-Do not ignore the entire `analysis/` folder if the agent needs to inspect it or if it will become the replication package. Ignore only machine-specific caches, histories, package libraries, and temporary files. The `.Rproj` file, scripts, public data, generated logs, and reproducibility metadata such as `renv.lock` should usually remain visible.
+Do not ignore the entire `r/` folder if the agent needs to inspect it or if it will become the replication package. Ignore only machine-specific caches, histories, package libraries, and temporary files. The `.Rproj` file, scripts, public data, generated logs, and reproducibility metadata such as `renv.lock` should usually remain visible.
 
 This integration makes the most important final check much easier: consistency between the paper and the replication package. The agent should verify that:
 
@@ -244,7 +246,7 @@ When uncertain, choose the simpler structure unless the build stage creates real
 Recommended for smaller packages. See `templates/compact/` for a lightweight starter version.
 
 ```text
-replication_package/
+r/
 |-- README.md
 |-- master.R
 |-- project.Rproj               # optional but recommended
@@ -285,7 +287,7 @@ The compact structure should still include `logs/`. A `functions/` folder is opt
 Recommended for larger packages. See `templates/build-analyze/` for a lightweight starter version.
 
 ```text
-replication_package/
+r/
 |-- README.md
 |-- master.R
 |-- project.Rproj               # optional but recommended

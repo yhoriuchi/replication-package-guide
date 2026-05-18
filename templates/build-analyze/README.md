@@ -11,7 +11,7 @@
 ## Folder Tree
 
 ```text
-replication_package/
+r/
 |-- README.md
 |-- master.R
 |-- project.Rproj

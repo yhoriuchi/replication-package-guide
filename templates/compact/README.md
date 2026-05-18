@@ -12,7 +12,7 @@ This compact template is for smaller projects where the public data, analysis sc
 ## Folder Tree
 
 ```text
-replication_package/
+r/
 |-- README.md
 |-- master.R
 |-- project.Rproj

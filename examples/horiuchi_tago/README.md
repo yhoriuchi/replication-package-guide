@@ -21,7 +21,7 @@ Run this command from the replication package root after restarting R.
 ## Directory Structure
 
 ```text
-replication_package/
+r/
 |-- README.md
 |-- master.R
 |-- R.Rproj
