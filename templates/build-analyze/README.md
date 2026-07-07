@@ -6,7 +6,7 @@
 
 - This replication package reproduces [all / selected] figures and tables reported in "[Paper Title]" and its supplementary materials.
 - All public analysis scripts write console output and messages to per-script log files saved in `analyze/logs/`.
-- This build/analyze template is for larger projects where data construction is separated from analysis, but the package still has one and only one authoritative `README.md`.
+- This build/analyze template is for larger projects where data construction is separated from analysis, but the package still has one authoritative `README.md`.
 
 ## How To Run
 

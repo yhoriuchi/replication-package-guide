@@ -119,7 +119,7 @@ r/
 |
 |-- scripts/
 |   |-- 01_prepare_data.R
-|   |-- 02_analyze_main_results.R
+|   |-- 02_analyze_results.R
 |   `-- 03_make_figures_tables.R
 |
 |-- functions/
@@ -272,9 +272,9 @@ Use this structure:
   - `tables/main_results.tex`
   - `tables/main_results.csv`
 - Script:
-  - `scripts/03_make_tables.R`
+  - `scripts/03_make_figures_tables.R`
 - Log:
-  - `logs/03_make_tables.log`
+  - `logs/03_make_figures_tables.log`
 - LaTeX Label:
   - `tab:main_results`
 - Notes: manuscript-ready LaTeX table and machine-readable CSV generated from the same model output.
@@ -312,10 +312,9 @@ Use script names that make the execution order and purpose obvious:
 ```text
 00_list_inputs.R
 01_prepare_data.R
-02_estimate_main_results.R
-03_make_figures.R
-04_make_tables.R
-05_robustness_checks.R
+02_analyze_results.R
+03_make_figures_tables.R
+04_robustness_checks.R
 ```
 
 Rules:
@@ -344,15 +343,15 @@ Logs should include:
 The log filename should match the script filename:
 
 ```text
-scripts/02_estimate_main_results.R
-logs/02_estimate_main_results.log
+scripts/02_analyze_results.R
+logs/02_analyze_results.log
 ```
 
 For a build/analyze package:
 
 ```text
-analyze/scripts/02_estimate_main_results.R
-analyze/logs/02_estimate_main_results.log
+analyze/scripts/01_analyze_results.R
+analyze/logs/01_analyze_results.log
 ```
 
 ## Suggested Logging Helper
@@ -395,7 +394,7 @@ Use this pattern in each public script:
 
 ```r
 source("functions/logging.R")
-start_script_log("02_estimate_main_results")
+start_script_log("02_analyze_results")
 
 tryCatch({
   # Script body goes here.
@@ -411,7 +410,7 @@ For build/analyze packages, adjust paths:
 
 ```r
 source("analyze/functions/logging.R")
-start_script_log("02_estimate_main_results", log_dir = "analyze/logs")
+start_script_log("01_analyze_results", log_dir = "analyze/logs")
 
 tryCatch({
   # Script body goes here.
@@ -457,9 +456,8 @@ safe_source <- function(file) {
 
 scripts <- c(
   "scripts/01_prepare_data.R",
-  "scripts/02_estimate_main_results.R",
-  "scripts/03_make_figures.R",
-  "scripts/04_make_tables.R"
+  "scripts/02_analyze_results.R",
+  "scripts/03_make_figures_tables.R"
 )
 
 for (script in scripts) {
@@ -486,9 +484,8 @@ For large packages, `master.R` should normally run the public analysis path only
 ```r
 scripts <- c(
   "analyze/scripts/00_list_inputs.R",
-  "analyze/scripts/01_estimate_main_results.R",
-  "analyze/scripts/02_make_figures.R",
-  "analyze/scripts/03_make_tables.R"
+  "analyze/scripts/01_analyze_results.R",
+  "analyze/scripts/02_make_figures_tables.R"
 )
 ```
 
@@ -618,39 +615,3 @@ analyze/
 ```
 
 The final archive should have obvious structure, one command to run, traceable outputs, and no surprises.
-
-## Common Agent Requests
-
-### Prepare or Reorganize a Replication Package
-
-Please read the Replication Package Guide before making changes. Then inspect my project and prepare a complete replication package. If the paper source files are available in the working directory, also check consistency between the paper and the replication outputs.
-
-First decide whether the project should use the compact structure or the build/analyze structure. Use the compact structure when the project is small and all public inputs can be shared directly. Use the build/analyze structure when data construction is complex, uses restricted sources, involves scraping/APIs, or produces analysis-ready datasets that should be treated as the public replication inputs.
-
-Every replication package must include `master.R`, script-specific log files, `session_info.log`, a self-contained `README.md`, and a complete crosswalk for all figures and tables reported in the paper or appendix. Check that every figure, table, and in-text numerical claim in the paper can be traced to the replication package, including estimates, standard errors, p-values, sample sizes, sampling dates, completion times, response rates, and descriptive statistics. Do not use absolute paths. Do not require manual steps unless they are documented as unavoidable.
-
-Use `templates/compact/` or `templates/build-analyze/` as the starting structure. Use the selected template's `README.md`, or `templates/README_TEMPLATE.md`, as the starting point for `README.md`. Replace all placeholder text with project-specific documentation.
-
-### Add or Repair Script Logs
-
-Please read the Replication Package Guide, then inspect all public R scripts in this project. Add or repair per-script logging so every public script writes a matching log file to `logs/` or `analyze/logs/`.
-
-Each log should record the script name, start and end time, important row counts, sample sizes, reported estimates or test results, warnings, and any other numbers reported in the paper.
-
-Use the project's existing logging style if one exists. Do not change substantive analysis code unless needed to make logging reliable. After editing, run the public replication path and confirm that every public script produces its expected log file.
-
-### Check Paper and Log Consistency
-
-Please read the Replication Package Guide, then compare the paper source files with the replication package outputs and logs.
-
-Check every figure, table, and in-text numerical claim in the paper and appendix, including estimates, standard errors, p-values, confidence intervals, sample sizes, sampling dates, field dates, completion times, response rates, missing-data counts, and descriptive statistics.
-
-For each reported item, verify that the value in the paper matches a script, log file, generated table, or generated figure. Report any mismatch with the paper source location, the replication source location, the paper value, and the replication value. Do not silently change paper text or analysis code; explain the discrepancy first.
-
-### Final Pre-Release Audit
-
-Please read the Replication Package Guide and perform a final pre-release audit of this replication package.
-
-Verify that `source("master.R")` runs from a fresh R session; every public script creates a log; `session_info.log` exists; `README.md` is the only README file; the figure/table crosswalk is complete; paper source consistency has been checked when source files are available; no absolute paths, personal files, caches, or temporary files remain; and restricted data are documented.
-
-Return a concise release-readiness report with pass/fail items, remaining risks, and exact files that need attention.

@@ -90,7 +90,7 @@ A practical guide and template collection for building high-quality social scien
 
 <div class="resource-card" markdown="1">
 
-### Copy Source
+### Instruction Source
 
 [`AGENTS.md`](https://github.com/yhoriuchi/replication-package-guide/blob/main/AGENTS.md) contains the instructions copied by the button above.
 
@@ -229,7 +229,7 @@ For public release, include paper source files only when appropriate and permitt
 
 A replication package is successful when a reader can unzip it, open the project root, run one command, and see exactly how the reported results were produced.
 
-The package should satisfy these requirements:
+Every package should include:
 
 - One public entry point: `master.R`.
 - Exactly one authoritative `README.md` that explains the package, the workflow, the required software, and every figure/table output.
@@ -243,7 +243,7 @@ The package should satisfy these requirements:
 - When paper source files are available, the replication package should be checked against the manuscript and appendix for consistency in figures, tables, and in-text numerical claims.
 - Restricted, proprietary, or non-redistributable data must be documented explicitly.
 
-## Choosing a Structure
+## Choose the Structure
 
 Use the compact structure for small or medium projects when:
 
@@ -263,9 +263,13 @@ Use the `build/` and `analyze/` structure for larger projects when:
 
 When uncertain, choose the simpler structure unless the build stage creates real complexity for users.
 
-## Compact Structure
+## Project Structures
 
-Recommended for smaller packages. See [`templates/compact/`](https://github.com/yhoriuchi/replication-package-guide/tree/main/templates/compact) for a lightweight starter version.
+The repository contains two starter structures. Copy one, then replace every placeholder with project-specific information.
+
+### Compact Structure
+
+Use [`templates/compact/`](https://github.com/yhoriuchi/replication-package-guide/tree/main/templates/compact) for smaller packages.
 
 ```text
 r/
@@ -285,7 +289,7 @@ r/
 |
 |-- scripts/
 |   |-- 01_prepare_data.R
-|   |-- 02_analyze_main_results.R
+|   |-- 02_analyze_results.R
 |   `-- 03_make_figures_tables.R
 |
 |-- functions/                  # optional helper functions
@@ -305,9 +309,9 @@ r/
 
 The compact structure should still include `logs/`. A `functions/` folder is optional, but recommended when multiple scripts reuse the same helpers.
 
-## Build/Analyze Structure
+### Build/Analyze Structure
 
-Recommended for larger packages. See [`templates/build-analyze/`](https://github.com/yhoriuchi/replication-package-guide/tree/main/templates/build-analyze) for a lightweight starter version.
+Use [`templates/build-analyze/`](https://github.com/yhoriuchi/replication-package-guide/tree/main/templates/build-analyze) for larger packages with a separate data-build stage.
 
 ```text
 r/
@@ -344,7 +348,7 @@ If the build stage depends on restricted data, do not force users to run it. Kee
 
 ## README Requirements
 
-The README is the user's map. It should be complete enough that a reader can understand and verify the package without opening every script.
+The README is the user's map. It should be complete enough that a reader can understand and verify the package without opening every script. Start from [`templates/README_TEMPLATE.md`](https://github.com/yhoriuchi/replication-package-guide/blob/main/templates/README_TEMPLATE.md) when reorganizing an existing project.
 
 Every replication README should include:
 
@@ -385,87 +389,11 @@ Use this section order unless a project-specific reason makes another order clea
 
 Commit only one README-style documentation file: `README.md`. If an archive or journal requires HTML or PDF documentation, generate those files from `README.md` at release time and make clear that `README.md` remains the source.
 
-## Data Sources and Restrictions
+## Crosswalk and Data Rules
 
-Use Markdown lists rather than a wide table for data sources. Long file paths and restriction notes are easier to scan when each source gets its own entry.
+The README must include a paper-order crosswalk that maps every reported manuscript and appendix figure/table to its output file, script, log, LaTeX label, and notes. Embedded previews are optional; they are not a substitute for the crosswalk.
 
-```markdown
-## Data Sources And Restrictions
-
-- **[Source name]**
-  - Location: `[path/to/file-or-folder]`
-  - Redistributable: Yes/No
-  - Notes: [License, access, provenance, or other source notes.]
-```
-
-If any source is restricted, proprietary, confidential, licensed, or otherwise non-redistributable, explain in the same entry:
-
-```markdown
-- **[Restricted source name]**
-  - Location: `[restricted/path-or-description]`
-  - Redistributable: No
-  - Restriction: [Why the source cannot be redistributed.]
-  - Scripts using this source: `[path/to/script.R]`
-  - Public replacement: `[path/to/analysis_ready_file]`
-  - Licensed rebuild: [Whether licensed users can rebuild the data.]
-  - Public reproducibility: [Whether published results can be reproduced without access to the restricted source.]
-```
-
-## Figures and Tables
-
-The README must include a paper-order crosswalk that maps every reported manuscript and appendix figure/table to its output file, script, log, LaTeX Label, and notes. Embedded previews are optional; they are not a substitute for the crosswalk.
-
-Use this structure:
-
-```markdown
-## Figures And Tables
-
-### Manuscript
-
-#### Figure 1
-
-- Output:
-  - `figures/main_effect.pdf`
-- Script:
-  - `scripts/02_analyze_main_results.R`
-- Log:
-  - `logs/02_analyze_main_results.log`
-- LaTeX Label:
-  - `fig:main_effect`
-- Notes: main treatment effect.
-
-#### Table 1
-
-- Output:
-  - `tables/main_results.tex`
-  - `tables/main_results.csv`
-- Script:
-  - `scripts/03_make_tables.R`
-- Log:
-  - `logs/03_make_tables.log`
-- LaTeX Label:
-  - `tab:main_results`
-- Notes: manuscript-ready LaTeX table and machine-readable CSV generated from the same model output.
-
-### Appendix
-
-#### Figure A.1
-
-- Output:
-  - `figures/appendix_balance.pdf`
-- Script:
-  - `scripts/04_appendix_checks.R`
-- Log:
-  - `logs/04_appendix_checks.log`
-- LaTeX Label:
-  - `fig:appendix_balance`
-- Notes: appendix balance check.
-```
-
-Formatting rules:
-
-- Use `## Figures And Tables` as the section heading.
-- Use `### Manuscript` and `### Appendix` as subsections. If the paper calls the appendix "Supplementary Materials," still use `### Appendix` unless journal requirements make another title clearer.
+- Use `## Figures And Tables` as the section heading, with `### Manuscript` and `### Appendix` subsections.
 - Add one `####` entry for every individual figure or table number used in the manuscript or appendix.
 - Do not group multiple figures or tables under one `####` heading.
 - Do not put descriptive titles or LaTeX labels in the `####` heading. Put descriptive context in `Notes` and put labels in `LaTeX Label`.
@@ -473,268 +401,47 @@ Formatting rules:
 - If a field contains multiple files or labels, list them as indented sub-items. Do not put multiple file paths on one line separated by commas or semicolons.
 - Use `No output file`, `No code`, or `Not applicable` when an item is conceptual, hand-made, or retained from the manuscript source rather than generated by public scripts.
 
-## Script Naming
+Use Markdown lists rather than a wide table for data sources. Long file paths and restriction notes are easier to scan when each source gets its own entry.
+
+For every restricted, proprietary, confidential, licensed, or otherwise non-redistributable source, document:
+
+- source name;
+- location or restricted-path description;
+- why the source cannot be redistributed;
+- which scripts originally used it;
+- which public analysis-ready file replaces it;
+- whether licensed users can rebuild it;
+- whether the published results can be reproduced without access to it.
+
+## Scripts, Logs, and Environment
 
 Use script names that make the execution order and purpose obvious:
 
 ```text
 00_list_inputs.R
 01_prepare_data.R
-02_estimate_main_results.R
-03_make_figures.R
-04_make_tables.R
-05_robustness_checks.R
+02_analyze_results.R
+03_make_figures_tables.R
 ```
-
-Rules:
 
 - Prefix public replication scripts with two-digit numbers.
 - Use lowercase file names with underscores.
 - Keep exploratory, obsolete, or non-paper scripts out of the public replication path.
 - If such scripts are retained, place them in `scripts/not_in_paper/` or `scripts/archive/` and explain that they are not required.
 - Avoid spaces and special characters in file names.
+- Use the template logging helper rather than ad hoc `sink()` calls when possible.
+- Make the log filename match the script filename, such as `scripts/02_analyze_results.R` and `logs/02_analyze_results.log`.
 
-## Logs
-
-Every public script should write a log file. Logs are not just debugging artifacts; they are part of the replication record.
-
-Logs should include:
+Every public script should write a log file. Logs are part of the replication record and should include:
 
 - script name;
 - start and end time;
-- important package versions if script-specific;
-- row counts after major filters or merges;
-- sample sizes used in each reported analysis;
-- summary statistics reported in the paper;
-- model estimates, standard errors, test statistics, and p-values reported in text;
-- warnings at the end of the script.
+- important row counts after filters or merges;
+- sample sizes used in reported analyses;
+- summary statistics, estimates, standard errors, test statistics, p-values, and warnings reported in the paper;
+- any warnings or failures at the end of the run.
 
-The log filename should match the script filename:
-
-```text
-scripts/02_estimate_main_results.R
-logs/02_estimate_main_results.log
-```
-
-For a build/analyze package:
-
-```text
-analyze/scripts/02_estimate_main_results.R
-analyze/logs/02_estimate_main_results.log
-```
-
-## Suggested Logging Helper
-
-Place a logging helper in `functions/logging.R` for compact packages or `analyze/functions/logging.R` for build/analyze packages.
-
-```r
-start_script_log <- function(script_name, log_dir = "logs") {
-  dir.create(log_dir, recursive = TRUE, showWarnings = FALSE)
-  log_file <- file.path(log_dir, paste0(script_name, ".log"))
-
-  sink(log_file, split = TRUE)
-
-  cat("############################################################\n")
-  cat("Script:", paste0(script_name, ".R"), "\n")
-  cat("Started:", format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z"), "\n")
-  cat("############################################################\n\n")
-
-  invisible(log_file)
-}
-
-end_script_log <- function() {
-  cat("\n############################################################\n")
-  cat("Ended:", format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z"), "\n")
-  cat("############################################################\n")
-
-  cat("\n--- warnings() at end of script ---\n")
-  w <- warnings()
-  if (is.null(w) || length(w) == 0) {
-    cat("None\n")
-  } else {
-    print(w)
-  }
-
-  while (sink.number() > 0) sink()
-}
-```
-
-Use this pattern in each public script:
-
-```r
-source("functions/logging.R")
-start_script_log("02_estimate_main_results")
-
-tryCatch({
-  # Script body goes here.
-}, error = function(e) {
-  cat("\nERROR:", conditionMessage(e), "\n")
-  stop(e)
-}, finally = {
-  end_script_log()
-})
-```
-
-For build/analyze packages, adjust paths:
-
-```r
-source("analyze/functions/logging.R")
-start_script_log("02_estimate_main_results", log_dir = "analyze/logs")
-
-tryCatch({
-  # Script body goes here.
-}, error = function(e) {
-  cat("\nERROR:", conditionMessage(e), "\n")
-  stop(e)
-}, finally = {
-  end_script_log()
-})
-```
-
-## Master Script
-
-Every package should include `master.R`. It is the reproducibility entry point and should run the full public replication path from a clean R session.
-
-The master script should:
-
-- assert that no sink is already open;
-- create required output folders;
-- source scripts in the correct order;
-- continue or stop according to a clear policy;
-- write `session_info.log`;
-- record start time, end time, and elapsed time.
-
-Suggested skeleton:
-
-```r
-# Master file
-# Run from the project root after restarting R.
-
-start_time <- Sys.time()
-stopifnot(sink.number() == 0)
-
-safe_source <- function(file) {
-  if (!file.exists(file)) stop("File not found: ", file)
-
-  cat("\n============================================================\n")
-  cat("Running:", file, "\n")
-  cat("============================================================\n")
-
-  source(file, echo = FALSE, print.eval = FALSE)
-}
-
-scripts <- c(
-  "scripts/01_prepare_data.R",
-  "scripts/02_estimate_main_results.R",
-  "scripts/03_make_figures.R",
-  "scripts/04_make_tables.R"
-)
-
-for (script in scripts) {
-  safe_source(script)
-}
-
-end_time <- Sys.time()
-
-while (sink.number() > 0) sink()
-
-sink("session_info.log", split = FALSE)
-cat("Run Time\n")
-cat("Started: ", format(start_time, "%Y-%m-%d %H:%M:%S"), "\n", sep = "")
-cat("Ended:   ", format(end_time, "%Y-%m-%d %H:%M:%S"), "\n", sep = "")
-cat("Elapsed: ", format(end_time - start_time), "\n\n", sep = "")
-
-cat("Session Information\n")
-print(sessionInfo())
-sink()
-```
-
-For large packages, `master.R` should normally run the public analysis path only:
-
-```r
-scripts <- c(
-  "analyze/scripts/00_list_inputs.R",
-  "analyze/scripts/01_estimate_main_results.R",
-  "analyze/scripts/02_make_figures.R",
-  "analyze/scripts/03_make_tables.R"
-)
-```
-
-If a small public subset of the build stage can be rebuilt, `master.R` may check for missing required files and rebuild only those public inputs. Do not require restricted data in the public run.
-
-## Data Rules
-
-Use clear data layers:
-
-- `data/`: public raw or received data for compact packages.
-- `build/data/`: raw or received data for large packages.
-- `build/output/analysis_ready/`: authoritative analysis inputs for large public replication packages.
-- `output/` or `analyze/output/`: reproducible intermediate objects.
-- `figures/` and `tables/`: final generated results.
-
-Data rules:
-
-- Never overwrite raw data.
-- Prefer scripts that read raw data and write new files to `output/`.
-- Use stable identifiers and codebooks.
-- Include questionnaires, survey instruments, coding rules, data dictionaries, and source notes in `documents/`.
-- Use `set.seed()` before simulations, bootstraps, random splits, random forests, MCMC starts, or any stochastic procedure.
-- Document any nondeterministic source such as Google Trends, APIs, web scraping, or data that changes over time.
-
-## Restricted Data
-
-If any source cannot be redistributed, document it inside `## Data Sources And Restrictions` using the restricted-source fields described above. The entry should explain:
-
-- source name;
-- owner or vendor;
-- why the source is restricted;
-- which scripts originally used it;
-- which public analysis-ready files replace it;
-- whether a licensed user can rebuild the data;
-- whether results can be reproduced without access to the restricted source.
-
-The public package should be designed so that users can reproduce published results without restricted access whenever legally and ethically possible.
-
-## Paper Consistency Checks
-
-When manuscript source files are available, treat them as part of the working context for package preparation. This is especially useful for Overleaf projects synced through Dropbox, because the paper source files and the R replication package can be inspected together.
-
-The final consistency pass should check:
-
-- figure and table labels in the paper against the README crosswalk;
-- manuscript figure/table file paths against the manuscript-ready files included by LaTeX;
-- manuscript-ready figures and tables against the corresponding R-generated files, scripts, and logs, especially when tables are manually edited after generation;
-- in-text estimates, standard errors, p-values, sample sizes, sampling dates, completion times, response rates, and descriptive statistics against logs and generated tables;
-- appendix items against scripts, outputs, and logs;
-- notes for any conceptual, hand-made, or non-replicated items.
-
-If the paper source files are not included in the public replication archive, state in `README.md` whether they were used during preparation for consistency checks.
-
-## Software Environment
-
-At minimum, include a short computing environment summary in `README.md` and `session_info.log` from a successful full run.
-
-Suggested README format:
-
-```text
-### Computing Environment
-
-Software: R version [version]
-Platform: [R platform]
-Computer Operating System: [operating system and version]
-Additional details: [RAM, processor/GPU, external tools, or other project-specific requirements when relevant.]
-```
-
-The values should come from the run that produced `session_info.log`. Some projects should report additional computing details when they affect reproducibility or runtime.
-
-For stronger reproducibility, also consider:
-
-- `renv.lock` for R package versions;
-- a short package installation script;
-- operating system notes when required by external dependencies;
-- clear instructions for LaTeX, Quarto, pandoc, or command-line tools if they are needed.
-
-Do not assume the user has the same local folder structure. Avoid `setwd()` to personal paths.
+Every package should include `master.R`. It should run the full public replication path from a clean R session, write `session_info.log`, and record start time, end time, elapsed time, platform, and package versions. For a build/analyze package, `master.R` should normally run the public analysis path only unless a public subset of the build stage can be rebuilt without restricted inputs.
 
 ## Quality Checklist
 
@@ -785,7 +492,7 @@ build/
 analyze/
 ```
 
-The final archive should feel boring in the best way: obvious structure, one command to run, traceable outputs, and no surprises.
+The final archive should have obvious structure, one command to run, traceable outputs, and no surprises.
 
 <script id="replication-package-instructions-text" type="text/plain">{% include_relative AGENTS.md %}</script>
 <script>
