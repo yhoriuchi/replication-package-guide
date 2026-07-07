@@ -5,7 +5,10 @@
 .Rproj.user/
 *.Rproj.user/
 
-# The Markdown README is authoritative for this instruction site.
+# Generated site output
+_site/
+
+# Generated documentation exports
 README.html
 README.pdf
 
