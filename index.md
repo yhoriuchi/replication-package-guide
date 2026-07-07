@@ -223,28 +223,7 @@ The final paper-integration check should verify that:
 - the values in the paper match the values produced by the replication scripts;
 - any conceptual figure, hand-made table, or non-replicated item is clearly identified in the README crosswalk.
 
-Recommended agent request:
-
-```text
-Please inspect both the R replication package and the Overleaf/LaTeX source. Check whether every manuscript-ready figure and table used by Overleaf matches the corresponding R-generated figure or table, and flag any copied, renamed, manually edited, stale, or unmatched file.
-```
-
 For public release, include paper source files only when appropriate and permitted. If the paper source cannot be included in the public archive, use it during preparation for the consistency check and document in `README.md` that the manuscript source was checked against the replication outputs.
-
-## Agent Request Examples
-
-Use the copy button for the full instructions. For narrower follow-up tasks, ask the agent for one specific pass at a time:
-
-- Prepare or reorganize a complete replication package.
-- Add or repair per-script logging.
-- Prepare or repair the single authoritative `README.md`.
-- Audit unnecessary files and obsolete script parts.
-- Check paper, output, and log consistency.
-- Review public replication scripts for coding errors.
-- Check Overleaf or LaTeX reporting errors.
-- Perform a final pre-release audit.
-
-The full copy source in `AGENTS.md` contains detailed prompt language for each of these tasks without making those long prompt blocks visible on the page.
 
 ## Core Standard
 
