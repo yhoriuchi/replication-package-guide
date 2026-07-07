@@ -21,15 +21,15 @@ layout: null
 A practical guide and template collection for building high-quality social science replication packages that coding agents and human researchers can inspect, run, and verify.
 
 <div class="hero-actions" markdown="1">
-<button type="button" class="button button-primary" id="copy-replication-package-instructions">Copy Replication Package Instructions</button>
-<span class="copy-status" id="copy-replication-package-instructions-status" aria-live="polite"></span>
+<button type="button" class="button button-primary" id="copy-agent-instructions">Copy Agent Instructions</button>
+<span class="copy-status" id="copy-agent-instructions-status" aria-live="polite"></span>
 </div>
 
 </section>
 
 ## How to Use This Guide
 
-1. Click **Copy Replication Package Instructions** and paste the instructions into Codex, Claude Code, or another coding agent before it changes files.
+1. Click **Copy Agent Instructions** and paste the instructions into Codex, Claude Code, or another coding agent before it changes files.
 2. Give the agent the replication package root and, when available, the paper source files, manuscript-ready figures, manuscript-ready tables, appendices, bibliography files, and source-data notes.
 3. Decide whether the project should use the compact structure or the build/analyze structure.
 4. Require one public entry point, script-specific logs, `session_info.log`, one authoritative `README.md`, and a complete figure/table crosswalk.
@@ -494,12 +494,12 @@ analyze/
 
 The final archive should have obvious structure, one command to run, traceable outputs, and no surprises.
 
-<script id="replication-package-instructions-text" type="text/plain">{% include_relative AGENTS.md %}</script>
+<script id="agent-instructions-text" type="text/plain">{% include_relative AGENTS.md %}</script>
 <script>
 (function () {
-  var button = document.getElementById("copy-replication-package-instructions");
-  var source = document.getElementById("replication-package-instructions-text");
-  var status = document.getElementById("copy-replication-package-instructions-status");
+  var button = document.getElementById("copy-agent-instructions");
+  var source = document.getElementById("agent-instructions-text");
+  var status = document.getElementById("copy-agent-instructions-status");
 
   if (!button || !source) {
     return;
