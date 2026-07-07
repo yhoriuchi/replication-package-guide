@@ -36,6 +36,15 @@ a {
   padding: 40px 0 64px;
 }
 
+.markdown-body,
+body > .container-lg,
+body > .container-md {
+  width: min(1080px, calc(100% - 32px));
+  max-width: 1080px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .hero {
   padding: 42px 0 30px;
   border-bottom: 1px solid var(--line);
@@ -245,7 +254,21 @@ pre {
   padding: 16px;
 }
 
-pre code {
+.highlight,
+div.highlighter-rouge {
+  border-radius: 8px;
+  background: var(--code-bg);
+}
+
+.highlight pre,
+div.highlighter-rouge pre {
+  margin: 0;
+  background: var(--code-bg);
+}
+
+pre code,
+.highlight code,
+div.highlighter-rouge code {
   background: transparent;
   color: var(--code-ink);
   padding: 0;
