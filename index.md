@@ -1,11 +1,10 @@
 ---
 title: Replication Package Guide
-layout: null
 ---
 
 <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
 
-<main class="page-shell markdown-page" markdown="1">
+<main class="page-shell" markdown="1">
 
 <section class="hero" markdown="1">
 

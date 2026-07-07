@@ -36,22 +36,13 @@ a {
   padding: 40px 0 64px;
 }
 
-.markdown-body,
-body > .container-lg,
-body > .container-md {
-  width: min(1080px, calc(100% - 32px));
-  max-width: 1080px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
 .hero {
   padding: 42px 0 30px;
   border-bottom: 1px solid var(--line);
 }
 
 .hero h1 {
-  max-width: 900px;
+  max-width: 860px;
   margin: 0 0 16px;
   font-size: clamp(2.3rem, 6vw, 4.8rem);
   line-height: 0.98;
@@ -59,7 +50,7 @@ body > .container-md {
 }
 
 .hero p {
-  max-width: 780px;
+  max-width: 760px;
   margin: 0 0 24px;
   color: var(--muted);
   font-size: 1.12rem;
