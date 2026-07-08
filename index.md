@@ -2,7 +2,7 @@
 title: Replication Package Guide
 ---
 
-<link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
+<link rel="stylesheet" href="assets/site.css">
 
 <main class="page-shell" markdown="1">
 
