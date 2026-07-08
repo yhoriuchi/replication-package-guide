@@ -59,6 +59,23 @@ The user should remove clearly obsolete files when possible, label exploratory s
 12. Re-run the package after documentation changes.
 13. Report any files that cannot be reproduced because of restricted data or missing inputs.
 
+## Final Readiness Report
+
+When the work is complete, return a concise readiness report. The report should be specific enough that the user can decide whether the package is ready for public release.
+
+Include:
+
+- overall status: ready, ready with caveats, or not ready;
+- files changed and why;
+- command used to run the public replication path;
+- whether `master.R` ran successfully;
+- whether every public script produced a matching log;
+- whether `session_info.log` was created from a successful full run;
+- whether the README folder tree, data-source notes, and figure/table crosswalk match the package;
+- whether manuscript and appendix figures, tables, and in-text numerical claims were checked against logs, outputs, and scripts when paper source files were available;
+- restricted-data limits, manual steps, missing inputs, warnings, failures, or remaining mismatches;
+- exact files or sections that still need user attention.
+
 ## Core Standard
 
 A replication package is successful when a reader can unzip it, open the project root, run one command, and see exactly how the reported results were produced.
@@ -259,9 +276,9 @@ Use this structure:
 - Output:
   - `figures/main_effect.pdf`
 - Script:
-  - `scripts/02_analyze_main_results.R`
+  - `scripts/02_analyze_results.R`
 - Log:
-  - `logs/02_analyze_main_results.log`
+  - `logs/02_analyze_results.log`
 - LaTeX Label:
   - `fig:main_effect`
 - Notes: main treatment effect.

@@ -13,7 +13,7 @@ title: Replication Package Guide
 - **Author:** Yusaku Horiuchi
 - **Affiliation:** Syde P. Deeb Eminent Scholar in Political Science, Florida State University
 - **Created:** May 10, 2026
-- **Last revised:** July 7, 2026
+- **Last revised:** July 8, 2026
 
 ![Page views](https://hits.sh/yhoriuchi.github.io/replication-package-guide.svg?label=page%20views)
 
@@ -32,7 +32,7 @@ A practical guide and template collection for building high-quality social scien
 2. Give the agent the replication package root and, when available, the paper source files, manuscript-ready figures, manuscript-ready tables, appendices, bibliography files, and source-data notes.
 3. Decide whether the project should use the compact structure or the build/analyze structure.
 4. Require one public entry point, script-specific logs, `session_info.log`, one authoritative `README.md`, and a complete figure/table crosswalk.
-5. Ask the agent to run the public replication path and report any remaining mismatches, restricted-data limits, or manual steps.
+5. Ask the agent to run the public replication path and return a readiness report covering remaining mismatches, restricted-data limits, and manual steps.
 
 <section class="summary-grid" markdown="1">
 
@@ -73,14 +73,14 @@ A practical guide and template collection for building high-quality social scien
   <li><strong>Inspect the paper source.</strong> When LaTeX, Overleaf, appendix, figure, table, or bibliography files are available, treat them as part of the working context.</li>
   <li><strong>Choose the structure.</strong> Use the compact structure for direct public inputs and modest workflows; use build/analyze when data construction is complex, restricted, or conceptually separate.</li>
   <li><strong>Organize without losing context.</strong> Move or copy files into the chosen structure only after understanding what produces the reported results.</li>
-  <li><strong>Create the public entry point.</strong> Add or repair `master.R` so the public replication path can run from a clean R session.</li>
+  <li><strong>Create the public entry point.</strong> Add or repair <code>master.R</code> so the public replication path can run from a clean R session.</li>
   <li><strong>Add script logs.</strong> Every public script should create a matching log with start/end time, sample sizes, reported statistics, and warnings.</li>
   <li><strong>Run the package.</strong> Execute the public replication path when feasible and fix reproducibility issues that are clearly within scope.</li>
-  <li><strong>Record the environment.</strong> Write `session_info.log` and summarize the computing environment in the README.</li>
+  <li><strong>Record the environment.</strong> Write <code>session_info.log</code> and summarize the computing environment in the README.</li>
   <li><strong>Build the crosswalk.</strong> Map each manuscript and appendix figure/table to output files, scripts, logs, LaTeX labels, and notes.</li>
   <li><strong>Check reported claims.</strong> Compare figures, tables, and in-text numerical claims against logs, generated outputs, and scripts.</li>
   <li><strong>Document restrictions.</strong> Explain any non-redistributable source, public replacement, and limits on rebuilding.</li>
-  <li><strong>Report readiness.</strong> Return pass/fail items, remaining risks, and exact files that still need attention.</li>
+  <li><strong>Report readiness.</strong> Return readiness status, remaining risks, and exact files that still need attention.</li>
 </ol>
 
 ## What This Repository Provides
@@ -100,6 +100,22 @@ A practical guide and template collection for building high-quality social scien
 ### README Template
 
 [`templates/README_TEMPLATE.md`](https://github.com/yhoriuchi/replication-package-guide/blob/main/templates/README_TEMPLATE.md) is a copyable starting point for a project's one authoritative `README.md`.
+
+</div>
+
+<div class="resource-card" markdown="1">
+
+### Agent Prompt
+
+[`prompts/replication-package-agent.md`](https://github.com/yhoriuchi/replication-package-guide/blob/main/prompts/replication-package-agent.md) is a short starter prompt for giving the agent project-specific paths and constraints.
+
+</div>
+
+<div class="resource-card" markdown="1">
+
+### Readiness Report
+
+[`templates/release-readiness-report.md`](https://github.com/yhoriuchi/replication-package-guide/blob/main/templates/release-readiness-report.md) is a structured final-report template for documenting what was changed, verified, and left unresolved.
 
 </div>
 

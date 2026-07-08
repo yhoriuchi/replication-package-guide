@@ -9,3 +9,6 @@ exclude:
   - .DS_Store
   - AGENTS.md
   - README.md
+  - prompts/
+  - templates/
+  - examples/

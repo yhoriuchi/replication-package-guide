@@ -8,7 +8,9 @@ The publishable guide is in [`index.md`](index.md). The copy button on the site 
 
 - [`AGENTS.md`](AGENTS.md): full agent/user instructions copied by the site button.
 - [`assets/site.css`](assets/site.css): the custom GitHub Pages stylesheet.
+- [`prompts/replication-package-agent.md`](prompts/replication-package-agent.md): optional starter prompt for providing project-specific paths and constraints.
 - [`templates/README_TEMPLATE.md`](templates/README_TEMPLATE.md): a copyable starting point for a project's one authoritative `README.md`.
+- [`templates/release-readiness-report.md`](templates/release-readiness-report.md): structured final-report template for replication-package audits.
 - [`templates/compact/`](templates/compact/): compact project structure for smaller replication packages.
 - [`templates/build-analyze/`](templates/build-analyze/): larger structure with separate `build/` and `analyze/` stages.
 - [`examples/horiuchi_tago/`](examples/horiuchi_tago/): a completed compact package example.
@@ -31,4 +33,4 @@ Give an agent:
 3. Any source-data restrictions.
 4. The instructions copied from the public guide.
 
-Require the agent to return a runnable package with `master.R`, per-script logs, `session_info.log`, one authoritative `README.md`, and a complete figure/table crosswalk.
+Require the agent to return a runnable package with `master.R`, per-script logs, `session_info.log`, one authoritative `README.md`, a complete figure/table crosswalk, and a readiness report.
