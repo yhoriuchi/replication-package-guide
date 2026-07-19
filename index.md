@@ -2,7 +2,7 @@
 title: Replication Package Guide
 ---
 
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}?v={{ site.github.build_revision }}">
 
 <main class="page-shell" markdown="1">
 
