@@ -234,6 +234,7 @@ code {
   font-size: 0.92em;
 }
 
+.markdown-body pre,
 pre {
   overflow-x: auto;
   border-radius: 8px;
@@ -241,18 +242,22 @@ pre {
   padding: 16px;
 }
 
+.markdown-body .highlight,
 .highlight,
 div.highlighter-rouge {
   border-radius: 8px;
   background: var(--code-bg);
 }
 
+.markdown-body .highlight pre,
+.markdown-body div.highlighter-rouge pre,
 .highlight pre,
 div.highlighter-rouge pre {
   margin: 0;
   background: var(--code-bg);
 }
 
+.markdown-body pre code,
 pre code,
 .highlight code,
 div.highlighter-rouge code {
