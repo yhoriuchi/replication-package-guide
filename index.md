@@ -13,7 +13,7 @@ title: Replication Package Guide
 - **Author:** Yusaku Horiuchi
 - **Affiliation:** Syde P. Deeb Eminent Scholar in Political Science, Florida State University
 - **Created:** May 10, 2026
-- **Last revised:** July 8, 2026
+- **Last revised:** July 21, 2026
 
 ![Page views](https://hits.sh/yhoriuchi.github.io/replication-package-guide.svg?label=page%20views)
 
@@ -33,6 +33,12 @@ A practical guide and template collection for building high-quality social scien
 3. Decide whether the project should use the compact structure or the build/analyze structure.
 4. Require one public entry point, script-specific logs, `session_info.log`, one authoritative `README.md`, and a complete figure/table crosswalk.
 5. Ask the agent to run the public replication path and return a readiness report covering remaining mismatches, restricted-data limits, and manual steps.
+
+## Use ReproAI Before Submission
+
+This guide and [ReproAI](https://reproai.org/) serve complementary purposes. This guide is an authoring framework: it helps researchers build traceability and reproducibility into a project from the outset through a clear structure, one public entry point, script-level logs, data-restriction documentation, and a paper-to-output crosswalk. ReproAI, developed by Yiqing Xu and Leo Yang Yang, is an author-facing diagnostic tool for existing replication packages, with an emphasis on pre-submission checks, venue compliance, smoke testing, and identifying common reproducibility problems.
+
+After preparing a package with this guide, I encourage authors to run ReproAI before journal or repository submission. It provides a valuable final preflight check and may identify structural, environment, or venue-specific issues that remain. The two projects are independent, but they fit naturally into the same workflow: build a transparent package from the beginning, then use ReproAI near submission to diagnose and resolve remaining problems.
 
 <section class="summary-grid" markdown="1">
 
