@@ -7,6 +7,7 @@
 - This replication package reproduces [all / selected] figures and tables reported in "[Paper Title]" and its supplementary materials.
 - All public scripts write console output and messages to per-script log files saved in `logs/` or `analyze/logs/`.
 - The file `session_info.log` records the R version, platform, loaded packages, and runtime from a successful full run.
+- The file `MANIFEST-SHA256.txt` inventories every released file other than itself.
 
 ## How To Run
 
@@ -48,6 +49,7 @@ r/
 |-- master.R
 |-- README.md
 |-- session_info.log
+|-- MANIFEST-SHA256.txt
 |
 |-- data/
 |   `-- [public input data]
@@ -88,6 +90,7 @@ r/
 |-- master.R
 |-- README.md
 |-- session_info.log
+|-- MANIFEST-SHA256.txt
 |
 |-- build/
 |   |-- data/
@@ -126,6 +129,9 @@ r/
 - **`session_info.log`**
   Full-run session information from a successful replication run.
 
+- **`MANIFEST-SHA256.txt`**
+  SHA-256 checksum inventory generated after the final run and cleanup.
+
 - **`data/` or `build/data/`**
   Public raw or received input data. Describe each important input file here.
 
@@ -161,6 +167,9 @@ Describe all data sources used in the package.
   - Location: `[path/to/file-or-folder]`
   - Redistributable: Yes/No
   - Notes: [License, access, provenance, or other source notes.]
+  - Citation: [Preferred data citation.]
+  - License: [License name or terms.]
+  - Accessed: [Date accessed.]
 
 If any source is restricted, proprietary, confidential, licensed, or otherwise non-redistributable, explain:
 
@@ -172,6 +181,14 @@ If any source is restricted, proprietary, confidential, licensed, or otherwise n
   - Public replacement: `[path/to/analysis_ready_file]`
   - Licensed rebuild: [Whether licensed users can rebuild the data.]
   - Public reproducibility: [Whether published results can be reproduced without access to the restricted source.]
+
+### Human-Subjects, Ethics, and Disclosure Review
+
+- Ethics/IRB documentation: `[path or public statement]`
+- Survey instruments and exact response options: `[path]`
+- Variable-level codebook: `[path]`
+- De-identification review: [Date, reviewer, and result.]
+- Sensitive fields removed or retained: [Explain.]
 
 ## Build Stage
 
@@ -210,6 +227,9 @@ The consistency check should verify:
 - manuscript-ready figures and tables are checked against the corresponding generated files, scripts, and logs, especially when publication tables are manually edited after generation;
 - every in-text estimate, standard error, p-value, sample size, sampling date, completion time, response rate, and descriptive statistic can be traced to a script, log file, generated table, or generated figure;
 - conceptual figures, hand-made tables, or non-replicated items are clearly identified in `Figures And Tables`.
+- every manuscript/package table matches numerically and every figure matches visually or pixel by pixel;
+- every in-text estimate, sample size, date, percentage, significance claim, and subgroup count is traced;
+- the complete manuscript compiles and has been visually inspected.
 
 ## Figures And Tables
 
@@ -313,3 +333,5 @@ source("master.R")
 ```
 
 from the project root.
+
+The final release ZIP was then extracted into a new temporary directory. Every entry in `MANIFEST-SHA256.txt` verified, and the extracted package ran without relying on files outside the archive.

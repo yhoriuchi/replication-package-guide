@@ -10,28 +10,38 @@ Before starting, the user should provide or identify:
 2. The paper source files when available, such as Overleaf/LaTeX files, manuscript-ready figures, manuscript-ready tables, appendices, and bibliography files.
 3. Any source data that can be shared with the agent.
 4. Any data that are restricted, proprietary, confidential, licensed, or otherwise non-redistributable.
-5. The target public archive, journal, or repository requirements.
+5. The target journal and its most up-to-date official replication-package, data, code, disclosure, archive, and file-format instructions, including the official URL or supplied files and date accessed.
 6. Whether the package should use a compact structure or a separate build/analyze structure, if already known.
 
 The user should remove clearly obsolete files when possible, label exploratory scripts, identify the scripts that generate reported results, and decide which data can legally be shared. The agent can help audit and organize, but the author remains responsible for judging which data, scripts, files, and results belong in the replication record.
 
+## Journal Instructions Take Priority
+
+Before inspecting or changing the package, read the target journal's most up-to-date official replication-package instructions in full. Check replication-package, data-availability, code, disclosure, archive, and file-format requirements. Record the official URL or supplied file, date accessed, and journal-specific requirements.
+
+This guide is a general workflow. When a journal's current instructions conflict with it, follow the journal. Do not rely on remembered requirements, an earlier submission checklist, or an undated local copy. If the target journal is not yet known, record that fact and repeat this review once a venue is selected.
+
 ## What the Agent Must Do
 
-1. Inspect the project before changing files.
-2. Identify all scripts, data inputs, generated outputs, figures, tables, logs, helper functions, documents, and paper source files visible in the workspace.
-3. Decide whether the package should use the compact structure or the build/analyze structure.
-4. Preserve substantive analysis choices unless a change is clearly needed for reproducibility, logging, paths, or documentation.
-5. Use relative paths from the project root.
-6. Create or repair one public entry point named `master.R`.
-7. Create or repair one authoritative package README named `README.md`.
-8. Add or repair one log file for every public script.
-9. Run the public replication path when feasible.
-10. Record `session_info.log` from a successful full run.
-11. Build a complete paper-order figure/table crosswalk.
-12. Check paper-replication consistency when paper source files are available.
-13. Document restricted data, manual steps, and remaining risks.
-14. Generate `MANIFEST-SHA256.txt` after the final successful run and final cleanup.
-15. Report exactly what changed, what was verified, and what could not be verified.
+1. Read the target journal's current official replication-package instructions in full and record the source and access date.
+2. Identify the private research/build workspace, manuscript repository, public replication package, and journal production/submission files. Do not treat them as one folder.
+3. Inspect the project before changing files.
+4. Identify all scripts, data inputs, generated outputs, figures, tables, logs, helper functions, documents, and paper source files visible in the workspace.
+5. Decide whether the package should use the compact structure or the build/analyze structure.
+6. Preserve substantive analysis choices unless a change is clearly needed for reproducibility, logging, paths, or documentation.
+7. Use relative paths from the project root.
+8. Create or repair one public entry point named `master.R`.
+9. Create or repair one authoritative package README named `README.md`.
+10. Add or repair one log file for every public script.
+11. Run every public script from a fresh session and run authorized reconstruction paths when available.
+12. Record `session_info.log` from a successful full run.
+13. Build a complete paper-order figure/table crosswalk.
+14. Check paper-replication consistency when paper source files are available.
+15. Validate data, codebooks, tables, figures, in-text claims, and disclosure risk.
+16. Document restricted data, manual steps, and remaining risks.
+17. Generate `MANIFEST-SHA256.txt` after the final successful run and final cleanup.
+18. Create, extract, verify, and run the final release ZIP in a new temporary directory.
+19. Report exactly what changed, what was verified, and what could not be verified.
 
 ## What the Agent Must Avoid
 
@@ -43,24 +53,53 @@ The user should remove clearly obsolete files when possible, label exploratory s
 6. Do not treat generated previews as a substitute for a figure/table crosswalk.
 7. Do not change substantive analysis code unless needed to make the public replication path run correctly or to fix a clearly identified coding error.
 8. Do not hide failed scripts, warnings, stale outputs, or mismatches between the paper and replication outputs.
+9. Do not put raw or restricted data in Git or an Overleaf-synchronized folder, even when the repository is private.
+10. Do not include internal archives, submission snapshots, or readiness reports in the public package unless the journal requests them.
+
+## Recommended Research-Project Architecture
+
+Use two Git repositories under one common parent folder:
+
+```text
+Research-Project/
+├── manuscript/       # Git repository 1
+└── analysis/         # Git repository 2
+```
+
+The manuscript repository should contain only LaTeX and bibliography sources, manuscript tables and figures, active supplementary-material sources, small compile-time assets, and manuscript-specific documentation. It can connect to Overleaf through GitHub integration. Exclude raw data, R intermediate files, complete replication-package staging, archives, and submission snapshots.
+
+The private analysis repository should contain scripts and functions, data-construction and analysis code, codebooks, replication-package staging, validation scripts, generated results, and internal project documentation. Restricted raw data must remain outside Git. Add ignore rules and document the expected authorized secure local paths.
+
+A Codex local project may select the common parent folder so the agent can inspect both repositories. Before changing either repository, check its branch, commit, synchronization, review, and protection conventions.
+
+Keep four artifacts conceptually and physically distinct:
+
+1. Private research/build workspace.
+2. Manuscript and Overleaf repository.
+3. Public replication package.
+4. Journal production and submission files.
+
+Use a documented promotion step for generated figures and tables copied from the analysis repository into the manuscript repository.
 
 ## Core Workflow
 
-1. Inspect the project files and identify all candidate inputs, scripts, outputs, figures, tables, and documents.
-2. Inspect the paper source files when they are available in the same working directory.
-3. Decide whether to use the compact structure or the build/analyze structure.
-4. Move or copy files into the chosen structure without deleting original work until the user approves.
-5. Create or repair `master.R`.
-6. Add or repair per-script logging.
-7. Run the public replication path.
-8. Record `session_info.log`.
-9. Build the README figure/table crosswalk in paper order.
-10. Check paper-replication consistency for figures, tables, and in-text numerical claims.
-11. Add embedded previews only if they make the README easier to inspect.
-12. Re-run the package after documentation changes.
-13. Complete final cleanup and generate `MANIFEST-SHA256.txt`.
-14. Verify the manifest before release.
-15. Report any files that cannot be reproduced because of restricted data or missing inputs.
+1. Identify the four artifacts and inspect both repositories when available.
+2. Inspect the project files and identify all candidate inputs, scripts, outputs, figures, tables, and documents.
+3. Inspect the paper source files when they are available in the same working directory.
+4. Decide whether to use the compact structure or the build/analyze structure.
+5. Move or copy files into the chosen structure without deleting original work until the user approves.
+6. Create or repair `master.R`.
+7. Add or repair per-script logging.
+8. Run the public replication path.
+9. Record `session_info.log`.
+10. Build the README figure/table crosswalk in paper order.
+11. Complete the formal data, codebook, table, figure, in-text claim, manuscript, and disclosure audit.
+12. Add embedded previews only if they make the README easier to inspect.
+13. Re-run the package after documentation changes.
+14. Complete final cleanup and generate `MANIFEST-SHA256.txt`.
+15. Create the release ZIP, extract it into a new temporary directory, verify the manifest, and run the extracted package.
+16. Complete the Dataverse checklist when Dataverse is the target.
+17. Report any files that cannot be reproduced because of restricted data or missing inputs.
 
 ## Final Readiness Report
 
@@ -91,6 +130,9 @@ The package should satisfy these requirements:
 - One log file for each script that is part of the public replication path.
 - One `session_info.log` file from a successful full run.
 - One `MANIFEST-SHA256.txt` checksum inventory generated from the final release contents.
+- De-identified analysis-ready data sufficient for every published result.
+- Exact survey instruments and response options, appropriate ethics/IRB documentation, and variable-level codebooks.
+- Data citations, licenses, access dates, and provenance.
 - Relative paths only. Scripts must run from the project root.
 - No hidden manual steps. If a step cannot be automated, document why and say exactly what file is affected.
 - Raw or received data should be treated as read-only.
@@ -357,12 +399,62 @@ Logs should include:
 
 - script name;
 - start and end time;
+- inputs;
+- outputs and file sizes;
 - important package versions if script-specific;
 - row counts after major filters or merges;
 - sample sizes used in each reported analysis;
+- treatment or group counts when relevant;
+- field dates when relevant;
 - summary statistics reported in the paper;
 - model estimates, standard errors, test statistics, and p-values reported in text;
 - warnings at the end of the script.
+
+Avoid workspace-wide serialization such as `save.image()`. Save only explicitly named objects. Load legacy workspace files into isolated environments.
+
+## Code and Output Hygiene
+
+Remove or archive obsolete scripts, dead commented-out exploratory code, development-only outputs, duplicate tables and figures, stale logs, RStudio caches, `.DS_Store`, conflicted copies, raw identifiers, temporary LaTeX build products, and files not referenced by the README, public execution workflow, or manuscript crosswalk. Retain useful explanatory comments that document reasoning, assumptions, or non-obvious code.
+
+## Required Final Validation
+
+Before release:
+
+1. Run every public script from a fresh session.
+2. Run optional source-reconstruction paths.
+3. Run the authorized raw-data build when available.
+4. Confirm that every script finishes without warnings or errors.
+5. Compare authorized rebuilt data with public data by checksum.
+6. Validate that codebooks cover every variable and accurately report names, order, types, coding, labels, and ranges.
+7. Compare every manuscript/package table numerically.
+8. Compare every manuscript/package figure visually or pixel by pixel.
+9. Trace every in-text estimate, sample size, date, percentage, significance claim, and subgroup count.
+10. Compile and visually inspect the complete manuscript.
+11. Screen public data for identifiers and unnecessary sensitive fields.
+12. Rebuild the SHA-256 manifest.
+13. Create the final ZIP.
+14. Extract it into a new temporary directory.
+15. Verify every manifest entry.
+16. Run the extracted package without relying on files outside it.
+
+## Dataverse Preparation
+
+When preparing a Dataverse deposit:
+
+- Upload only the final verified archive.
+- Confirm the uploaded checksum, file size, and date.
+- Leave the Dataverse file path blank for a single self-contained ZIP.
+- Add a concise reviewer-facing file description.
+- Remove all repository-template help text.
+- Do not invent an article DOI before one exists.
+- Check related-publication metadata for incomplete identifier artifacts.
+- Confirm authors, ORCIDs, affiliations, contact, description, subject, license, and deposit date.
+- Keep internal validation and readiness reports local unless requested.
+- Submit for review only after checking the saved public metadata display.
+
+## Overleaf Size and Privacy
+
+Overleaf's 50 MB limit concerns an individual upload or file, not total project size. Nevertheless, an Overleaf-connected repository should contain only compilation-relevant materials. Never store raw or restricted data in an Overleaf-synchronized folder because of privacy, collaborator access, synchronization reliability, and project bloat.
 
 The log filename should match the script filename:
 
@@ -383,7 +475,7 @@ analyze/logs/01_analyze_results.log
 Place a logging helper in `functions/logging.R` for compact packages or `analyze/functions/logging.R` for build/analyze packages.
 
 ```r
-start_script_log <- function(script_name, log_dir = "logs") {
+start_script_log <- function(script_name, log_dir = "logs", inputs = character()) {
   dir.create(log_dir, recursive = TRUE, showWarnings = FALSE)
   log_file <- file.path(log_dir, paste0(script_name, ".log"))
 
@@ -392,12 +484,27 @@ start_script_log <- function(script_name, log_dir = "logs") {
   cat("############################################################\n")
   cat("Script:", paste0(script_name, ".R"), "\n")
   cat("Started:", format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z"), "\n")
+  cat("Inputs:\n")
+  if (length(inputs) == 0) {
+    cat("  None declared\n")
+  } else {
+    for (input in inputs) cat(" ", input, "\n")
+  }
   cat("############################################################\n\n")
 
   invisible(log_file)
 }
 
-end_script_log <- function() {
+end_script_log <- function(outputs = character()) {
+  cat("\n--- outputs ---\n")
+  if (length(outputs) == 0) {
+    cat("None declared\n")
+  } else {
+    for (output in outputs) {
+      size <- if (file.exists(output)) file.info(output)$size else NA_real_
+      cat(output, "| bytes:", if (is.na(size)) "missing" else size, "\n")
+    }
+  }
   cat("\n############################################################\n")
   cat("Ended:", format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z"), "\n")
   cat("############################################################\n")

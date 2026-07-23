@@ -5,15 +5,20 @@ Use this prompt when starting a new replication-package audit or repair task. Re
 ```text
 Please prepare, audit, or repair this replication package using the Replication Package Guide instructions.
 
-Before changing files, inspect the project and identify the public replication path.
+Before changing files, read the target journal's most up-to-date official replication-package instructions in full. Treat those current journal requirements as controlling when they conflict with the general guide. Then inspect the project and identify the public replication path.
 
 Project context:
+- Common research-project parent: [path]
+- Manuscript repository: [path or not available]
+- Private analysis repository: [path]
 - Replication package root: [path]
 - Paper source files: [path or not available]
 - Manuscript-ready figures/tables: [path or not available]
 - Source data available to the agent: [path or status]
 - Restricted, proprietary, confidential, licensed, or non-redistributable data: [list or none known]
 - Target archive, journal, or repository requirements: [requirements or none known]
+- Official journal-instructions URL or files: [URL/path or target journal not yet selected]
+- Journal instructions accessed on: [date]
 - Preferred structure: [compact / build-analyze / agent should decide]
 
 Required outcome:
@@ -27,7 +32,10 @@ Required outcome:
 8. Build a complete paper-order figure/table crosswalk.
 9. Check paper-replication consistency when paper source files are available.
 10. Document restricted data, manual steps, and remaining risks.
-11. Return a readiness report summarizing what changed, what was verified, and what could not be verified.
+11. Generate and verify MANIFEST-SHA256.txt after the final run and cleanup.
+12. Create the release ZIP, extract it into a new temporary directory, verify it, and run the extracted package without outside files.
+13. Keep internal readiness reports outside the public package unless the journal requires them.
+14. Return a readiness report summarizing what changed, what was verified, and what could not be verified.
 
 Do not use absolute personal paths, create competing README files, silently delete raw data or manuscript source files, hide failed scripts or warnings, or treat previews as a substitute for a figure/table crosswalk.
 ```

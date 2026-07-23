@@ -13,8 +13,9 @@ The publishable guide is in [`index.md`](index.md). The copy button on the site 
 - [`templates/release-readiness-report.md`](templates/release-readiness-report.md): structured final-report template for replication-package audits.
 - [`templates/compact/`](templates/compact/): compact project structure for smaller replication packages.
 - [`templates/build-analyze/`](templates/build-analyze/): larger structure with separate `build/` and `analyze/` stages.
-- [`examples/horiuchi_tago/`](examples/horiuchi_tago/): a completed compact package example.
 - [`rules.dropboxignore`](rules.dropboxignore): Dropbox-root ignore rules for R/RStudio local and session files.
+
+The guide recommends two sibling Git repositories under one research-project parent: a compilation-focused `manuscript/` repository and a private `analysis/` repository. The public replication archive and journal production files are staged as separate artifacts.
 
 ## Public Site
 
@@ -28,9 +29,10 @@ The site is intentionally a single practical homepage rather than a multi-page d
 
 Give an agent:
 
-1. The replication package root.
-2. The paper source files when available.
-3. Any source-data restrictions.
-4. The instructions copied from the public guide.
+1. The target journal's most up-to-date official replication-package instructions and their access date.
+2. The replication package root.
+3. The paper source files when available.
+4. Any source-data restrictions.
+5. The instructions copied from the public guide.
 
-Require the agent to return a runnable package with `master.R`, per-script logs, `session_info.log`, one authoritative `README.md`, a complete figure/table crosswalk, and a readiness report.
+Require the agent to return a runnable package with `master.R`, per-script logs, `session_info.log`, one authoritative `README.md`, a complete figure/table crosswalk, a verified `MANIFEST-SHA256.txt`, and an extracted-archive test. Keep the readiness report private unless the journal requests it.

@@ -8,9 +8,14 @@ Use this template for the final report after preparing, auditing, or repairing a
 - Date checked:
 - Agent or model:
 - Workspace:
+- Manuscript repository:
+- Private analysis repository:
 - Public package root:
 - Paper source status:
 - Target archive, journal, or repository:
+- Official journal-instructions source:
+- Journal instructions accessed:
+- Journal-specific requirements:
 - Chosen structure: compact / build-analyze / other
 
 ## Executive Summary
@@ -23,6 +28,8 @@ Use this template for the final report after preparing, auditing, or repairing a
 - Figure/table crosswalk status:
 - Paper consistency status:
 - Restricted-data status:
+- Manifest status:
+- Extracted-archive run status:
 
 ## Files Changed
 
@@ -41,6 +48,15 @@ source("master.R")
 - Outputs regenerated:
 - Logs regenerated:
 - Warnings or errors:
+
+## Source Reconstruction and Data Validation
+
+- Optional reconstruction paths run:
+- Authorized raw-data build run:
+- Rebuilt/public data checksum comparison:
+- Codebook variable coverage:
+- Names, order, types, coding, and ranges checked:
+- Identifier and sensitive-field screen:
 
 ## README and Crosswalk Audit
 
@@ -68,6 +84,37 @@ source("master.R")
 - Mismatches found:
 - Mismatches resolved:
 - Mismatches remaining:
+
+## Numerical and Visual Output Validation
+
+- Every manuscript/package table compared numerically:
+- Every manuscript/package figure compared visually or pixel by pixel:
+- Complete manuscript compiled:
+- Complete manuscript visually inspected:
+
+## Release Archive and Manifest
+
+- Final cleanup completed:
+- `MANIFEST-SHA256.txt` regenerated:
+- Manifest coverage:
+- Manifest verification:
+- ZIP path:
+- ZIP checksum:
+- ZIP file size and date:
+- Extracted into a new temporary directory:
+- Extracted manifest verification:
+- Extracted package run without outside files:
+
+## Dataverse Metadata Check
+
+- Only the final verified archive selected:
+- Dataverse file path left blank for the self-contained ZIP:
+- Reviewer-facing description added:
+- Template help text removed:
+- Article DOI omitted unless issued:
+- Related-publication identifiers checked:
+- Authors, ORCIDs, affiliations, contact, description, subject, license, and deposit date checked:
+- Saved public metadata display checked before review submission:
 
 ## Remaining Risks
 

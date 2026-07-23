@@ -34,6 +34,7 @@ r/
 |-- master.R
 |-- project.Rproj
 |-- session_info.log
+|-- MANIFEST-SHA256.txt
 |
 |-- data/
 |-- documents/
@@ -63,6 +64,9 @@ r/
 
 - **`session_info.log`**
   Full-run session information from a successful replication run.
+
+- **`MANIFEST-SHA256.txt`**
+  SHA-256 inventory generated after the final run and cleanup.
 
 - **`data/`**
   Public input data.
