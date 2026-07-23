@@ -6,12 +6,14 @@ These instructions are for Codex, Claude Code, or another coding agent preparing
 
 Before starting, the user should provide or identify:
 
-1. The replication package root or draft project folder.
-2. The paper source files when available, such as Overleaf/LaTeX files, manuscript-ready figures, manuscript-ready tables, appendices, and bibliography files.
-3. Any source data that can be shared with the agent.
-4. Any data that are restricted, proprietary, confidential, licensed, or otherwise non-redistributable.
-5. The target journal and its most up-to-date official replication-package, data, code, disclosure, archive, and file-format instructions, including the official URL or supplied files and date accessed.
-6. Whether the package should use a compact structure or a separate build/analyze structure, if already known.
+1. The common research-project root selected as the single Codex or Claude project.
+2. The manuscript repository and analysis repository under that root.
+3. The replication-package staging root or draft package folder.
+4. The paper source files when available, such as Overleaf/LaTeX files, manuscript-ready figures, manuscript-ready tables, appendices, and bibliography files.
+5. Any source data that can be shared with the agent.
+6. Any data that are restricted, proprietary, confidential, licensed, or otherwise non-redistributable.
+7. The target journal and its most up-to-date official replication-package, data, code, disclosure, archive, and file-format instructions, including the official URL or supplied files and date accessed.
+8. Whether the public package should use a compact structure or a separate build/analyze structure, if already known.
 
 The user should remove clearly obsolete files when possible, label exploratory scripts, identify the scripts that generate reported results, and decide which data can legally be shared. The agent can help audit and organize, but the author remains responsible for judging which data, scripts, files, and results belong in the replication record.
 
@@ -23,15 +25,15 @@ This guide is a general workflow. When a journal's current instructions conflict
 
 ## What the Agent Must Do
 
-1. Read the target journal's current official replication-package instructions in full and record the source and access date.
-2. Identify the private research/build workspace, manuscript repository, public replication package, and journal production/submission files. Do not treat them as one folder.
-3. Inspect the project before changing files.
+1. Read the root `AGENTS.md` and `README.md`, the current AI Collaboration Guide, and the target journal's current official replication-package instructions in full; record each source and access date.
+2. Confirm that the common parent is the single AI workspace and identify the manuscript repository, analysis repository, public replication package, and journal production/submission files.
+3. Inspect the project and independently check both repositories' branch, commit, remote, synchronization, and dirty state before changing files.
 4. Identify all scripts, data inputs, generated outputs, figures, tables, logs, helper functions, documents, and paper source files visible in the workspace.
 5. Decide whether the package should use the compact structure or the build/analyze structure.
 6. Preserve substantive analysis choices unless a change is clearly needed for reproducibility, logging, paths, or documentation.
 7. Use relative paths from the project root.
 8. Create or repair one public entry point named `master.R`.
-9. Create or repair one authoritative package README named `README.md`.
+9. Create or repair one authoritative public-package README named `README.md`.
 10. Add or repair one log file for every public script.
 11. Run every public script from a fresh session and run authorized reconstruction paths when available.
 12. Record `session_info.log` from a successful full run.
@@ -56,21 +58,37 @@ This guide is a general workflow. When a journal's current instructions conflict
 9. Do not put raw or restricted data in Git or an Overleaf-synchronized folder, even when the repository is private.
 10. Do not include internal archives, submission snapshots, or readiness reports in the public package unless the journal requests them.
 
-## Recommended Research-Project Architecture
+## Required Research-Project Architecture
 
-Use two Git repositories under one common parent folder:
+Use one common local project root as the single Codex or Claude workspace, with two child Git repositories:
 
 ```text
 Research-Project/
-├── manuscript/       # Git repository 1
-└── analysis/         # Git repository 2
+├── AGENTS.md                  # instructions for the whole project
+├── README.md                  # private project map and workflow
+├── manuscript/                # Git repository 1
+├── analysis/                  # Git repository 2
+├── project_history/           # one AI-work history for the project
+│   └── Person_Name/
+│       └── YYYY-MM-DD by Agent.md
+└── others/                    # optional non-core materials and archives
 ```
+
+The common parent is the single AI workspace, not normally a third Git repository. Do not create nested-repository ambiguity by initializing a wrapper repository unless the user has a deliberate version-control design for it.
+
+Place the common project root inside an institutionally approved Dropbox, Google Drive, or iCloud location when the project's data agreements permit it. The sync service should synchronize the root instructions, project history, both repositories, optional materials, and permitted local data across the user's computers.
+
+Cloud synchronization and Git have different scopes. Cloud sync covers the whole working folder. Git versions only tracked files inside `manuscript/` and `analysis/`. Because the common parent is not a wrapper Git repository, no project-root `.gitignore` is needed merely to exclude data from a nonexistent parent Git index. The analysis repository must still ignore local, restricted, licensed, or intentionally untracked datasets within its own Git scope. If cloud storage is prohibited for a dataset, keep it in the authorized secure location and document the expected path.
+
+Keep exactly one root `AGENTS.md`. It governs work in both repositories and defines their boundaries, data restrictions, synchronization rules, output-promotion procedure, public-package requirements, and project-history location.
+
+Keep a root `README.md` as the private project map. It should identify the project, authors, target journal and instructions, both repositories and remotes, Overleaf status, secure local-data locations, public-package staging location, analysis-to-manuscript promotion workflow, optional folders, and current reproducibility status.
 
 The manuscript repository should contain only LaTeX and bibliography sources, manuscript tables and figures, active supplementary-material sources, small compile-time assets, and manuscript-specific documentation. It can connect to Overleaf through GitHub integration. Exclude raw data, R intermediate files, complete replication-package staging, archives, and submission snapshots.
 
 The private analysis repository should contain scripts and functions, data-construction and analysis code, codebooks, replication-package staging, validation scripts, generated results, and internal project documentation. Restricted raw data must remain outside Git. Add ignore rules and document the expected authorized secure local paths.
 
-A Codex local project may select the common parent folder so the agent can inspect both repositories. Before changing either repository, check its branch, commit, synchronization, review, and protection conventions.
+A Codex or Claude project should select the common parent folder once so the agent can inspect both repositories. Before changing either repository, check its branch, commit, remote, synchronization, review, protection, and dirty-state conventions independently.
 
 Keep four artifacts conceptually and physically distinct:
 
@@ -80,6 +98,128 @@ Keep four artifacts conceptually and physically distinct:
 4. Journal production and submission files.
 
 Use a documented promotion step for generated figures and tables copied from the analysis repository into the manuscript repository.
+
+The optional `others/` folder may contain presentations, DAG source files, reading materials, archives, submission files, and other non-core records. It must not become an undocumented substitute for analysis code, public-package staging, or manuscript compilation files.
+
+## Project History
+
+Maintain one and only one active `project_history/` directory at the common project root. Do not create separate active project histories inside `manuscript/`, `analysis/`, an Overleaf mirror, or `others/`.
+
+Before substantive work begins, both the user and the AI agent must read the current [AI Collaboration Guide](https://yhoriuchi.github.io/ai-collaboration-guide/) in full. That page contains the complete instructions for recording AI usage and maintaining project history. The user should explicitly direct the agent to read it, and the agent should record the URL and access date in the project history. The summary below supplements that guide but does not replace it. When the current AI Collaboration Guide conflicts with this summary, follow the AI Collaboration Guide. If the page is unavailable, record that limitation and ask the user for a current saved copy rather than relying on memory or an undated version.
+
+Use one subfolder per human collaborator, with spaces converted to underscores. Use the human collaborator's name for the subfolder and the AI agent/tool name in the filename:
+
+```text
+project_history/
+├── Yusaku_Horiuchi/
+│   ├── 2026-07-23 by Codex.md
+│   └── 2026-07-23 by Claude.md
+└── Another_Collaborator/
+    └── 2026-07-23 by Codex.md
+```
+
+Use the local date and time zone. Append a new entry when a same-day file already exists; never overwrite earlier entries. At the end of every substantive task, update the history before the final response, including tasks that only inspect, diagnose, decide, or verify.
+
+Record as much metadata as the agent can access. If a value is unavailable, write `Unknown` or `Not exposed in this session` rather than omitting it. Preserve specific user-selected model and reasoning values rather than replacing them with generic labels.
+
+Each entry should record, when available:
+
+- date, time, and time zone;
+- AI surface and source task/thread description;
+- common working directory and human collaborator/history owner;
+- exact model display name, family, slug, reasoning level/effort, and raw/config value;
+- verbosity, speed mode, service tier, collaboration/planning mode, sandbox/permissions, approval policy, and network/web-access mode;
+- active skills, plugins, connectors, MCP servers, browser/computer-use tools, shell, OS, and relevant runtime versions;
+- project, manuscript, analysis, deck, dataset, or artifact title;
+- the user's goal, instructions, constraints, target journal, and journal requirements;
+- manuscript and analysis repository branches, commits, remotes, ahead/behind state, and dirty-state summaries;
+- data files, source files, scripts, TeX files, PDFs, images, and other inputs used;
+- external sources checked, including URLs and access dates;
+- commands run and important tool actions;
+- files created, changed, removed, relocated, staged, committed, pushed, or otherwise affected;
+- tests, package runs, compilation, rendering, link checks, checksum verification, comparison results, and other concrete evidence;
+- outputs and deliverables, including paths, sizes, page counts, checksums, or counts when relevant;
+- notes, assumptions, unresolved risks, open questions, manual steps, and next actions.
+
+Use this structure unless the user requests another:
+
+```md
+# YYYY-MM-DD by Agent
+
+## Metadata
+
+- Date:
+- Time:
+- Time zone:
+- AI surface:
+- Source task/thread:
+- Model display name:
+- Model family:
+- Model slug:
+- Reasoning level/effort:
+- Reasoning raw/config value:
+- Verbosity:
+- Speed mode:
+- Service tier:
+- Collaboration/planning mode:
+- Sandbox/permissions:
+- Approval policy:
+- Network/web access:
+- Working directory:
+- Human collaborator / history owner:
+- History file path:
+- Manuscript repository branch/commit/status:
+- Analysis repository branch/commit/status:
+- Manuscript/artifact:
+- Primary work type:
+- User goal:
+- Active tools/skills/plugins/connectors:
+- Data and inputs used:
+- Main commands:
+- Verification status:
+
+## Summary of User Instructions
+
+-
+
+## Summary of Agent Work
+
+-
+
+## Files Changed
+
+-
+
+## Files Created
+
+-
+
+## Files Removed or Relocated
+
+-
+
+## Outputs / Deliverables
+
+-
+
+## Verification
+
+-
+
+## External Sources Checked
+
+-
+
+## Notes, Assumptions, and Open Questions
+
+-
+
+## End-of-Day Status
+
+-
+```
+
+Keep `.Rhistory`, `.DS_Store`, caches, temporary files, credentials, and secrets out of `project_history/`.
 
 ## Core Workflow
 
@@ -126,7 +266,7 @@ A replication package is successful when a reader can unzip it, open the project
 The package should satisfy these requirements:
 
 - One public entry point: `master.R`.
-- Exactly one authoritative `README.md` that explains the package, the workflow, the required software, and every figure/table output.
+- Exactly one authoritative `README.md` inside the public package that explains the package, the workflow, the required software, and every figure/table output.
 - One log file for each script that is part of the public replication path.
 - One `session_info.log` file from a successful full run.
 - One `MANIFEST-SHA256.txt` checksum inventory generated from the final release contents.
@@ -281,7 +421,9 @@ Use this section order unless a project-specific reason makes another order clea
 12. `## Recommended Citation`
 13. `## Last Verified`
 
-Commit only one README-style documentation file: `README.md`. If an archive or journal requires HTML or PDF documentation, generate those files from `README.md` at release time and make clear that `README.md` remains the source.
+Commit only one README-style documentation file inside the public package: `README.md`. If an archive or journal requires HTML or PDF documentation, generate those files from `README.md` at release time and make clear that `README.md` remains the source.
+
+This package-level rule does not prohibit the common project-root `README.md` or a private analysis-repository `README.md`. The root README maps the private working project; the analysis README documents the private code repository; the public-package README is authoritative for archive users. State each file's scope clearly and do not duplicate contradictory instructions.
 
 ## Data Sources and Restrictions
 
@@ -398,17 +540,20 @@ Every public script should write a log file. Logs are part of the replication re
 Logs should include:
 
 - script name;
-- start and end time;
-- inputs;
-- outputs and file sizes;
+- start and end time, time zone, elapsed time, and completion status;
+- working directory, invocation or execution path, and relevant Git commit when available;
+- inputs with paths, file sizes, access dates or versions, and checksums when identity matters;
+- outputs with paths, file sizes, and checksums when identity matters;
+- user-set parameters, random seeds, and important package or external-tool versions;
 - important package versions if script-specific;
 - row counts after major filters or merges;
+- merge diagnostics, exclusions, missing-data handling, and transformation checkpoints needed to audit the analysis;
 - sample sizes used in each reported analysis;
 - treatment or group counts when relevant;
 - field dates when relevant;
 - summary statistics reported in the paper;
 - model estimates, standard errors, test statistics, and p-values reported in text;
-- warnings at the end of the script.
+- warnings, errors, and unresolved messages at the end of the script.
 
 Avoid workspace-wide serialization such as `save.image()`. Save only explicitly named objects. Load legacy workspace files into isolated environments.
 
@@ -657,7 +802,7 @@ The public package should be designed so that users can reproduce published resu
 
 ## Paper Consistency Checks
 
-When manuscript source files are available, treat them as part of the working context for package preparation. This is especially useful for Overleaf projects synced through Dropbox, because the paper source files and the R replication package can be inspected together.
+When manuscript source files are available, treat them as part of the working context for package preparation. Selecting the common project root lets the agent inspect the local manuscript repository and analysis repository together even when the manuscript is synchronized with Overleaf through GitHub.
 
 The final consistency pass should check:
 

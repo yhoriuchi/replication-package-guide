@@ -9,13 +9,14 @@ The publishable guide is in [`index.md`](index.md). The copy button on the site 
 - [`AGENTS.md`](AGENTS.md): full agent/user instructions copied by the site button.
 - [`assets/site.css`](assets/site.css): the custom GitHub Pages stylesheet.
 - [`prompts/replication-package-agent.md`](prompts/replication-package-agent.md): optional starter prompt for providing project-specific paths and constraints.
-- [`templates/README_TEMPLATE.md`](templates/README_TEMPLATE.md): a copyable starting point for a project's one authoritative `README.md`.
+- [`templates/README_TEMPLATE.md`](templates/README_TEMPLATE.md): a copyable starting point for the public package's one authoritative `README.md`.
+- [`templates/PROJECT_ROOT_README_TEMPLATE.md`](templates/PROJECT_ROOT_README_TEMPLATE.md): a private root-level map for the single AI workspace and its two repositories.
 - [`templates/release-readiness-report.md`](templates/release-readiness-report.md): structured final-report template for replication-package audits.
 - [`templates/compact/`](templates/compact/): compact project structure for smaller replication packages.
 - [`templates/build-analyze/`](templates/build-analyze/): larger structure with separate `build/` and `analyze/` stages.
 - [`rules.dropboxignore`](rules.dropboxignore): Dropbox-root ignore rules for R/RStudio local and session files.
 
-The guide recommends two sibling Git repositories under one research-project parent: a compilation-focused `manuscript/` repository and a private `analysis/` repository. The public replication archive and journal production files are staged as separate artifacts.
+The guide recommends one Codex or Claude project at a cloud-synced common research-project root, with root `AGENTS.md`, root `README.md`, one `project_history/`, a compilation-focused `manuscript/` Git repository, and a private `analysis/` Git repository. Dropbox, Google Drive, or iCloud can synchronize the whole authorized workspace, while Git tracks only the two child repositories. The public replication archive and journal production files remain separately staged artifacts.
 
 ## Public Site
 
@@ -35,4 +36,4 @@ Give an agent:
 4. Any source-data restrictions.
 5. The instructions copied from the public guide.
 
-Require the agent to return a runnable package with `master.R`, per-script logs, `session_info.log`, one authoritative `README.md`, a complete figure/table crosswalk, a verified `MANIFEST-SHA256.txt`, and an extracted-archive test. Keep the readiness report private unless the journal requests it.
+Require the agent to return a runnable package with `master.R`, per-script logs, `session_info.log`, one authoritative public-package `README.md`, a complete figure/table crosswalk, a verified `MANIFEST-SHA256.txt`, and an extracted-archive test. Keep the readiness report private unless the journal requests it.

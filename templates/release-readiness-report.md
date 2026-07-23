@@ -8,6 +8,10 @@ Use this template for the final report after preparing, auditing, or repairing a
 - Date checked:
 - Agent or model:
 - Workspace:
+- Cloud-sync service and restrictions:
+- Root `AGENTS.md`:
+- Root project `README.md`:
+- Root `project_history/`:
 - Manuscript repository:
 - Private analysis repository:
 - Public package root:
@@ -17,6 +21,10 @@ Use this template for the final report after preparing, auditing, or repairing a
 - Journal instructions accessed:
 - Journal-specific requirements:
 - Chosen structure: compact / build-analyze / other
+- Manuscript repository branch/commit/status:
+- Analysis repository branch/commit/status:
+- Project-history entry updated:
+- AI Collaboration Guide URL/access date recorded:
 
 ## Executive Summary
 
