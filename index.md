@@ -1,5 +1,5 @@
 ---
-title: Replication Package Guide
+title: AI-Assisted Research Project Management and Replication Guide
 ---
 
 <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}?v={{ site.github.build_revision }}">
@@ -8,7 +8,7 @@ title: Replication Package Guide
 
 <section class="hero" markdown="1">
 
-# Replication Package Guide
+# AI-Assisted Research Project Management and Replication Guide
 
 - **Author:** Yusaku Horiuchi
 - **Affiliation:** Syde P. Deeb Eminent Scholar in Political Science, Florida State University
@@ -17,7 +17,7 @@ title: Replication Package Guide
 
 ![Page views](https://hits.sh/yhoriuchi.github.io/replication-package-guide.svg?label=page%20views)
 
-A practical guide and template collection for building high-quality social science replication packages that coding agents and human researchers can inspect, run, and verify.
+A practical, software-neutral guide for organizing an AI-assisted research project from Day 1 and developing a high-quality replication package before publication.
 
 <div class="hero-actions" markdown="1">
 <button type="button" class="button button-primary" id="copy-agent-instructions">Copy Agent Instructions</button>
@@ -31,9 +31,9 @@ A practical guide and template collection for building high-quality social scien
 1. Find the most up-to-date replication-package, data, and code instructions issued by the journal to which the manuscript will be submitted.
 2. Tell the agent to read those journal instructions in full before inspecting or changing the package. Provide the official URL or files and the date accessed.
 3. Read the current [AI Collaboration Guide](https://yhoriuchi.github.io/ai-collaboration-guide/) and explicitly tell the AI agent to read it in full. It is the authoritative source for recording AI usage and maintaining `project_history/`.
-4. Click **Copy Agent Instructions** and paste the instructions into Codex, Claude Code, or another coding agent before it changes files.
+4. Click **Copy Agent Instructions** and append or merge the copied instructions into the root `AGENTS.md`. Never replace or overwrite an existing `AGENTS.md`; preserve all existing instructions and reconcile any conflict explicitly. Give the resulting instructions to the AI assistant before it changes files. If the tool cannot read local files, provide the relevant instructions in its chat and manually save its substantive work record under `project_history/`.
 5. Give the agent the replication package root and, when available, the paper source files, manuscript-ready figures, manuscript-ready tables, appendices, bibliography files, and source-data notes.
-6. Open one Codex or Claude project at the common research-project root so the agent can see the root instructions, project history, manuscript repository, and analysis repository together.
+6. Open one AI workspace at the common research-project root so a file-capable assistant can see the root instructions, project history, manuscript repository, and analysis repository together.
 7. Decide whether the public package should use the compact structure or the build/analyze structure.
 8. Require one public entry point, script-specific logs, `session_info.log`, one authoritative public-package `README.md`, and a complete figure/table crosswalk.
 9. Ask the agent to run the final audit on an extracted copy of the release ZIP and return a readiness report covering remaining mismatches, restricted-data limits, and manual steps.
@@ -164,27 +164,32 @@ After preparing a package with this guide, I encourage authors to run ReproAI be
 
 </section>
 
-The guide assumes an R-based workflow, with `master.R`, R scripts, and `session_info.log` as the default examples. The underlying standard is not limited to R. For Stata, Python, Julia, MATLAB, or another toolchain, ask the agent to prepare an analogous package with the appropriate single entry point, logs, software-environment record, and figure/table crosswalk.
+The research-project analysis repository is always named `analysis/`, not `r/`, because researchers may use R, Python, Stata, Julia, MATLAB, multiple languages, or another toolchain. The examples use `master.R`, R scripts, and `session_info.log` as defaults, but the underlying standard is software-neutral. For a non-R or mixed-language project, use an analogous single entry point, logs, software-environment record, and figure/table crosswalk while retaining the `analysis/` repository name.
 
-## Before You Start
+## Start on Day 1
 
-Before asking an AI agent to polish a replication package for publication, clean the project as much as possible yourself. AI is useful for checking, reorganizing, documenting, and catching inconsistencies, but it should not be treated as a substitute for the author's judgment about which files, scripts, data sources, and results are actually part of the replication record.
+Use this architecture when the research project begins, not only when a journal requests a replication package. Early structure makes later release preparation an audit and promotion exercise instead of a reconstruction exercise.
 
-At minimum, remove clearly obsolete files, label exploratory scripts, identify the scripts that generate reported results, gather the paper source files when available, and decide which data can legally be shared. The cleaner the starting point, the more reliable the AI-assisted audit will be.
+On Day 1:
 
-For a new replication package:
+1. Create the common research-project root, its private project-map `README.md`, the `manuscript/` and `analysis/` child repositories, one root `project_history/`, and optional `others/`. Create `AGENTS.md` only when none exists; otherwise append or merge the new project instructions without deleting existing content.
+2. Read the current AI Collaboration Guide and make every AI assistant used on the project follow it. Use the same root instructions and history convention regardless of the assistant or interface.
+3. Classify each expected data source before collection or receipt: ownership, license, confidentiality, redistributability, approved storage, expected secure path, and scripts allowed to use it.
+4. Record the software environment, random seeds, source URLs, access dates, survey instruments, ethics/IRB documentation, codebooks, and important analytical decisions as they arise.
+5. Keep raw or received data read-only. Build analysis-ready files with scripts, use relative paths within repositories and the future public package, and document how generated results are promoted into the manuscript.
+6. Start script-level logging and the paper-to-output crosswalk as soon as reported results exist. Do not wait until submission.
+7. Once a target journal is selected, read its current official requirements in full and update the project map and release plan. Repeat the check at submission because requirements can change.
 
-1. Read the target journal's current official replication-package instructions.
-2. Read this guide once before organizing files.
-3. Decide whether the project needs the compact structure or the build/analyze structure.
-4. If starting from scratch, copy either `templates/compact/` or `templates/build-analyze/` into the new project and use its included `README.md` as the starting README.
-5. If reorganizing an existing project, copy `templates/README_TEMPLATE.md` to the project root as `README.md`.
-6. Delete any unused folder-tree option inside `README.md`.
-7. Replace every placeholder with project-specific information.
-8. Fill in the figure/table crosswalk in paper order.
-9. Run `source("master.R")` from a fresh R session.
-10. Confirm that `session_info.log` and one log per public script were created.
-11. Commit only one README file: `README.md`.
+For an existing project, first inspect before reorganizing. Remove or archive clearly obsolete files only after their role is understood, label exploratory scripts, identify what generates reported results, gather available paper source, and determine what can legally be shared. The author remains responsible for deciding which data, scripts, files, and results belong in the replication record.
+
+When staging a public package:
+
+1. Choose the compact or build/analyze structure.
+2. Copy the appropriate template into the staging area, or use `templates/README_TEMPLATE.md` when repairing an existing package.
+3. Replace every placeholder and retain exactly one authoritative public-package `README.md`.
+4. Complete the paper-order figure/table crosswalk.
+5. Run the public entry point from a fresh session and confirm that the environment record and one matching log per public script were created.
+6. Complete the manifest, extracted-archive test, journal-specific checks, and final readiness report.
 
 ## Separate the Research, Manuscript, Release, and Submission Artifacts
 
@@ -197,9 +202,9 @@ A research project normally produces four related but different artifacts:
 
 Do not treat these as one folder. In particular, internal archives, complete replication staging directories, raw data, and submission snapshots do not belong in the manuscript repository or public package.
 
-## One AI Project Root with Two Git Repositories
+## One AI Workspace with Two Git Repositories
 
-Create one local research-project folder and select that folder—once—as the Codex or Claude project. Keep the manuscript and analysis work in two child Git repositories:
+Create one local research-project folder and use that folder as the common AI workspace. File-capable assistants should open or receive access to this root so they can read the same instructions and inspect both child repositories:
 
 ```text
 Research-Project/
@@ -215,11 +220,11 @@ Research-Project/
 
 The common parent is the **single AI workspace**, not a third research repository. Unless there is a deliberate reason to version it, do not initialize another Git repository around the two child repositories. This avoids nested-repository confusion while allowing one agent session to inspect both sides of the project.
 
-Place the common project root inside an institutionally approved Dropbox, Google Drive, or iCloud location when permitted by the project's data agreements. The sync service can then synchronize the root instructions, project history, both repositories, optional materials, and local data across the user's computers. Cloud synchronization and Git serve different purposes: cloud sync covers the whole working folder, while Git versions only the files tracked inside `manuscript/` and `analysis/`.
+Place the common project root inside an institutionally approved synchronized storage location—such as Dropbox, Google Drive, iCloud, or another approved service—when permitted by the project's data agreements. The service can synchronize the root instructions, project history, both repositories, optional materials, and permitted local data across the user's computers. Cloud synchronization and Git serve different purposes: synchronization covers the whole authorized working folder, while Git versions only the files tracked inside `manuscript/` and `analysis/`.
 
-Because the common parent is not a wrapper Git repository, users do not need a project-root `.gitignore` merely to keep data out of a nonexistent parent repository. Data stored under the cloud-synced root can remain outside Git. The analysis repository must still ignore any local, restricted, licensed, or otherwise untracked datasets within its own Git scope. If a data-use agreement forbids Dropbox, Google Drive, iCloud, or personal-cloud storage, keep those data in the authorized secure location and document the expected path instead.
+Because the common parent is not a wrapper Git repository, users do not need a project-root `.gitignore` merely to keep data out of a nonexistent parent repository. Permitted data stored under the synchronized root can remain outside Git. The analysis repository must still ignore any local, restricted, licensed, or otherwise untracked datasets within its own Git scope. If a data-use agreement forbids the selected service or personal-cloud storage, keep those data in the authorized secure location and document the expected path instead. Before a clean run or release audit, confirm synchronization is complete and make required files available locally; online-only placeholders are not valid replication inputs. Synchronization is not a substitute for version control or backup, and collaborators should resolve conflict copies before release.
 
-Keep exactly one root `AGENTS.md`. It governs work across both child repositories and should define repository boundaries, data restrictions, synchronization rules, the analysis-to-manuscript promotion workflow, public-package requirements, and the root project-history destination.
+Keep exactly one canonical root `AGENTS.md`. It is the tool-neutral instruction source for the whole project and should define repository boundaries, data restrictions, synchronization rules, the analysis-to-manuscript promotion workflow, public-package requirements, and the root project-history destination. Always append or carefully merge new instructions into an existing file; never replace or overwrite it. Preserve existing requirements, resolve conflicts explicitly, and avoid duplicate sections. Each assistant should read this file directly or receive the same contents through its supported instruction mechanism; do not maintain divergent agent-specific policies.
 
 Keep one root `README.md` as the private project map. It should identify the project, authors, two repositories and remotes, Overleaf synchronization status, secure local-data locations, public-package staging location, promotion workflow, optional folders, and current reproducibility status. This root README does not replace the analysis repository README or the public replication package README; each documents a different scope.
 
@@ -252,6 +257,8 @@ project_history/
 
 Use the human collaborator's name for the subfolder and the AI agent/tool name in the filename. Use the local date and time zone. Append new entries to an existing same-day file; do not overwrite earlier entries.
 
+Every appended task or follow-up should carry its own task-specific model and runtime metadata; do not assume that metadata from an earlier entry still applies. If an assistant cannot write local files, the user should export or copy a concise record into the correct history file. Keep project history private by default and out of the manuscript repository, public replication package, and journal submission unless disclosure is specifically required. Do not record confidential, proprietary, embargoed, personally identifying, or otherwise sensitive content unless the project is authorized to retain it there. Project history supplements rather than replaces journal disclosure statements, data-availability statements, preregistrations, ethics documentation, or version control.
+
 At the end of every substantive task—including inspection, diagnosis, decisions, verification, or work that changes no project files—record:
 
 - date, time, and time zone;
@@ -275,14 +282,15 @@ Overleaf's 50 MB limit concerns an individual uploaded file, not the total size 
 
 Never store raw or restricted data in an Overleaf-synchronized folder. Beyond file size, the important concerns are privacy, collaborator access, synchronization reliability, and project bloat. Keep restricted inputs in an authorized secure location outside both Git repositories and record the expected path in private documentation.
 
-Keep local and session files out of Git and, when Dropbox is used, out of Dropbox sync. Git and Dropbox have separate ignore mechanisms:
+Keep local and session files out of Git and, when supported, out of synchronization. Version-control exclusions and storage-service exclusions are separate mechanisms:
 
-- `rules.dropboxignore` belongs at the applicable Dropbox root and controls synchronization.
+- `rules.dropboxignore` is an optional Dropbox-specific example that belongs at the applicable Dropbox root.
+- For Google Drive, iCloud, or another service, use that service's supported exclusion or selective-sync controls; if it offers none, keep prohibited files outside the synchronized root.
 - `.gitignore` belongs inside each Git repository and controls version tracking.
 
-The simplest setup is to adapt this repository's [`rules.dropboxignore`](rules.dropboxignore) and add appropriate rules to each repository's `.gitignore`. Append to existing files rather than replacing project-specific rules.
+For Dropbox, adapt this repository's [`rules.dropboxignore`](rules.dropboxignore). For every platform, add appropriate rules to each repository's `.gitignore`. Append to existing files rather than replacing project-specific rules.
 
-Suggested base rules for both `rules.dropboxignore` and project-level `.gitignore` files:
+Suggested base patterns for a supported storage-service exclusion file and project-level `.gitignore` files:
 
 ```text
 # R and RStudio local/session files
@@ -307,7 +315,7 @@ Suggested base rules for both `rules.dropboxignore` and project-level `.gitignor
 **/Rplots.pdf
 ```
 
-Dropbox ignore rules apply only going forward. Files that already synced may need to be removed and recreated after `rules.dropboxignore` is added. Git ignore rules also do not automatically untrack files that were already committed; after checking carefully, remove such files from Git tracking with `git rm --cached [file]`.
+Storage-service exclusion behavior varies and may apply only going forward. Confirm that previously synchronized files were actually removed from the service before relying on an exclusion. Git ignore rules also do not automatically untrack files that were already committed; after checking carefully, remove such files from Git tracking with `git rm --cached [file]`.
 
 Do not ignore the whole analysis repository. Ignore only restricted inputs, machine-specific caches, histories, package libraries, temporary files, and other explicitly excluded artifacts. The `.Rproj` file, scripts, redistributable data, generated logs, and reproducibility metadata such as `renv.lock` should usually remain visible.
 
@@ -373,7 +381,7 @@ The repository contains two starter structures. Copy one, then replace every pla
 Use [`templates/compact/`](https://github.com/yhoriuchi/replication-package-guide/tree/main/templates/compact) for smaller packages.
 
 ```text
-r/
+analysis/
 |-- README.md
 |-- .gitignore
 |-- master.R
@@ -415,7 +423,7 @@ The compact structure should still include `logs/`. A `functions/` folder is opt
 Use [`templates/build-analyze/`](https://github.com/yhoriuchi/replication-package-guide/tree/main/templates/build-analyze) for larger packages with a separate data-build stage.
 
 ```text
-r/
+analysis/
 |-- README.md
 |-- .gitignore
 |-- master.R

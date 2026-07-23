@@ -1,12 +1,12 @@
-# Agent and User Instructions: Prepare a Replication Package
+# Agent and User Instructions: Manage a Research Project and Prepare Its Replication Package
 
-These instructions are for Codex, Claude Code, or another coding agent preparing, auditing, or repairing a social science replication package. The goal is a public package that a reader can open, run from one entry point, and use to trace every reported result back to code, data, logs, and documentation.
+These tool-neutral instructions are for any AI assistant preparing, auditing, or repairing a social science replication package. The goal is a public package that a reader can open, run from one entry point, and use to trace every reported result back to code, data, logs, and documentation.
 
 ## Required User Context
 
 Before starting, the user should provide or identify:
 
-1. The common research-project root selected as the single Codex or Claude project.
+1. The common research-project root used as the single AI workspace.
 2. The manuscript repository and analysis repository under that root.
 3. The replication-package staging root or draft package folder.
 4. The paper source files when available, such as Overleaf/LaTeX files, manuscript-ready figures, manuscript-ready tables, appendices, and bibliography files.
@@ -58,9 +58,22 @@ This guide is a general workflow. When a journal's current instructions conflict
 9. Do not put raw or restricted data in Git or an Overleaf-synchronized folder, even when the repository is private.
 10. Do not include internal archives, submission snapshots, or readiness reports in the public package unless the journal requests them.
 
+## Start on Day 1
+
+Apply this architecture when the research project begins, not only when a journal requests a replication package.
+
+1. Create the common research-project root, private root `README.md`, the `manuscript/` and `analysis/` repositories, one root `project_history/`, and optional `others/`. Create `AGENTS.md` only when none exists; otherwise append or merge these instructions without deleting existing content.
+2. Read the current AI Collaboration Guide and use its recording convention for every AI assistant and interface used on the project.
+3. Classify expected data sources before collection or receipt: ownership, license, confidentiality, redistributability, approved storage, secure path, and permitted uses.
+4. Record source URLs and access dates, instruments, ethics/IRB materials, codebooks, software environments, seeds, major analytical decisions, and output-promotion steps as they arise.
+5. Treat raw or received data as read-only. Construct derived data by script, use relative paths, and begin script logging and the paper-to-output crosswalk when reported results first appear.
+6. Read the target journal's current official requirements once a venue is selected and check them again at submission.
+
+For an existing project, inspect before reorganizing. Understand candidate inputs, scripts, outputs, and archives before removing or relocating anything.
+
 ## Required Research-Project Architecture
 
-Use one common local project root as the single Codex or Claude workspace, with two child Git repositories:
+Use one common local project root as the single AI workspace, with two child Git repositories:
 
 ```text
 Research-Project/
@@ -76,11 +89,11 @@ Research-Project/
 
 The common parent is the single AI workspace, not normally a third Git repository. Do not create nested-repository ambiguity by initializing a wrapper repository unless the user has a deliberate version-control design for it.
 
-Place the common project root inside an institutionally approved Dropbox, Google Drive, or iCloud location when the project's data agreements permit it. The sync service should synchronize the root instructions, project history, both repositories, optional materials, and permitted local data across the user's computers.
+Place the common project root inside an institutionally approved synchronized storage location—such as Dropbox, Google Drive, iCloud, or another approved service—when the project's data agreements permit it. The service should synchronize the root instructions, project history, both repositories, optional materials, and permitted local data across the user's computers.
 
-Cloud synchronization and Git have different scopes. Cloud sync covers the whole working folder. Git versions only tracked files inside `manuscript/` and `analysis/`. Because the common parent is not a wrapper Git repository, no project-root `.gitignore` is needed merely to exclude data from a nonexistent parent Git index. The analysis repository must still ignore local, restricted, licensed, or intentionally untracked datasets within its own Git scope. If cloud storage is prohibited for a dataset, keep it in the authorized secure location and document the expected path.
+Cloud synchronization and Git have different scopes. Synchronization covers the whole authorized working folder. Git versions only tracked files inside `manuscript/` and `analysis/`. Because the common parent is not a wrapper Git repository, no project-root `.gitignore` is needed merely to exclude data from a nonexistent parent Git index. The analysis repository must still ignore local, restricted, licensed, or intentionally untracked datasets within its own Git scope. If the selected storage service is prohibited for a dataset, keep it in the authorized secure location and document the expected path. Before a clean run or release audit, confirm synchronization is complete and make required files available locally. Treat online-only placeholders and unresolved conflict copies as release blockers. Synchronization is not a substitute for Git or backup.
 
-Keep exactly one root `AGENTS.md`. It governs work in both repositories and defines their boundaries, data restrictions, synchronization rules, output-promotion procedure, public-package requirements, and project-history location.
+Keep exactly one canonical root `AGENTS.md`. It is the tool-neutral instruction source for both repositories and defines their boundaries, data restrictions, synchronization rules, output-promotion procedure, public-package requirements, and project-history location. Always append or carefully merge new instructions into an existing `AGENTS.md`; never replace, overwrite, truncate, or discard it. Preserve existing requirements, reconcile conflicts explicitly, and avoid duplicating equivalent sections. Each assistant should read this file directly or receive the same contents through its supported instruction mechanism. Do not maintain divergent agent-specific policies.
 
 Keep a root `README.md` as the private project map. It should identify the project, authors, target journal and instructions, both repositories and remotes, Overleaf status, secure local-data locations, public-package staging location, analysis-to-manuscript promotion workflow, optional folders, and current reproducibility status.
 
@@ -88,7 +101,7 @@ The manuscript repository should contain only LaTeX and bibliography sources, ma
 
 The private analysis repository should contain scripts and functions, data-construction and analysis code, codebooks, replication-package staging, validation scripts, generated results, and internal project documentation. Restricted raw data must remain outside Git. Add ignore rules and document the expected authorized secure local paths.
 
-A Codex or Claude project should select the common parent folder once so the agent can inspect both repositories. Before changing either repository, check its branch, commit, remote, synchronization, review, protection, and dirty-state conventions independently.
+A file-capable AI assistant should open or receive access to the common parent folder so it can inspect both repositories. Before changing either repository, check its branch, commit, remote, synchronization, review, protection, and dirty-state conventions independently. If an assistant cannot access local files, the user must provide the relevant instructions and materials and manually save its substantive work record.
 
 Keep four artifacts conceptually and physically distinct:
 
@@ -119,6 +132,8 @@ project_history/
 ```
 
 Use the local date and time zone. Append a new entry when a same-day file already exists; never overwrite earlier entries. At the end of every substantive task, update the history before the final response, including tasks that only inspect, diagnose, decide, or verify.
+
+Every appended task or follow-up must include its own task-specific model and runtime metadata; do not assume an earlier entry's metadata still applies. If the assistant cannot write local files, return a concise record that the user can copy into the correct history file.
 
 Record as much metadata as the agent can access. If a value is unavailable, write `Unknown` or `Not exposed in this session` rather than omitting it. Preserve specific user-selected model and reasoning values rather than replacing them with generic labels.
 
@@ -219,7 +234,7 @@ Use this structure unless the user requests another:
 -
 ```
 
-Keep `.Rhistory`, `.DS_Store`, caches, temporary files, credentials, and secrets out of `project_history/`.
+Keep project history private by default and outside the manuscript repository, public replication package, and journal submission unless disclosure is specifically required. Do not record confidential, proprietary, embargoed, personally identifying, or otherwise sensitive content unless authorized. Keep `.Rhistory`, `.DS_Store`, caches, temporary files, credentials, and secrets out of `project_history/`. Project history supplements rather than replaces journal disclosure statements, data-availability statements, preregistrations, ethics documentation, or version control.
 
 ## Core Workflow
 
@@ -283,6 +298,8 @@ The package should satisfy these requirements:
 
 ## Choosing a Structure
 
+The research-project analysis repository and the root shown in public-package examples should be named `analysis/`, not `r/`. This name is deliberately software-neutral: a project may use R, Python, Stata, Julia, MATLAB, several languages, or another toolchain. R-specific filenames below are defaults, not a requirement to rename the repository after a programming language.
+
 Use the compact structure for small or medium projects when:
 
 - the raw or cleaned public data can be included directly;
@@ -306,7 +323,7 @@ When uncertain, choose the simpler structure unless the build stage creates real
 Recommended for smaller packages:
 
 ```text
-r/
+analysis/
 |-- README.md
 |-- .gitignore
 |-- master.R
@@ -349,7 +366,7 @@ The compact structure should still include `logs/`. A `functions/` folder is opt
 Recommended for larger packages:
 
 ```text
-r/
+analysis/
 |-- README.md
 |-- .gitignore
 |-- master.R

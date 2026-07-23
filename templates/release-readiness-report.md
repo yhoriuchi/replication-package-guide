@@ -8,7 +8,7 @@ Use this template for the final report after preparing, auditing, or repairing a
 - Date checked:
 - Agent or model:
 - Workspace:
-- Cloud-sync service and restrictions:
+- Synchronized storage service and restrictions:
 - Root `AGENTS.md`:
 - Root project `README.md`:
 - Root `project_history/`:

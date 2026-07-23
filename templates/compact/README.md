@@ -28,7 +28,7 @@ source("scripts/03_make_figures_tables.R")
 ## Folder Tree
 
 ```text
-r/
+analysis/
 |-- README.md
 |-- .gitignore
 |-- master.R
@@ -118,7 +118,7 @@ List public scripts, helper files, or generated outputs when useful. Keep this s
 
 ## Paper Source And Consistency Checks
 
-State whether the paper source files were available during preparation. If the paper was written in Overleaf and synced through Dropbox, note whether this replication package was prepared inside or alongside the synced Overleaf folder.
+State whether the paper source files were available during preparation. If the paper was written in Overleaf and synchronized through GitHub or an approved storage service, note whether this replication package was prepared inside or alongside that synchronized workspace.
 
 Paper source status:
 

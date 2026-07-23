@@ -1,6 +1,6 @@
 # Replication Package Agent Prompt
 
-Use this prompt when starting a new replication-package audit or repair task. Replace the bracketed fields before sending it to Codex, Claude Code, or another coding agent.
+Use this prompt when starting a new replication-package audit or repair task. Replace the bracketed fields before giving it to any AI assistant.
 
 ```text
 Please prepare, audit, or repair this replication package using the Replication Package Guide instructions.
@@ -11,9 +11,11 @@ Before changing files, read both of the following in full:
 
 Record both sources and their access dates. Then inspect the project and identify the public replication path.
 
+If the root already contains `AGENTS.md`, preserve it and append or carefully merge the new instructions. Never replace, overwrite, truncate, or discard an existing `AGENTS.md`. The analysis repository/root is named `analysis/` regardless of whether the project uses R, Python, Stata, Julia, MATLAB, or another toolchain.
+
 Project context:
 - Common research-project parent: [path]
-- Cloud-sync service and restrictions: [Dropbox / Google Drive / iCloud / approved alternative and any prohibited data]
+- Synchronized storage service and restrictions: [Dropbox / Google Drive / iCloud / another approved service, or none; list any prohibited data]
 - Root project instructions: [path to AGENTS.md]
 - Root project map: [path to README.md]
 - Root project history: [path to project_history/]
@@ -31,7 +33,7 @@ Project context:
 - Preferred structure: [compact / build-analyze / agent should decide]
 
 Required outcome:
-1. Maintain one active project history at the common root and append a detailed entry after every substantive task.
+1. Maintain one private active project history at the common root and append a detailed, task-specific entry after every substantive task. If you cannot write local files, return a concise record for the user to save there.
 2. Preserve substantive analysis choices unless a change is needed for reproducibility, logging, paths, or documentation.
 3. Use relative paths from the public package root.
 4. Create or repair one public entry point named master.R.

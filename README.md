@@ -1,8 +1,8 @@
-# Replication Package Guide
+# AI-Assisted Research Project Management and Replication Guide
 
-This repository contains the public GitHub Pages guide and lightweight templates for preparing high-quality social science replication packages.
+This repository contains the public GitHub Pages guide and lightweight templates for managing an AI-assisted research project from Day 1 and preparing a high-quality social science replication package.
 
-The publishable guide is in [`index.md`](index.md). The copy button on the site embeds [`AGENTS.md`](AGENTS.md), which contains the plain-text instructions for Codex, Claude Code, or another coding agent.
+The publishable guide is in [`index.md`](index.md). The copy button on the site embeds [`AGENTS.md`](AGENTS.md), which contains tool-neutral plain-text instructions for AI coding assistants.
 
 ## What This Repo Provides
 
@@ -16,7 +16,7 @@ The publishable guide is in [`index.md`](index.md). The copy button on the site 
 - [`templates/build-analyze/`](templates/build-analyze/): larger structure with separate `build/` and `analyze/` stages.
 - [`rules.dropboxignore`](rules.dropboxignore): Dropbox-root ignore rules for R/RStudio local and session files.
 
-The guide recommends one Codex or Claude project at a cloud-synced common research-project root, with root `AGENTS.md`, root `README.md`, one `project_history/`, a compilation-focused `manuscript/` Git repository, and a private `analysis/` Git repository. Dropbox, Google Drive, or iCloud can synchronize the whole authorized workspace, while Git tracks only the two child repositories. The public replication archive and journal production files remain separately staged artifacts.
+The guide recommends one common AI workspace from Day 1, with root `AGENTS.md`, root `README.md`, one `project_history/`, a compilation-focused `manuscript/` Git repository, and a private, software-neutral `analysis/` Git repository. New instructions must be appended or merged into an existing `AGENTS.md`, never substituted for it. Dropbox, Google Drive, iCloud, or another institutionally approved storage service can synchronize the authorized workspace, while Git tracks only the two child repositories. The public replication archive and journal production files remain separately staged artifacts.
 
 ## Public Site
 

@@ -1,6 +1,6 @@
 # [Research Project Name]
 
-This is the common local workspace for the manuscript, analysis, AI collaboration history, and non-core project materials. Open this folder as the single Codex or Claude project.
+This is the common local workspace for the manuscript, analysis, AI collaboration history, and non-core project materials. Use it as the single AI workspace regardless of the assistant or interface.
 
 ## Project
 
@@ -9,10 +9,17 @@ This is the common local workspace for the manuscript, analysis, AI collaboratio
 - Target journal: [Journal or not yet selected]
 - Journal instructions: [Official URL or local file]
 - Instructions accessed: [Date]
-- Cloud-sync service: [Dropbox / Google Drive / iCloud / approved alternative]
+- Synchronized storage service: [Dropbox / Google Drive / iCloud / another institutionally approved service]
 - Cloud-data restrictions: [Any files that must remain outside the sync service]
 - AI Collaboration Guide: `https://yhoriuchi.github.io/ai-collaboration-guide/`
 - AI Collaboration Guide accessed: [Date]
+
+## Instructions
+
+- Canonical instruction file: `AGENTS.md`
+- Update policy: append or carefully merge new instructions; never replace, overwrite, truncate, or discard the existing file.
+- Conflict policy: preserve existing requirements and resolve conflicts explicitly without duplicating equivalent sections.
+- Analysis repository name: `analysis/` regardless of the software or programming language used.
 
 ## Folder Map
 
@@ -54,6 +61,8 @@ Describe the documented or automated process that promotes manuscript-ready figu
 - Human collaborator folder: `project_history/[Person_Name]/`
 - Filename convention: `YYYY-MM-DD by Agent.md`
 - Policy: one active history for the whole project; append after every substantive AI task.
+- Privacy: keep history private by default; do not copy sensitive content into it without authorization.
+- Tools without file access: manually export or copy a concise substantive-task record here.
 - Full recording instructions: read the current AI Collaboration Guide before substantive work.
 
 ## Other Materials

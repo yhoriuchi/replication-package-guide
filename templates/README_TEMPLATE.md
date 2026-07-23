@@ -43,7 +43,7 @@ Choose the tree that matches the project structure and delete the other one.
 Use this structure when the project is small enough that data, scripts, figures, tables, and outputs can live in one project root.
 
 ```text
-r/
+analysis/
 |-- project.Rproj
 |-- .gitignore
 |-- master.R
@@ -84,7 +84,7 @@ r/
 Use this structure when data construction is complex, conceptually separate from analysis, or depends on restricted/non-reproducible upstream sources.
 
 ```text
-r/
+analysis/
 |-- project.Rproj
 |-- .gitignore
 |-- master.R
@@ -212,7 +212,7 @@ List public analysis scripts, helper files, or generated outputs when useful. Ke
 
 ## Paper Source And Consistency Checks
 
-State whether the paper source files were available during preparation. If the paper was written in Overleaf and synced through Dropbox, note whether the replication package was prepared inside or alongside the synced Overleaf folder.
+State whether the paper source files were available during preparation. If the paper was written in Overleaf and synchronized through GitHub or an approved storage service, note whether the replication package was prepared inside or alongside that synchronized workspace.
 
 Paper source status:
 
