@@ -30,7 +30,8 @@ The user should remove clearly obsolete files when possible, label exploratory s
 11. Build a complete paper-order figure/table crosswalk.
 12. Check paper-replication consistency when paper source files are available.
 13. Document restricted data, manual steps, and remaining risks.
-14. Report exactly what changed, what was verified, and what could not be verified.
+14. Generate `MANIFEST-SHA256.txt` after the final successful run and final cleanup.
+15. Report exactly what changed, what was verified, and what could not be verified.
 
 ## What the Agent Must Avoid
 
@@ -57,7 +58,9 @@ The user should remove clearly obsolete files when possible, label exploratory s
 10. Check paper-replication consistency for figures, tables, and in-text numerical claims.
 11. Add embedded previews only if they make the README easier to inspect.
 12. Re-run the package after documentation changes.
-13. Report any files that cannot be reproduced because of restricted data or missing inputs.
+13. Complete final cleanup and generate `MANIFEST-SHA256.txt`.
+14. Verify the manifest before release.
+15. Report any files that cannot be reproduced because of restricted data or missing inputs.
 
 ## Final Readiness Report
 
@@ -71,6 +74,7 @@ Include:
 - whether `master.R` ran successfully;
 - whether every public script produced a matching log;
 - whether `session_info.log` was created from a successful full run;
+- whether `MANIFEST-SHA256.txt` covers and verifies every released file other than itself;
 - whether the README folder tree, data-source notes, and figure/table crosswalk match the package;
 - whether manuscript and appendix figures, tables, and in-text numerical claims were checked against logs, outputs, and scripts when paper source files were available;
 - restricted-data limits, manual steps, missing inputs, warnings, failures, or remaining mismatches;
@@ -86,6 +90,7 @@ The package should satisfy these requirements:
 - Exactly one authoritative `README.md` that explains the package, the workflow, the required software, and every figure/table output.
 - One log file for each script that is part of the public replication path.
 - One `session_info.log` file from a successful full run.
+- One `MANIFEST-SHA256.txt` checksum inventory generated from the final release contents.
 - Relative paths only. Scripts must run from the project root.
 - No hidden manual steps. If a step cannot be automated, document why and say exactly what file is affected.
 - Raw or received data should be treated as read-only.
@@ -125,6 +130,7 @@ r/
 |-- master.R
 |-- project.Rproj
 |-- session_info.log
+|-- MANIFEST-SHA256.txt
 |
 |-- data/
 |   `-- public input data
@@ -167,6 +173,7 @@ r/
 |-- master.R
 |-- project.Rproj
 |-- session_info.log
+|-- MANIFEST-SHA256.txt
 |
 |-- build/
 |   |-- data/
@@ -582,6 +589,39 @@ For stronger reproducibility, also consider:
 
 Do not assume the user has the same local folder structure. Avoid `setwd()` to personal paths.
 
+## Release Integrity Manifest
+
+Every final replication package should include `MANIFEST-SHA256.txt` at the package root. This file is a checksum inventory for release integrity and auditing. It is not required to run the replication scripts and should not be sourced by `master.R`.
+
+Generate the manifest only after the final successful replication run, documentation edits, and cleanup. It should:
+
+- list every file included in the public release except `MANIFEST-SHA256.txt` itself;
+- use paths relative to the package root;
+- use one SHA-256 checksum and file path per line;
+- use deterministic path ordering;
+- exclude files and directories that are not part of the public release, such as `.git/`, local caches, and operating-system metadata;
+- be regenerated whenever any released file changes.
+
+On macOS or Linux, generate it from the package root with an equivalent of:
+
+```sh
+find . -type f \
+  ! -path './MANIFEST-SHA256.txt' \
+  ! -path './.git/*' \
+  -print |
+  LC_ALL=C sort |
+  while IFS= read -r file; do shasum -a 256 "$file"; done \
+  > MANIFEST-SHA256.txt
+```
+
+Verify it from the package root with:
+
+```sh
+shasum -a 256 -c MANIFEST-SHA256.txt
+```
+
+Use a platform-appropriate SHA-256 tool when `shasum` is unavailable, while preserving the same relative-path inventory. Record the generation and verification commands in the release notes or final readiness report. If the archive is modified after manifest generation, regenerate and re-verify the manifest.
+
 ## Quality Checklist
 
 Before releasing a replication package, verify:
@@ -590,6 +630,9 @@ Before releasing a replication package, verify:
 - All scripts use relative paths from the project root.
 - Every public script creates a matching log file.
 - `session_info.log` exists and comes from a successful full run.
+- `MANIFEST-SHA256.txt` was generated after the final run and cleanup.
+- Every released file other than `MANIFEST-SHA256.txt` appears exactly once in the manifest.
+- All checksums in `MANIFEST-SHA256.txt` verify successfully.
 - The README folder tree matches the actual package.
 - The README crosswalk lists every figure and table in paper order.
 - Every figure/table has an output path, script path, and log path, or an explicit `No output file`, `No code`, or `Not applicable` entry.
@@ -610,6 +653,7 @@ README.md
 .gitignore
 master.R
 session_info.log
+MANIFEST-SHA256.txt
 data/
 documents/
 scripts/
@@ -627,6 +671,7 @@ README.md
 .gitignore
 master.R
 session_info.log
+MANIFEST-SHA256.txt
 build/
 analyze/
 ```
