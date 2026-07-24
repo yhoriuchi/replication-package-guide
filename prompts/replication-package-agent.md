@@ -3,7 +3,7 @@
 Use this prompt when starting a new replication-package audit or repair task. Replace the bracketed fields before giving it to any AI assistant.
 
 ```text
-Please prepare, audit, or repair this replication package using the Replication Package Guide instructions.
+Please prepare, audit, or repair this replication package using the AI-Assisted Research Project Management and Replication Guide instructions.
 
 Before changing files, read both of the following in full:
 1. The target journal's most up-to-date official replication-package instructions. Treat those current journal requirements as controlling when they conflict with the general replication guide.
@@ -15,7 +15,7 @@ If the root already contains `AGENTS.md`, preserve it and append or carefully me
 
 Project context:
 - Common research-project parent: [path]
-- Synchronized storage service and restrictions: [Dropbox / Google Drive / iCloud / another approved service, or none; list any prohibited data]
+- Synchronized storage service and restrictions: [Dropbox / Google Drive / iCloud / SharePoint / Box / another approved service, or none; list any prohibited data]
 - Root project instructions: [path to AGENTS.md]
 - Root project map: [path to README.md]
 - Root project history: [path to project_history/]
@@ -36,11 +36,11 @@ Required outcome:
 1. Maintain one private active project history at the common root and append a detailed, task-specific entry after every substantive task. If you cannot write local files, return a concise record for the user to save there.
 2. Preserve substantive analysis choices unless a change is needed for reproducibility, logging, paths, or documentation.
 3. Use relative paths from the public package root.
-4. Create or repair one public entry point named master.R.
+4. Create or repair one software-appropriate public entry point; use master.R for an R project.
 5. Create or repair one authoritative public-package README.md.
 6. Add or repair one detailed log file for every public script.
 7. Run the public replication path when feasible.
-8. Record session_info.log from a successful full run.
+8. Record a software-environment file from a successful full run; use session_info.log for an R project.
 9. Build a complete paper-order figure/table crosswalk.
 10. Check paper-replication consistency when paper source files are available.
 11. Document restricted data, manual steps, and remaining risks.

@@ -1,6 +1,6 @@
 # AI-Assisted Research Project Management and Replication Guide
 
-This repository contains the public GitHub Pages guide and lightweight templates for managing an AI-assisted research project from Day 1 and preparing a high-quality social science replication package.
+This repository contains the public GitHub Pages guide and lightweight templates for managing an AI-assisted research project from Day 1 and preparing a high-quality replication package.
 
 The publishable guide is in [`index.md`](index.md). The copy button on the site embeds [`AGENTS.md`](AGENTS.md), which contains tool-neutral plain-text instructions for AI coding assistants.
 
@@ -16,7 +16,7 @@ The publishable guide is in [`index.md`](index.md). The copy button on the site 
 - [`templates/build-analyze/`](templates/build-analyze/): larger structure with separate `build/` and `analyze/` stages.
 - [`rules.dropboxignore`](rules.dropboxignore): Dropbox-root ignore rules for R/RStudio local and session files.
 
-The guide recommends one common AI workspace from Day 1, with root `AGENTS.md`, root `README.md`, one `project_history/`, a compilation-focused `manuscript/` Git repository, and a private, software-neutral `analysis/` Git repository. New instructions must be appended or merged into an existing `AGENTS.md`, never substituted for it. Dropbox, Google Drive, iCloud, or another institutionally approved storage service can synchronize the authorized workspace, while Git tracks only the two child repositories. The public replication archive and journal production files remain separately staged artifacts.
+The guide recommends one common AI workspace from Day 1, with root `AGENTS.md`, root `README.md`, one `project_history/`, a compilation-focused `manuscript/` Git repository, and a private, software-neutral `analysis/` Git repository. New instructions must be appended or merged into an existing `AGENTS.md`, never substituted for it. Dropbox, Google Drive, iCloud, SharePoint, Box, or another institutionally approved storage service can synchronize the authorized workspace, while Git tracks only the two child repositories. The public replication archive and journal production files remain separately staged artifacts.
 
 ## Public Site
 
@@ -24,7 +24,7 @@ The guide is designed to publish at:
 
 <https://yhoriuchi.github.io/replication-package-guide/>
 
-The site is intentionally a single practical homepage rather than a multi-page documentation site. Keep `index.md` as the Pages entry point and `AGENTS.md` as the source copied by the primary button.
+The site is intentionally a single two-step homepage rather than a multi-page manual. The top of `index.md` gives users one copy action for project setup and one for replication-package preparation; optional explanatory detail appears below. `AGENTS.md` remains the complete operational source copied with both prompts.
 
 ## Suggested Use
 
@@ -36,4 +36,4 @@ Give an agent:
 4. Any source-data restrictions.
 5. The instructions copied from the public guide.
 
-Require the agent to return a runnable package with `master.R`, per-script logs, `session_info.log`, one authoritative public-package `README.md`, a complete figure/table crosswalk, a verified `MANIFEST-SHA256.txt`, and an extracted-archive test. Keep the readiness report private unless the journal requests it.
+Require the agent to return a runnable package with one software-appropriate public entry point, per-script logs, an environment record, one authoritative public-package `README.md`, a complete figure/table crosswalk, a verified `MANIFEST-SHA256.txt`, and an extracted-archive test. For R, the provided templates use `master.R` and `session_info.log`. Keep the readiness report private unless the journal requests it.

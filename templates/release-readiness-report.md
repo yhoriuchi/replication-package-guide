@@ -32,7 +32,7 @@ Use this template for the final report after preparing, auditing, or repairing a
 - Public entry point:
 - README status:
 - Script logs status:
-- `session_info.log` status:
+- Software-environment record status:
 - Figure/table crosswalk status:
 - Paper consistency status:
 - Restricted-data status:
@@ -47,8 +47,8 @@ Use this template for the final report after preparing, auditing, or repairing a
 
 - Command:
 
-```r
-source("master.R")
+```text
+[command that runs the public entry point]
 ```
 
 - Result:

@@ -9,7 +9,7 @@ This is the common local workspace for the manuscript, analysis, AI collaboratio
 - Target journal: [Journal or not yet selected]
 - Journal instructions: [Official URL or local file]
 - Instructions accessed: [Date]
-- Synchronized storage service: [Dropbox / Google Drive / iCloud / another institutionally approved service]
+- Synchronized storage service: [Dropbox / Google Drive / iCloud / SharePoint / Box / another institutionally approved service]
 - Cloud-data restrictions: [Any files that must remain outside the sync service]
 - AI Collaboration Guide: `https://yhoriuchi.github.io/ai-collaboration-guide/`
 - AI Collaboration Guide accessed: [Date]
@@ -63,7 +63,7 @@ Describe the documented or automated process that promotes manuscript-ready figu
 - Policy: one active history for the whole project; append after every substantive AI task.
 - Privacy: keep history private by default; do not copy sensitive content into it without authorization.
 - Tools without file access: manually export or copy a concise substantive-task record here.
-- Full recording instructions: read the current AI Collaboration Guide before substantive work.
+- Full recording instructions: the AI assistant must read the current AI Collaboration Guide before substantive work; users may read it for context but need not study the operational details.
 
 ## Other Materials
 

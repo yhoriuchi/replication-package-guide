@@ -17,431 +17,162 @@ title: AI-Assisted Research Project Management and Replication Guide
 
 ![Page views](https://hits.sh/yhoriuchi.github.io/replication-package-guide.svg?label=page%20views)
 
-A practical, software-neutral guide for organizing an AI-assisted research project from Day 1 and developing a high-quality replication package before publication.
-
-<div class="hero-actions" markdown="1">
-<button type="button" class="button button-primary" id="copy-agent-instructions">Copy Agent Instructions</button>
-<span class="copy-status" id="copy-agent-instructions-status" aria-live="polite"></span>
-</div>
+Use AI to organize a research project from Day 1 and to build its replication package before publication. You only need to choose the step that matches your project today.
 
 </section>
 
-## How to Use This Guide
+<section class="steps-grid" aria-label="Two-step guide" markdown="1">
 
-1. Find the most up-to-date replication-package, data, and code instructions issued by the journal to which the manuscript will be submitted.
-2. Tell the agent to read those journal instructions in full before inspecting or changing the package. Provide the official URL or files and the date accessed.
-3. Read the current [AI Collaboration Guide](https://yhoriuchi.github.io/ai-collaboration-guide/) and explicitly tell the AI agent to read it in full. It is the authoritative source for recording AI usage and maintaining `project_history/`.
-4. Click **Copy Agent Instructions** and append or merge the copied instructions into the root `AGENTS.md`. Never replace or overwrite an existing `AGENTS.md`; preserve all existing instructions and reconcile any conflict explicitly. Give the resulting instructions to the AI assistant before it changes files. If the tool cannot read local files, provide the relevant instructions in its chat and manually save its substantive work record under `project_history/`.
-5. Give the agent the replication package root and, when available, the paper source files, manuscript-ready figures, manuscript-ready tables, appendices, bibliography files, and source-data notes.
-6. Open one AI workspace at the common research-project root so a file-capable assistant can see the root instructions, project history, manuscript repository, and analysis repository together.
-7. Decide whether the public package should use the compact structure or the build/analyze structure.
-8. Require one public entry point, script-specific logs, `session_info.log`, one authoritative public-package `README.md`, and a complete figure/table crosswalk.
-9. Ask the agent to run the final audit on an extracted copy of the release ZIP and return a readiness report covering remaining mismatches, restricted-data limits, and manual steps.
+<article class="step-card" markdown="1">
+<div class="step-number">Step 1</div>
 
-## Check the Journal's Current Instructions First
+## Set Up the Research Project
 
-This guide is a general workflow, not a substitute for a journal's submission requirements. Requirements change. At the start of every replication-package task, the user should direct the AI agent to locate or open the journal's most up-to-date official replication-package, data-availability, code, disclosure, archive, and file-format instructions and read them in full.
+**When:** At the beginning of a project—or whenever an existing project needs a clear structure.
 
-Record the official source URL or supplied file, the date accessed, and any journal-specific requirements. When the journal's current instructions conflict with this guide, follow the journal. If no target journal has been selected, say so explicitly and repeat this check once the venue is known. Do not rely on remembered requirements, an earlier submission's checklist, or an undated local copy.
+**Do one thing:** Open the project's common root folder in your AI assistant, click the button below, and paste the copied instruction.
 
-## Use ReproAI Before Submission
+The AI will inspect the folder, preserve existing work, and help establish the recommended project environment.
 
-This guide and [ReproAI](https://reproai.org/) serve complementary purposes. This guide is an authoring framework: it helps researchers build traceability and reproducibility into a project from the outset through a clear structure, one public entry point, script-level logs, data-restriction documentation, and a paper-to-output crosswalk. ReproAI, developed by Yiqing Xu and Leo Yang Yang, is an author-facing diagnostic tool for existing replication packages, with an emphasis on pre-submission checks, venue compliance, smoke testing, and identifying common reproducibility problems.
+<button type="button" class="button button-primary copy-instruction" data-prompt="step-1-prompt">Copy Step 1 Instruction</button>
+<span class="copy-status" aria-live="polite"></span>
+</article>
 
-After preparing a package with this guide, I encourage authors to run ReproAI before journal or repository submission. It provides a valuable final preflight check and may identify structural, environment, or venue-specific issues that remain. The two projects are independent, but they fit naturally into the same workflow: build a transparent package from the beginning, then use ReproAI near submission to diagnose and resolve remaining problems.
+<article class="step-card" markdown="1">
+<div class="step-number">Step 2</div>
 
-<section class="summary-grid" markdown="1">
+## Build the Replication Package
 
-<div class="summary-card" markdown="1">
+**When:** As soon as analyses begin producing results intended for the manuscript. Do not wait for acceptance or the submission deadline.
 
-## What the Agent and User Must Do
+**Do one thing:** Open the same project root, click the button below, and paste the copied instruction into your AI assistant.
 
-- Identify the public replication path before reorganizing files.
-- Preserve the author's substantive analysis choices.
-- Use relative paths and one reproducibility entry point.
-- Keep one authoritative `README.md` within each documented scope; the public package must have exactly one.
-- Record one log per public script and one `session_info.log`.
-- Trace every reported figure, table, and number to code, output, or documentation.
-- Check the paper source against replication outputs when source files are available.
+The AI will inspect the research workflow and help build, document, run, and validate the public replication package.
 
-</div>
-
-<div class="summary-card" markdown="1">
-
-## What to Avoid
-
-- Absolute personal paths.
-- Multiple competing README files.
-- Hidden manual steps.
-- Unlogged public scripts.
-- Stale figures, tables, or copied manuscript-ready files.
-- Deleting raw data, manuscript source, or restricted-data documentation without approval.
-- Treating generated previews as a substitute for a crosswalk.
-
-</div>
+<button type="button" class="button button-primary copy-instruction" data-prompt="step-2-prompt">Copy Step 2 Instruction</button>
+<span class="copy-status" aria-live="polite"></span>
+</article>
 
 </section>
 
-## Core Workflow
+## Two Guides, Two Jobs
 
-<ol class="workflow">
-  <li><strong>Open the single AI workspace.</strong> Select the common research-project root containing <code>AGENTS.md</code>, <code>README.md</code>, <code>project_history/</code>, <code>manuscript/</code>, and <code>analysis/</code>.</li>
-  <li><strong>Identify the four artifacts.</strong> Locate the private research workspace, manuscript repository, public replication package, and journal production/submission files. Do not confuse their roles.</li>
-  <li><strong>Inspect the project.</strong> Identify scripts, inputs, outputs, figures, tables, logs, helper functions, documents, and visible paper source files before editing.</li>
-  <li><strong>Inspect the paper source.</strong> When LaTeX, Overleaf, appendix, figure, table, or bibliography files are available, treat them as part of the working context.</li>
-  <li><strong>Choose the structure.</strong> Use the compact structure for direct public inputs and modest workflows; use build/analyze when data construction is complex, restricted, or conceptually separate.</li>
-  <li><strong>Organize without losing context.</strong> Move or copy files into the chosen structure only after understanding what produces the reported results.</li>
-  <li><strong>Create the public entry point.</strong> Add or repair <code>master.R</code> so the public replication path can run from a clean R session.</li>
-  <li><strong>Add script logs.</strong> Every public script should create a matching log with start/end time, sample sizes, reported statistics, and warnings.</li>
-  <li><strong>Run every public path.</strong> Execute every public script from a fresh session, plus optional reconstruction and authorized raw-data build paths when available.</li>
-  <li><strong>Record the environment.</strong> Write <code>session_info.log</code> and summarize the computing environment in the README.</li>
-  <li><strong>Build the crosswalk.</strong> Map each manuscript and appendix figure/table to output files, scripts, logs, LaTeX labels, and notes.</li>
-  <li><strong>Check reported claims.</strong> Compare every table numerically, every figure visually or pixel by pixel, and every in-text numerical claim against logs, generated outputs, and scripts.</li>
-  <li><strong>Document restrictions.</strong> Explain any non-redistributable source, public replacement, and limits on rebuilding.</li>
-  <li><strong>Audit the release archive.</strong> Rebuild the SHA-256 manifest, create the ZIP, extract it into a new temporary directory, verify the manifest, and run the extracted package without outside files.</li>
-  <li><strong>Report readiness.</strong> Return readiness status, remaining risks, and exact files that still need attention. Keep the internal report outside the public package unless the journal requests it.</li>
-</ol>
+- The [AI Collaboration Guide](https://yhoriuchi.github.io/ai-collaboration-guide/) provides the universal standard for recording substantive AI use in any kind of project and may install that convention in an AI tool's global instruction location.
+- This guide applies that standard to research-project organization and replication-package preparation.
 
-## What This Repository Provides
+The AI—not the user—is expected to read and apply the detailed instructions. There is **one and only one research-guide [`AGENTS.md`](https://github.com/yhoriuchi/replication-package-guide/blob/main/AGENTS.md) for both steps**. Each button copies that same research-specific operational standard with a different short instruction in front: Step 1 activates project-setup mode, and Step 2 activates replication-package mode.
 
-<section class="resource-grid" markdown="1">
+The universal/global instructions and the research-project instructions have different scopes; they are not competing files. Each research project maintains one canonical root `AGENTS.md`. If the AI Collaboration recording convention is already installed globally or present in the root file, the AI preserves it and merges only missing research-specific requirements without creating duplicate recording sections.
 
-<div class="resource-card" markdown="1">
+## Three Rules That Always Apply
 
-### Instruction Source
+1. **Preserve existing instructions.** Append or carefully merge into `AGENTS.md`; never replace, overwrite, truncate, or discard it.
+2. **Use a software-neutral analysis repository.** Name it `analysis/`, whether the project uses R, Python, Stata, Julia, MATLAB, multiple languages, or another toolchain.
+3. **Follow the journal.** During Step 2, the target journal's most up-to-date official requirements take priority over this general guide.
 
-[`AGENTS.md`](https://github.com/yhoriuchi/replication-package-guide/blob/main/AGENTS.md) contains the instructions copied by the button above.
+## What Happens in Step 1?
 
-</div>
-
-<div class="resource-card" markdown="1">
-
-### README Template
-
-[`templates/README_TEMPLATE.md`](https://github.com/yhoriuchi/replication-package-guide/blob/main/templates/README_TEMPLATE.md) is a copyable starting point for the public package's one authoritative `README.md`.
-
-</div>
-
-<div class="resource-card" markdown="1">
-
-### Project-Root README Template
-
-[`templates/PROJECT_ROOT_README_TEMPLATE.md`](https://github.com/yhoriuchi/replication-package-guide/blob/main/templates/PROJECT_ROOT_README_TEMPLATE.md) documents the common AI workspace, its two repositories, project history, and optional non-core files.
-
-</div>
-
-<div class="resource-card" markdown="1">
-
-### Agent Prompt
-
-[`prompts/replication-package-agent.md`](https://github.com/yhoriuchi/replication-package-guide/blob/main/prompts/replication-package-agent.md) is a short starter prompt for giving the agent project-specific paths and constraints.
-
-</div>
-
-<div class="resource-card" markdown="1">
-
-### Readiness Report
-
-[`templates/release-readiness-report.md`](https://github.com/yhoriuchi/replication-package-guide/blob/main/templates/release-readiness-report.md) is a structured final-report template for documenting what was changed, verified, and left unresolved.
-
-</div>
-
-<div class="resource-card" markdown="1">
-
-### Compact Template
-
-[`templates/compact/`](https://github.com/yhoriuchi/replication-package-guide/tree/main/templates/compact) is the starter structure for small and medium projects.
-
-</div>
-
-<div class="resource-card" markdown="1">
-
-### Build/Analyze Template
-
-[`templates/build-analyze/`](https://github.com/yhoriuchi/replication-package-guide/tree/main/templates/build-analyze) is the starter structure for larger projects with a separate data-build stage.
-
-</div>
-
-</section>
-
-The research-project analysis repository is always named `analysis/`, not `r/`, because researchers may use R, Python, Stata, Julia, MATLAB, multiple languages, or another toolchain. The examples use `master.R`, R scripts, and `session_info.log` as defaults, but the underlying standard is software-neutral. For a non-R or mixed-language project, use an analogous single entry point, logs, software-environment record, and figure/table crosswalk while retaining the `analysis/` repository name.
-
-## Start on Day 1
-
-Use this architecture when the research project begins, not only when a journal requests a replication package. Early structure makes later release preparation an audit and promotion exercise instead of a reconstruction exercise.
-
-On Day 1:
-
-1. Create the common research-project root, its private project-map `README.md`, the `manuscript/` and `analysis/` child repositories, one root `project_history/`, and optional `others/`. Create `AGENTS.md` only when none exists; otherwise append or merge the new project instructions without deleting existing content.
-2. Read the current AI Collaboration Guide and make every AI assistant used on the project follow it. Use the same root instructions and history convention regardless of the assistant or interface.
-3. Classify each expected data source before collection or receipt: ownership, license, confidentiality, redistributability, approved storage, expected secure path, and scripts allowed to use it.
-4. Record the software environment, random seeds, source URLs, access dates, survey instruments, ethics/IRB documentation, codebooks, and important analytical decisions as they arise.
-5. Keep raw or received data read-only. Build analysis-ready files with scripts, use relative paths within repositories and the future public package, and document how generated results are promoted into the manuscript.
-6. Start script-level logging and the paper-to-output crosswalk as soon as reported results exist. Do not wait until submission.
-7. Once a target journal is selected, read its current official requirements in full and update the project map and release plan. Repeat the check at submission because requirements can change.
-
-For an existing project, first inspect before reorganizing. Remove or archive clearly obsolete files only after their role is understood, label exploratory scripts, identify what generates reported results, gather available paper source, and determine what can legally be shared. The author remains responsible for deciding which data, scripts, files, and results belong in the replication record.
-
-When staging a public package:
-
-1. Choose the compact or build/analyze structure.
-2. Copy the appropriate template into the staging area, or use `templates/README_TEMPLATE.md` when repairing an existing package.
-3. Replace every placeholder and retain exactly one authoritative public-package `README.md`.
-4. Complete the paper-order figure/table crosswalk.
-5. Run the public entry point from a fresh session and confirm that the environment record and one matching log per public script were created.
-6. Complete the manifest, extracted-archive test, journal-specific checks, and final readiness report.
-
-## Separate the Research, Manuscript, Release, and Submission Artifacts
-
-A research project normally produces four related but different artifacts:
-
-1. **Private research/build workspace.** The complete working environment for data construction, analysis, validation, and internal documentation.
-2. **Manuscript and Overleaf repository.** Only files needed to compile and maintain the paper and active supplement.
-3. **Public replication package.** A deliberately staged, de-identified, self-contained release that reproduces every published result.
-4. **Journal production and submission files.** Submission snapshots, proofs, forms, cover letters, and production-specific exports.
-
-Do not treat these as one folder. In particular, internal archives, complete replication staging directories, raw data, and submission snapshots do not belong in the manuscript repository or public package.
-
-## One AI Workspace with Two Git Repositories
-
-Create one local research-project folder and use that folder as the common AI workspace. File-capable assistants should open or receive access to this root so they can read the same instructions and inspect both child repositories:
+Step 1 creates one durable workspace for the whole research project:
 
 ```text
 Research-Project/
-|-- AGENTS.md                  # instructions for all work under this root
-|-- README.md                  # private project map and workflow
+|-- AGENTS.md                  # shared instructions
+|-- README.md                  # private project map
 |-- manuscript/                # Git repository 1
 |-- analysis/                  # Git repository 2
-|-- project_history/           # one AI-work history for the whole project
+|-- project_history/
 |   `-- Person_Name/
 |       `-- YYYY-MM-DD by Agent.md
-`-- others/                    # optional, non-core materials and archives
+`-- others/                    # optional
 ```
 
-The common parent is the **single AI workspace**, not a third research repository. Unless there is a deliberate reason to version it, do not initialize another Git repository around the two child repositories. This avoids nested-repository confusion while allowing one agent session to inspect both sides of the project.
+### The AI inspects before organizing
 
-Place the common project root inside an institutionally approved synchronized storage location—such as Dropbox, Google Drive, iCloud, or another approved service—when permitted by the project's data agreements. The service can synchronize the root instructions, project history, both repositories, optional materials, and permitted local data across the user's computers. Cloud synchronization and Git serve different purposes: synchronization covers the whole authorized working folder, while Git versions only the files tracked inside `manuscript/` and `analysis/`.
+The AI first identifies existing files, repositories, instructions, data locations, and synchronization arrangements. It does not silently delete, move, or overwrite substantive work.
 
-Because the common parent is not a wrapper Git repository, users do not need a project-root `.gitignore` merely to keep data out of a nonexistent parent repository. Permitted data stored under the synchronized root can remain outside Git. The analysis repository must still ignore any local, restricted, licensed, or otherwise untracked datasets within its own Git scope. If a data-use agreement forbids the selected service or personal-cloud storage, keep those data in the authorized secure location and document the expected path instead. Before a clean run or release audit, confirm synchronization is complete and make required files available locally; online-only placeholders are not valid replication inputs. Synchronization is not a substitute for version control or backup, and collaborators should resolve conflict copies before release.
+### The AI preserves the instruction history
 
-Keep exactly one canonical root `AGENTS.md`. It is the tool-neutral instruction source for the whole project and should define repository boundaries, data restrictions, synchronization rules, the analysis-to-manuscript promotion workflow, public-package requirements, and the root project-history destination. Always append or carefully merge new instructions into an existing file; never replace or overwrite it. Preserve existing requirements, resolve conflicts explicitly, and avoid duplicate sections. Each assistant should read this file directly or receive the same contents through its supported instruction mechanism; do not maintain divergent agent-specific policies.
+If `AGENTS.md` already exists, the AI appends or carefully merges the new instructions. It never replaces, overwrites, truncates, or discards the existing file. The resulting root file governs both repositories and records project-specific boundaries, data restrictions, synchronization rules, and output-promotion procedures.
 
-Keep one root `README.md` as the private project map. It should identify the project, authors, two repositories and remotes, Overleaf synchronization status, secure local-data locations, public-package staging location, promotion workflow, optional folders, and current reproducibility status. This root README does not replace the analysis repository README or the public replication package README; each documents a different scope.
+### The AI separates synchronization from Git
 
-The **manuscript repository** should contain only LaTeX and bibliography sources, manuscript tables and figures, active supplementary-material sources, small compile-time assets, and manuscript-specific documentation. It can connect to Overleaf through GitHub integration. Exclude raw data, R intermediate files, complete replication-package staging, archives, and submission snapshots.
+The common root may live in Dropbox, Google Drive, iCloud, SharePoint, Box, or another institutionally approved synchronized location. Git versions files inside `manuscript/` and `analysis/`; the synchronized parent is not normally a third Git repository. Restricted data stay outside Git and outside any storage service prohibited by consent, license, IRB, data-use agreement, or institutional policy.
 
-The **analysis repository** should normally remain private during active research. It should contain R scripts and functions, data-construction and analysis code, codebooks, replication-package staging, validation scripts, generated results, and internal project documentation. Restricted raw data must remain outside Git even when this repository is private. Ignore those files and document their expected secure local paths.
+### The AI establishes one project history
 
-Before editing, the agent should independently check the branch, commit, remote, dirty state, synchronization, and review conventions of both repositories. A clean manuscript repository does not imply a clean analysis repository.
+The AI follows the current [AI Collaboration Guide](https://yhoriuchi.github.io/ai-collaboration-guide/) and maintains one private `project_history/` at the common root. It records substantive AI work, exact available model/runtime metadata, files and sources used, changes, verification, limitations, and unresolved questions.
 
-Generated results may be copied from `analysis/` into `manuscript/` only through a documented promotion step. The crosswalk should record both the generated package output and the manuscript-ready file, especially when a table is formatted or edited after generation.
+### The two repositories have different jobs
 
-The optional `others/` folder may hold presentations, DAG source files, reading materials, archived snapshots, submission materials, and miscellaneous project records that do not belong in either repository. Organize it deliberately. Do not let it become an undocumented substitute for the analysis workflow or the public replication package.
+- `manuscript/` contains compilation-relevant paper and supplement sources and may connect to Overleaf through GitHub.
+- `analysis/` contains the software-neutral research workflow: data construction, analysis, validation, generated results, codebooks, and future public-package staging.
 
-## One Root Project History
+Generated figures and tables move from `analysis/` to `manuscript/` through a documented promotion step.
 
-Maintain one and only one active `project_history/` directory at the common research-project root. Do not create separate active histories inside `manuscript/`, `analysis/`, an Overleaf mirror, or `others/`.
+## What Happens in Step 2?
 
-The full project-history and AI-usage recording standard is maintained in the [AI Collaboration Guide](https://yhoriuchi.github.io/ai-collaboration-guide/). Both the user and the AI agent should read the current page in full before substantive work begins. The agent should record the URL and access date. The summary here is provided for convenience and does not replace the full guide.
+Step 2 begins while the paper is still being developed, once analyses produce results intended for the manuscript.
 
-Use one subfolder per human collaborator, with spaces converted to underscores:
+### The AI reads the controlling requirements
 
-```text
-project_history/
-|-- Yusaku_Horiuchi/
-|   |-- 2026-07-23 by Codex.md
-|   `-- 2026-07-23 by Claude.md
-`-- Another_Collaborator/
-    `-- 2026-07-23 by Codex.md
-```
+Before changing the package, the AI reads:
 
-Use the human collaborator's name for the subfolder and the AI agent/tool name in the filename. Use the local date and time zone. Append new entries to an existing same-day file; do not overwrite earlier entries.
+1. the root `AGENTS.md` and `README.md`;
+2. the current AI Collaboration Guide; and
+3. the target journal's most up-to-date official replication-package, data, code, disclosure, archive, and file-format instructions.
 
-Every appended task or follow-up should carry its own task-specific model and runtime metadata; do not assume that metadata from an earlier entry still applies. If an assistant cannot write local files, the user should export or copy a concise record into the correct history file. Keep project history private by default and out of the manuscript repository, public replication package, and journal submission unless disclosure is specifically required. Do not record confidential, proprietary, embargoed, personally identifying, or otherwise sensitive content unless the project is authorized to retain it there. Project history supplements rather than replaces journal disclosure statements, data-availability statements, preregistrations, ethics documentation, or version control.
+The journal's current requirements control when they conflict with this general guide.
 
-At the end of every substantive task—including inspection, diagnosis, decisions, verification, or work that changes no project files—record:
+### The AI identifies four distinct artifacts
 
-- date, time, and time zone;
-- AI surface, task/thread description, working directory, and human collaborator;
-- exact model display name, family, slug, reasoning label, and raw/config value when exposed;
-- verbosity, speed/service tier, collaboration mode, sandbox/permissions, approval policy, and network/web-access mode;
-- active skills, plugins, connectors, browser/computer-use tools, shell, OS, and relevant runtime versions;
-- both repositories' branches, commits, remotes, and dirty-state summaries;
-- user goal, instructions, constraints, journal requirements, and source URLs or access dates;
-- data, scripts, manuscript files, images, and other inputs inspected;
-- commands and external sources used;
-- files created, changed, removed, relocated, staged, committed, pushed, or otherwise affected;
-- tests, compilation, checks, rendered-page review, checksum results, and other verification evidence;
-- outputs and deliverables, unresolved risks, assumptions, open questions, and next steps.
+The AI keeps the private research workspace, manuscript repository, public replication package, and journal production/submission files conceptually and physically distinct.
 
-Write `Unknown` or `Not exposed in this session` when a metadata value is genuinely unavailable; do not silently omit it or replace a known specific model with a generic label. Keep project-history files outside both Git repositories unless the project deliberately decides to version them. Exclude `.Rhistory`, `.DS_Store`, caches, and other session debris from `project_history/`.
+### The AI builds the public replication path
 
-## Overleaf Size, Scope, and Privacy
+Depending on project complexity, the AI uses a compact package or separates data building from analysis. The public package should have:
 
-Overleaf's 50 MB limit concerns an individual uploaded file, not the total size of the project. That does not make Overleaf an appropriate research-data store. Keep an Overleaf-connected repository limited to compilation-relevant materials.
+- one software-appropriate entry point;
+- one authoritative `README.md`;
+- relative paths;
+- one detailed log per public script;
+- a software-environment record;
+- analysis-ready public data and codebooks when legally permitted;
+- clear restricted-data documentation; and
+- a paper-order crosswalk connecting every figure and table to output, code, and logs.
 
-Never store raw or restricted data in an Overleaf-synchronized folder. Beyond file size, the important concerns are privacy, collaborator access, synchronization reliability, and project bloat. Keep restricted inputs in an authorized secure location outside both Git repositories and record the expected path in private documentation.
+R projects may use `master.R` and `session_info.log`; Python, Stata, Julia, MATLAB, mixed-language, and other projects use equivalent entry points and environment records.
 
-Keep local and session files out of Git and, when supported, out of synchronization. Version-control exclusions and storage-service exclusions are separate mechanisms:
+### Two ways to structure `analysis/`
 
-- `rules.dropboxignore` is an optional Dropbox-specific example that belongs at the applicable Dropbox root.
-- For Google Drive, iCloud, or another service, use that service's supported exclusion or selective-sync controls; if it offers none, keep prohibited files outside the synchronized root.
-- `.gitignore` belongs inside each Git repository and controls version tracking.
-
-For Dropbox, adapt this repository's [`rules.dropboxignore`](rules.dropboxignore). For every platform, add appropriate rules to each repository's `.gitignore`. Append to existing files rather than replacing project-specific rules.
-
-Suggested base patterns for a supported storage-service exclusion file and project-level `.gitignore` files:
-
-```text
-# R and RStudio local/session files
-**/.Rproj.user/
-**/.Rhistory
-**/.RData
-**/.Ruserdata
-
-# macOS and temporary files
-**/.DS_Store
-**/*.tmp
-**/*.temp
-**/*.bak
-
-# package/cache folders
-**/renv/library/
-**/renv/staging/
-**/*_cache/
-**/*_files/
-
-# R graphics leftovers
-**/Rplots.pdf
-```
-
-Storage-service exclusion behavior varies and may apply only going forward. Confirm that previously synchronized files were actually removed from the service before relying on an exclusion. Git ignore rules also do not automatically untrack files that were already committed; after checking carefully, remove such files from Git tracking with `git rm --cached [file]`.
-
-Do not ignore the whole analysis repository. Ignore only restricted inputs, machine-specific caches, histories, package libraries, temporary files, and other explicitly excluded artifacts. The `.Rproj` file, scripts, redistributable data, generated logs, and reproducibility metadata such as `renv.lock` should usually remain visible.
-
-The final paper-integration check should verify that:
-
-- every figure and table cited in the paper or appendix appears in the README crosswalk;
-- every figure/table path in the paper points to the intended manuscript-ready file in root-level `figures/` or `tables/`;
-- every manuscript-ready figure or table can be traced back to the R-generated source file, script, and log, especially when files are copied, renamed, or manually edited after generation;
-- every in-text number reported in the paper, including estimates, standard errors, p-values, sample sizes, sampling dates, completion times, response rates, and descriptive statistics, can be traced to a script, log file, generated table, or generated figure;
-- the values in the paper match the values produced by the replication scripts;
-- any conceptual figure, hand-made table, or non-replicated item is clearly identified in the README crosswalk.
-
-For public release, include paper source files only when appropriate and permitted. If the paper source cannot be included in the public archive, use it during preparation for the consistency check and document in `README.md` that the manuscript source was checked against the replication outputs.
-
-## Core Standard
-
-A replication package is successful when a reader can unzip it, open the project root, run one command, and see exactly how the reported results were produced.
-
-Every package should include:
-
-- One public entry point: `master.R`.
-- Exactly one authoritative public-package `README.md` that explains the package, the workflow, the required software, and every figure/table output.
-- One log file for each script that is part of the public replication path.
-- One `session_info.log` file from a successful full run.
-- De-identified analysis-ready data sufficient for every published result.
-- Exact survey instruments and response options, ethics/IRB documentation appropriate for public release, and variable-level codebooks.
-- Data citations, licenses, access dates, and provenance.
-- One `MANIFEST-SHA256.txt` inventory generated after the final run and cleanup.
-- Relative paths only. Scripts must run from the project root.
-- No hidden manual steps. If a step cannot be automated, document why and say exactly what file is affected.
-- Raw or received data should be treated as read-only.
-- Generated files should be reproducible from scripts, except when restricted data prevent public rebuilding.
-- All reported numerical results should appear in logs, tables, figures, or the README crosswalk.
-- When paper source files are available, the replication package should be checked against the manuscript and appendix for consistency in figures, tables, and in-text numerical claims.
-- Restricted, proprietary, or non-redistributable data must be documented explicitly.
-
-## Choose the Structure
-
-Use the compact structure for small or medium projects when:
-
-- the raw or cleaned public data can be included directly;
-- data wrangling and analysis are closely connected;
-- the package has a modest number of scripts;
-- there are no major restricted-data or expensive upstream collection steps;
-- the full public replication path can reasonably run end-to-end.
-
-Use the `build/` and `analyze/` structure for larger projects when:
-
-- data construction is long, fragile, expensive, or conceptually separate from analysis;
-- the project uses restricted data, licensed data, APIs, web scraping, or data that cannot be redistributed;
-- the public replication package should rely on analysis-ready datasets;
-- many scripts create intermediate data before any paper results are produced;
-- users need to understand data provenance without necessarily rerunning the full build stage.
-
-When uncertain, choose the simpler structure unless the build stage creates real complexity for users.
-
-## Project Structures
-
-The repository contains two starter structures. Copy one, then replace every placeholder with project-specific information.
-
-### Compact Structure
-
-Use [`templates/compact/`](https://github.com/yhoriuchi/replication-package-guide/tree/main/templates/compact) for smaller packages.
+Use the **compact structure** for small or medium projects when public data can be included directly, data preparation and analysis are closely connected, and the complete workflow can run end to end:
 
 ```text
 analysis/
 |-- README.md
-|-- .gitignore
-|-- master.R
-|-- project.Rproj               # optional but recommended
-|-- session_info.log
-|
+|-- master.R                  # or equivalent entry point
 |-- data/
-|   `-- public input data
-|
 |-- documents/
-|   |-- paper/
-|   |-- questionnaires/
-|   `-- other supporting documents
-|
 |-- scripts/
-|   |-- 01_prepare_data.R
-|   |-- 02_analyze_results.R
-|   `-- 03_make_figures_tables.R
-|
-|-- functions/                  # optional helper functions
-|
+|-- functions/
 |-- figures/
-|   `-- generated figures
-|
 |-- tables/
-|   `-- generated tables
-|
 |-- output/
-|   `-- intermediate reproducible objects
-|
 `-- logs/
-    `-- one log per script
 ```
 
-The compact structure should still include `logs/`. A `functions/` folder is optional, but recommended when multiple scripts reuse the same helpers.
-
-### Build/Analyze Structure
-
-Use [`templates/build-analyze/`](https://github.com/yhoriuchi/replication-package-guide/tree/main/templates/build-analyze) for larger packages with a separate data-build stage.
+Use the **build/analyze structure** when data construction is long or conceptually separate, inputs are restricted or licensed, or the public package should begin with analysis-ready data:
 
 ```text
 analysis/
 |-- README.md
-|-- .gitignore
-|-- master.R
-|-- project.Rproj               # optional but recommended
-|-- session_info.log
-|
+|-- master.R                  # or equivalent entry point
 |-- build/
 |   |-- data/
-|   |   `-- raw or received inputs, when distributable
 |   |-- documents/
-|   |   `-- source documentation and data provenance files
 |   |-- scripts/
-|   |   `-- scripts that create analysis-ready data
 |   |-- output/
-|   |   |-- analysis_ready/
-|   |   `-- other build outputs
-|   `-- logs/                   # use if build scripts are public and runnable
-|
+|   |   `-- analysis_ready/
+|   `-- logs/
 `-- analyze/
     |-- scripts/
     |-- functions/
@@ -451,233 +182,72 @@ analysis/
     `-- logs/
 ```
 
-The `build/` stage constructs analysis-ready datasets. The `analyze/` stage produces the manuscript and appendix results. The public replication workflow should normally run from `build/output/analysis_ready/` into `analyze/`.
+When uncertain, use the compact structure. Choose build/analyze only when the data-building stage creates real complexity, access restrictions, or a meaningful boundary for users.
 
-If the build stage depends on restricted data, do not force users to run it. Keep the build scripts for transparency, remove restricted inputs, include the analysis-ready public files when legally permitted, and explain the limitation in `README.md`.
+### The AI checks the paper against the package
 
-## README Requirements
+When manuscript source is available, the AI traces figures, tables, labels, estimates, uncertainty measures, sample sizes, dates, percentages, significance statements, and appendix results back to scripts, logs, and generated outputs.
 
-The README is the user's map. It should be complete enough that a reader can understand and verify the package without opening every script. Start from [`templates/README_TEMPLATE.md`](https://github.com/yhoriuchi/replication-package-guide/blob/main/templates/README_TEMPLATE.md) when reorganizing an existing project.
+### The AI validates the release
 
-Every replication README should include:
+The AI runs every authorized public path from a clean session, records warnings and limitations, generates `MANIFEST-SHA256.txt`, creates the release archive, extracts it into a new temporary directory, verifies its checksums, and runs it without relying on files outside the archive.
 
-- paper title and authors;
-- short description of what the package reproduces;
-- instructions for running `master.R`;
-- instructions for running individual scripts, if useful;
-- folder tree;
-- files included in the package;
-- data sources and restrictions;
-- build-stage documentation, if using the build/analyze structure;
-- analysis-stage documentation;
-- paper source and consistency-check status;
-- figure/table crosswalk in paper order;
-- optional figure/table previews when useful;
-- software requirements;
-- session information and computing environment summary;
-- recommended citation;
-- final verification date.
+### The researcher uses ReproAI before submission
 
-Use exactly one authoritative `README.md` **inside the public replication package** regardless of package size. Do not commit generated `README.html` or `README.pdf` files unless an archive or journal specifically requires them.
+This guide is an authoring and project-management framework. [ReproAI](https://reproai.org/), developed by Yiqing Xu and Leo Yang Yang, is a complementary author-facing diagnostic tool for checking an existing replication package, venue compliance, and common reproducibility problems. After preparing and validating the package with this guide, the researcher should run ReproAI as a final pre-submission check and resolve any additional issues it identifies.
 
-This package-level rule does not prohibit the common project-root `README.md` or a private analysis-repository `README.md`. The root README maps the private working project; the analysis README documents the private code repository; the public-package README is the authoritative guide for archive users. State each file's scope clearly and do not copy contradictory instructions among them.
+The final readiness report states whether the package is ready, ready with caveats, or not ready—and identifies exactly what still needs the researcher's attention.
 
-Use this section order unless a project-specific reason makes another order clearer:
+## Templates
 
-1. `## Description`
-2. `## How To Run`
-3. `## Folder Tree`
-4. `## Files Included In This Package`
-5. `## Data Sources And Restrictions`
-6. `## Build Stage`, for build/analyze packages only
-7. `## Analysis Stage`
-8. `## Paper Source And Consistency Checks`
-9. `## Figures And Tables`
-10. `## Software Requirements`
-11. `## Session Information`
-12. `## Recommended Citation`
-13. `## Last Verified`
-
-Commit only one README-style documentation file: `README.md`. If an archive or journal requires HTML or PDF documentation, generate those files from `README.md` at release time and make clear that `README.md` remains the source.
-
-## Crosswalk and Data Rules
-
-The README must include a paper-order crosswalk that maps every reported manuscript and appendix figure/table to its output file, script, log, LaTeX label, and notes. Embedded previews are optional; they are not a substitute for the crosswalk.
-
-- Use `## Figures And Tables` as the section heading, with `### Manuscript` and `### Appendix` subsections.
-- Add one `####` entry for every individual figure or table number used in the manuscript or appendix.
-- Do not group multiple figures or tables under one `####` heading.
-- Do not put descriptive titles or LaTeX labels in the `####` heading. Put descriptive context in `Notes` and put labels in `LaTeX Label`.
-- Each `####` entry should contain exactly five fields, in this order: `Output`, `Script`, `Log`, `LaTeX Label`, and `Notes`.
-- If a field contains multiple files or labels, list them as indented sub-items. Do not put multiple file paths on one line separated by commas or semicolons.
-- Use `No output file`, `No code`, or `Not applicable` when an item is conceptual, hand-made, or retained from the manuscript source rather than generated by public scripts.
-
-Use Markdown lists rather than a wide table for data sources. Long file paths and restriction notes are easier to scan when each source gets its own entry.
-
-For every restricted, proprietary, confidential, licensed, or otherwise non-redistributable source, document:
-
-- source name;
-- location or restricted-path description;
-- why the source cannot be redistributed;
-- which scripts originally used it;
-- which public analysis-ready file replaces it;
-- whether licensed users can rebuild it;
-- whether the published results can be reproduced without access to it.
-
-## Scripts, Logs, and Environment
-
-Use script names that make the execution order and purpose obvious:
-
-```text
-00_list_inputs.R
-01_prepare_data.R
-02_analyze_results.R
-03_make_figures_tables.R
-```
-
-- Prefix public replication scripts with two-digit numbers.
-- Use lowercase file names with underscores.
-- Keep exploratory, obsolete, or non-paper scripts out of the public replication path.
-- If such scripts are retained, place them in `scripts/not_in_paper/` or `scripts/archive/` and explain that they are not required.
-- Avoid spaces and special characters in file names.
-- Use the template logging helper rather than ad hoc `sink()` calls when possible.
-- Make the log filename match the script filename, such as `scripts/02_analyze_results.R` and `logs/02_analyze_results.log`.
-
-Every public script should write a log file. Logs are part of the replication record and should include:
-
-- script name;
-- start and end time, time zone, elapsed time, and completion status;
-- working directory, invocation or execution path, and relevant Git commit when available;
-- inputs with paths, file sizes, access dates or versions, and checksums when identity matters;
-- outputs with paths, file sizes, and checksums when identity matters;
-- user-set parameters, random seeds, and important package or external-tool versions;
-- important row counts after filters or merges;
-- merge diagnostics, exclusions, missing-data handling, and transformation checkpoints needed to audit the analysis;
-- sample sizes used in reported analyses;
-- treatment or group counts and field dates when relevant;
-- summary statistics, estimates, standard errors, test statistics, p-values, and warnings reported in the paper;
-- warnings, errors, and unresolved messages at the end of the run.
-
-Every package should include `master.R`. It should run the full public replication path from a clean R session, write `session_info.log`, and record start time, end time, elapsed time, platform, and package versions. For a build/analyze package, `master.R` should normally run the public analysis path only unless a public subset of the build stage can be rebuilt without restricted inputs.
-
-Avoid workspace-wide serialization such as `save.image()`. Save only explicitly named objects. When legacy `.RData` or workspace files must be inspected, load them into an isolated environment so they cannot silently replace objects in the running session.
-
-## Code and Output Hygiene
-
-Before staging the release, remove or archive obsolete scripts, dead commented-out exploratory code, development-only outputs, duplicate tables and figures, stale logs, RStudio caches, `.DS_Store`, conflicted copies, raw identifiers, temporary LaTeX build products, and files not referenced by the README, execution workflow, or manuscript crosswalk. Preserve explanatory comments that document reasoning, assumptions, or non-obvious code; they are not dead code.
-
-## Formal Final Audit
-
-Complete this audit only after the intended release contents have stabilized:
-
-1. Run every public script from a fresh session and confirm that each finishes without warnings or errors.
-2. Run optional source-reconstruction paths and the authorized raw-data build when available.
-3. Compare authorized rebuilt data with the public data by checksum.
-4. Verify that the codebooks cover every released variable and accurately report variable names, order, types, coding, labels, and observed ranges.
-5. Compare every manuscript/package table numerically.
-6. Compare every manuscript/package figure visually or pixel by pixel.
-7. Trace every in-text estimate, sample size, date, percentage, significance claim, and subgroup count.
-8. Compile and visually inspect the complete manuscript.
-9. Screen public data for direct and indirect identifiers and unnecessary sensitive fields.
-10. Rebuild `MANIFEST-SHA256.txt` after the final run and cleanup.
-11. Create the final ZIP, extract it into a new temporary directory, and verify every manifest entry.
-12. Run the extracted package successfully without relying on files outside the extracted directory.
-
-Internal validation and readiness reports should normally remain in the private analysis workspace, not in the public archive, unless the journal requests them.
-
-## Dataverse Preparation
-
-For a Dataverse deposit:
-
-- Upload only the final verified archive.
-- Confirm the uploaded checksum, file size, and date.
-- Leave the Dataverse file path blank for a single self-contained ZIP.
-- Add a concise reviewer-facing file description and remove all repository-template help text.
-- Do not invent an article DOI before one exists.
-- Check related-publication metadata for empty or incomplete identifier artifacts.
-- Confirm authors, ORCIDs, affiliations, contact information, description, subject, license, and deposit date.
-- Keep internal validation and readiness reports local unless requested.
-- Submit for review only after checking the saved public metadata display.
-
-## Quality Checklist
-
-Before releasing a replication package, verify:
-
-- `source("master.R")` runs from a fresh R session.
-- All scripts use relative paths from the project root.
-- Every public script creates a matching log file.
-- `session_info.log` exists and comes from a successful full run.
-- Every public script completes without warnings or errors.
-- Authorized rebuilt and public analysis-ready data match by checksum when both are available.
-- Codebooks completely and accurately cover every public variable.
-- Every manuscript/package table matches numerically.
-- Every manuscript/package figure matches visually or pixel by pixel.
-- Public data contain no unnecessary identifiers or sensitive fields.
-- `MANIFEST-SHA256.txt` covers and verifies every released file other than itself.
-- The final ZIP was extracted and run successfully without outside dependencies.
-- The README folder tree matches the actual package.
-- The README crosswalk lists every figure and table in paper order.
-- Every figure/table has an output path, script path, and log path, or an explicit `No output file`, `No code`, or `Not applicable` entry.
-- Every reported number in the paper source has been checked against logs, tables, figures, or scripts when the paper source is available.
-- All reported text numbers can be traced to a log, table, figure, or script.
-- All restricted data sources are documented.
-- All temporary, personal, and cache files are removed.
-- The package contains no absolute personal paths.
-- File names are stable and readable.
-- The package opens cleanly on another computer.
-
-## Minimal Release Contents
-
-For a compact package:
-
-```text
-README.md
-.gitignore
-master.R
-session_info.log
-data/
-documents/
-scripts/
-functions/
-figures/
-tables/
-output/
-logs/
-```
-
-For a large package:
-
-```text
-README.md
-.gitignore
-master.R
-session_info.log
-build/
-analyze/
-```
-
-The final archive should have obvious structure, one command to run, traceable outputs, and no surprises.
+- [Private project-root README](https://github.com/yhoriuchi/replication-package-guide/blob/main/templates/PROJECT_ROOT_README_TEMPLATE.md)
+- [Public replication-package README](https://github.com/yhoriuchi/replication-package-guide/blob/main/templates/README_TEMPLATE.md)
+- [Compact package structure](https://github.com/yhoriuchi/replication-package-guide/tree/main/templates/compact)
+- [Build/analyze package structure](https://github.com/yhoriuchi/replication-package-guide/tree/main/templates/build-analyze)
+- [Release-readiness report](https://github.com/yhoriuchi/replication-package-guide/blob/main/templates/release-readiness-report.md)
 
 <script id="agent-instructions-text" type="text/plain">{% include_relative AGENTS.md %}</script>
+
+<script id="step-1-prompt" type="text/plain">
+Please complete Step 1 of the AI-Assisted Research Project Management and Replication Guide: set up or organize this research project.
+
+First inspect the current folder and preserve all existing work. Create AGENTS.md only if it does not exist. If it exists, append or carefully merge the shared instructions below; never replace, overwrite, truncate, or discard existing instructions. Resolve conflicts explicitly and avoid duplicate sections.
+
+Help me establish one common research-project root with:
+- a private root README.md that maps the project;
+- manuscript/ as Git repository 1;
+- analysis/ as the software-neutral Git repository 2;
+- one root project_history/ following the current AI Collaboration Guide; and
+- optional others/ for non-core materials.
+
+Check before initializing or changing Git repositories. Do not reorganize or delete substantive files until you understand their roles. Identify storage restrictions and keep restricted data outside Git and any prohibited synchronization service. Do not begin the full replication-package build unless I request Step 2.
+
+At the end, explain what you created or changed, what you preserved, what still needs my decision, and where future AI-use history will be recorded.
+</script>
+
+<script id="step-2-prompt" type="text/plain">
+Please complete Step 2 of the AI-Assisted Research Project Management and Replication Guide: begin or continue building this project's replication package.
+
+Before changing files:
+1. Read the root AGENTS.md and README.md in full.
+2. Read the current AI Collaboration Guide at https://yhoriuchi.github.io/ai-collaboration-guide/ and record its access date.
+3. Find or ask me for the target journal, then read its most up-to-date official replication-package, data, code, disclosure, archive, and file-format requirements in full. Record the official source and access date. Current journal requirements take priority.
+4. Inspect the manuscript and analysis repositories and identify the private research workspace, manuscript files, public replication-package staging area, and journal submission files.
+
+Start this work before acceptance. Preserve substantive analysis choices unless a documented correction is necessary. Build a software-appropriate public workflow with one entry point, one authoritative package README, one detailed log per public script, an environment record, a complete paper-order figure/table crosswalk, restricted-data documentation, and relative paths. Run all authorized public paths, generate and verify the final SHA-256 manifest, and test an extracted release archive without outside files.
+
+After the package passes these checks, recommend that I run ReproAI at https://reproai.org/ as a complementary final pre-submission diagnostic and help me address any issues it reports.
+
+At the end, return a readiness report stating exactly what changed, what ran successfully, what could not be verified, and what still requires my attention.
+</script>
+
 <script>
 (function () {
-  var button = document.getElementById("copy-agent-instructions");
-  var source = document.getElementById("agent-instructions-text");
-  var status = document.getElementById("copy-agent-instructions-status");
+  var instructions = document.getElementById("agent-instructions-text");
+  var buttons = document.querySelectorAll(".copy-instruction");
 
-  if (!button || !source) {
+  if (!instructions || !buttons.length) {
     return;
-  }
-
-  function setStatus(message) {
-    if (!status) {
-      return;
-    }
-    status.textContent = message;
-    window.clearTimeout(setStatus.timeout);
-    setStatus.timeout = window.setTimeout(function () {
-      status.textContent = "";
-    }, 2400);
   }
 
   function fallbackCopy(text) {
@@ -692,21 +262,38 @@ The final archive should have obvious structure, one command to run, traceable o
     document.body.removeChild(textarea);
   }
 
-  button.addEventListener("click", function () {
-    var text = source.textContent.trim();
-
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(function () {
-        setStatus("Copied");
-      }).catch(function () {
-        fallbackCopy(text);
-        setStatus("Copied");
-      });
+  function setStatus(button, message) {
+    var status = button.nextElementSibling;
+    if (!status) {
       return;
     }
+    status.textContent = message;
+    window.clearTimeout(status.copyTimeout);
+    status.copyTimeout = window.setTimeout(function () {
+      status.textContent = "";
+    }, 2400);
+  }
 
-    fallbackCopy(text);
-    setStatus("Copied");
+  Array.prototype.forEach.call(buttons, function (button) {
+    button.addEventListener("click", function () {
+      var prompt = document.getElementById(button.getAttribute("data-prompt"));
+      var text = prompt.textContent.trim() +
+        "\n\n--- Shared project and replication instructions ---\n\n" +
+        instructions.textContent.trim();
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () {
+          setStatus(button, "Copied");
+        }).catch(function () {
+          fallbackCopy(text);
+          setStatus(button, "Copied");
+        });
+        return;
+      }
+
+      fallbackCopy(text);
+      setStatus(button, "Copied");
+    });
   });
 })();
 </script>
