@@ -16,7 +16,9 @@ The publishable guide is in [`index.md`](index.md). The copy button on the site 
 - [`templates/build-analyze/`](templates/build-analyze/): larger structure with separate `build/` and `analyze/` stages.
 - [`rules.dropboxignore`](rules.dropboxignore): Dropbox-root ignore rules for R/RStudio local and session files.
 
-The guide recommends one common AI workspace from Day 1, with root `AGENTS.md`, root `README.md`, one `project_history/`, a compilation-focused `manuscript/` Git repository, and a private, software-neutral `analysis/` Git repository. New instructions must be appended or merged into an existing `AGENTS.md`, never substituted for it. Dropbox, Google Drive, iCloud, SharePoint, Box, or another institutionally approved storage service can synchronize the authorized workspace, while Git tracks only the two child repositories. The public replication archive and journal production files remain separately staged artifacts.
+The guide recommends one common AI workspace from Day 1, with root `AGENTS.md`, root `README.md`, one `project_history/`, a compilation-focused `manuscript/` Git repository, and a private, software-neutral `analysis/` Git repository. New instructions must be appended or merged into an existing `AGENTS.md`, never substituted for it. When project rules permit, Dropbox, Google Drive, iCloud, SharePoint, Box, or another institutionally approved storage service should synchronize the authorized workspace. Git tracks only approved files inside the two child repositories, and data remain outside Git/GitHub by default. The public replication archive and journal production files remain separately staged artifacts.
+
+The guide promotes transparency and reproducibility within binding privacy, confidentiality, security, consent, ethics/IRB, legal, regulatory, contractual, licensing, data-use, funder, and institutional requirements. Those obligations take priority over journal requirements and the guide.
 
 ## Public Site
 

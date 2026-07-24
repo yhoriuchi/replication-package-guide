@@ -20,6 +20,7 @@ Use this template for the final report after preparing, auditing, or repairing a
 - Official journal-instructions source:
 - Journal instructions accessed:
 - Journal-specific requirements:
+- Governing legal/regulatory/consent/ethics/privacy/security/contract/license/institutional requirements:
 - Chosen structure: compact / build-analyze / other
 - Manuscript repository branch/commit/status:
 - Analysis repository branch/commit/status:
@@ -36,6 +37,8 @@ Use this template for the final report after preparing, auditing, or repairing a
 - Figure/table crosswalk status:
 - Paper consistency status:
 - Restricted-data status:
+- Privacy, legal, ethics, and regulatory compliance status:
+- Git/GitHub data-exclusion status:
 - Manifest status:
 - Extracted-archive run status:
 
@@ -80,6 +83,10 @@ Use this template for the final report after preparing, auditing, or repairing a
 - Public data sources documented:
 - Restricted or non-redistributable sources documented:
 - Public replacements documented:
+- `analysis/.gitignore` reviewed:
+- Tracked files checked for datasets:
+- Staged files checked for datasets:
+- Any intentionally Git-tracked public data and approval basis:
 - Licensed rebuild path documented:
 - Public reproducibility limits documented:
 

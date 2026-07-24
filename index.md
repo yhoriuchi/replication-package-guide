@@ -64,11 +64,13 @@ The AI—not the user—is expected to read and apply the detailed instructions.
 
 The universal/global instructions and the research-project instructions have different scopes; they are not competing files. Each research project maintains one canonical root `AGENTS.md`. If the AI Collaboration recording convention is already installed globally or present in the root file, the AI preserves it and merges only missing research-specific requirements without creating duplicate recording sections.
 
-## Three Rules That Always Apply
+## Five Rules That Always Apply
 
 1. **Preserve existing instructions.** Append or carefully merge into `AGENTS.md`; never replace, overwrite, truncate, or discard it.
 2. **Use a software-neutral analysis repository.** Name it `analysis/`, whether the project uses R, Python, Stata, Julia, MATLAB, multiple languages, or another toolchain.
-3. **Follow the journal.** During Step 2, the target journal's most up-to-date official requirements take priority over this general guide.
+3. **Protect people and comply with governing rules.** Research transparency never overrides privacy, confidentiality, security, consent, ethics/IRB requirements, laws, regulations, contracts, licenses, data-use agreements, or institutional policy.
+4. **Keep data out of GitHub by default.** Exclude raw, received, restricted, licensed, confidential, and working data from Git. Add only deliberately approved, redistributable public data when the project and journal require it.
+5. **Follow the journal within those boundaries.** During Step 2, the target journal's current official requirements take priority over this general guide, but never over applicable law, regulation, ethics, consent, contractual duties, or institutional policy.
 
 ## What Happens in Step 1?
 
@@ -96,7 +98,11 @@ If `AGENTS.md` already exists, the AI appends or carefully merges the new instru
 
 ### The AI separates synchronization from Git
 
-The common root may live in Dropbox, Google Drive, iCloud, SharePoint, Box, or another institutionally approved synchronized location. Git versions files inside `manuscript/` and `analysis/`; the synchronized parent is not normally a third Git repository. Restricted data stay outside Git and outside any storage service prohibited by consent, license, IRB, data-use agreement, or institutional policy.
+Researchers should normally place the common project root in Dropbox, Google Drive, iCloud, SharePoint, Box, or another institutionally approved synchronized location. This keeps the root instructions, project map, AI-use history, both repositories, and permitted local files synchronized across the researcher's computers. The recommendation applies only when consent, license, IRB, data-use agreements, and institutional policy permit the service.
+
+Cloud synchronization and GitHub have different scopes. Git versions approved files inside `manuscript/` and `analysis/`; the synchronized parent is not normally a third Git repository. Data may remain inside the approved synchronized parent without being tracked by Git. Data prohibited from the selected storage service must remain in an authorized secure location documented by the project.
+
+Transparency means documenting provenance, methods, restrictions, and reproducibility limits as fully as permitted. It does not mean exposing protected records, confidential sources, identifying information, security-sensitive details, or material that the project is not legally or ethically allowed to disclose.
 
 ### The AI establishes one project history
 
@@ -121,7 +127,7 @@ Before changing the package, the AI reads:
 2. the current AI Collaboration Guide; and
 3. the target journal's most up-to-date official replication-package, data, code, disclosure, archive, and file-format instructions.
 
-The journal's current requirements control when they conflict with this general guide.
+The journal's current requirements control when they conflict with this general guide, but they do not override law, regulation, consent, ethics/IRB requirements, contracts, licenses, data-use agreements, privacy, security, or institutional policy.
 
 ### The AI identifies four distinct artifacts
 
@@ -141,6 +147,12 @@ Depending on project complexity, the AI uses a compact package or separates data
 - a paper-order crosswalk connecting every figure and table to output, code, and logs.
 
 R projects may use `master.R` and `session_info.log`; Python, Stata, Julia, MATLAB, mixed-language, and other projects use equivalent entry points and environment records.
+
+### The AI keeps data out of Git and GitHub by default
+
+The `analysis/` repository should track code, documentation, codebooks, validation tools, logs, and appropriate generated results—not automatically upload the project's data. Its `.gitignore` should exclude raw, received, restricted, licensed, confidential, secure-local, and working data paths.
+
+Before staging, committing, or pushing Step 2 work, the AI checks Git's tracked and staged files for datasets and sensitive material. Only data that are deliberately classified as redistributable public replication inputs—and are permitted by consent, license, ethics, institutional policy, and journal rules—may be added to Git. Large public release data should normally be deposited with the replication archive or an appropriate data repository rather than GitHub.
 
 ### Two ways to structure `analysis/`
 
@@ -220,7 +232,7 @@ Help me establish one common research-project root with:
 - one root project_history/ following the current AI Collaboration Guide; and
 - optional others/ for non-core materials.
 
-Check before initializing or changing Git repositories. Do not reorganize or delete substantive files until you understand their roles. Identify storage restrictions and keep restricted data outside Git and any prohibited synchronization service. Do not begin the full replication-package build unless I request Step 2.
+Recommend placing the common project root in an institutionally approved synchronized location such as Dropbox, Google Drive, iCloud, SharePoint, or Box when project rules permit it. Explain that cloud synchronization and Git/GitHub have different scopes. Before moving or recording material, identify applicable privacy, confidentiality, security, consent, ethics/IRB, legal, regulatory, contractual, licensing, data-use, and institutional restrictions. Check before initializing or changing Git repositories. Do not reorganize or delete substantive files until you understand their roles. Keep prohibited data outside any disallowed synchronization service. Do not begin the full replication-package build unless I request Step 2.
 
 At the end, explain what you created or changed, what you preserved, what still needs my decision, and where future AI-use history will be recorded.
 </script>
@@ -231,10 +243,14 @@ Please complete Step 2 of the AI-Assisted Research Project Management and Replic
 Before changing files:
 1. Read the root AGENTS.md and README.md in full.
 2. Read the current AI Collaboration Guide at https://yhoriuchi.github.io/ai-collaboration-guide/ and record its access date.
-3. Find or ask me for the target journal, then read its most up-to-date official replication-package, data, code, disclosure, archive, and file-format requirements in full. Record the official source and access date. Current journal requirements take priority.
+3. Find or ask me for the target journal, then read its most up-to-date official replication-package, data, code, disclosure, archive, and file-format requirements in full. Record the official source and access date. Current journal requirements take priority over this guide, but not over applicable law, regulation, consent, ethics/IRB, privacy, security, contract, license, data-use agreement, or institutional policy.
 4. Inspect the manuscript and analysis repositories and identify the private research workspace, manuscript files, public replication-package staging area, and journal submission files.
 
 Start this work before acceptance. Preserve substantive analysis choices unless a documented correction is necessary. Build a software-appropriate public workflow with one entry point, one authoritative package README, one detailed log per public script, an environment record, a complete paper-order figure/table crosswalk, restricted-data documentation, and relative paths. Run all authorized public paths, generate and verify the final SHA-256 manifest, and test an extracted release archive without outside files.
+
+Keep data out of Git and GitHub by default. Inspect and repair the analysis repository's `.gitignore`, then check tracked and staged files before every commit or push. Exclude raw, received, restricted, licensed, confidential, secure-local, and working datasets. Add only deliberately approved, redistributable public replication inputs when permitted by consent, license, ethics, institutional policy, and journal rules. Prefer the final replication archive or an appropriate data repository over GitHub for large public release data.
+
+Respect research transparency while protecting privacy and complying with all applicable laws, regulations, consent terms, ethics/IRB requirements, contracts, licenses, data-use agreements, security obligations, and institutional policies. When full disclosure is prohibited, document the restriction, provenance, access procedure, public replacement, and reproducibility limit without revealing protected content. Stop and ask me when governing requirements are unclear or conflict.
 
 After the package passes these checks, recommend that I run ReproAI at https://reproai.org/ as a complementary final pre-submission diagnostic and help me address any issues it reports.
 

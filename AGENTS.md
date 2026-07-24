@@ -13,6 +13,21 @@ These are not two competing project instruction files. A research project keeps 
 
 The research root `AGENTS.md` is a deliberate specialized exception to the universal guide's advice not to create project-specific instruction files unnecessarily: this project needs one file to govern two repositories, data boundaries, output promotion, project history, and replication preparation.
 
+## Research Transparency, Privacy, and Governing Requirements
+
+Promote research transparency and reproducibility as fully as permitted, but never treat transparency as permission to disclose protected material. Do not expose confidential sources, identifying information, restricted records, security-sensitive details, proprietary inputs, or other material that the project is not authorized to disclose.
+
+Apply this authority hierarchy:
+
+1. Applicable law and regulation; binding court, government, or regulator requirements.
+2. Consent terms; ethics/IRB approvals; privacy, confidentiality, and security obligations; contracts; licenses; data-use agreements; funder and institutional policies.
+3. The target journal's current official requirements.
+4. This guide and project preferences.
+
+Higher-ranked obligations control when requirements conflict. A journal request or this guide never overrides law, regulation, ethics, consent, privacy, security, contract, license, data-use, or institutional restrictions.
+
+When full disclosure is prohibited, document the source, restriction, lawful access procedure, public replacement, and reproducibility limitation as fully as permitted without copying protected content into the manuscript, public package, Git, GitHub, cloud storage, logs, or `project_history/`. If governing requirements are unclear or appear to conflict, stop before disclosure or transfer, record the uncertainty without sensitive details, and ask the user for direction or appropriate institutional review.
+
 ## Two Operating Modes
 
 These instructions support two distinct stages. Follow the stage requested by the user; do not force Step 2 work during Step 1.
@@ -34,6 +49,7 @@ Begin Step 2 as soon as analyses produce results intended for the manuscript. Do
 
 - Read the project instructions and map, the current AI Collaboration Guide, and the target journal's current official requirements.
 - Inspect the research and manuscript workflows before staging public files.
+- Inspect the analysis repository's ignore rules and tracked/staged files; keep data out of Git and GitHub by default.
 - Apply the complete replication-package, logging, crosswalk, validation, manifest, and extracted-archive requirements below.
 - After the package passes its internal checks, recommend [ReproAI](https://reproai.org/), developed by Yiqing Xu and Leo Yang Yang, as a complementary final pre-submission diagnostic and help the user address any issues it reports.
 - Return a readiness report that distinguishes verified results from restrictions, missing inputs, and unresolved work.
@@ -69,7 +85,7 @@ The AI should inspect and help organize existing materials; it should not requir
 
 Before inspecting or changing the package, read the target journal's most up-to-date official replication-package instructions in full. Check replication-package, data-availability, code, disclosure, archive, and file-format requirements. Record the official URL or supplied file, date accessed, and journal-specific requirements.
 
-This guide is a general workflow. When a journal's current instructions conflict with it, follow the journal. Do not rely on remembered requirements, an earlier submission checklist, or an undated local copy. If the target journal is not yet known, record that fact and repeat this review once a venue is selected.
+This guide is a general workflow. When a journal's current instructions conflict with this guide, follow the journal only within the higher-ranked legal, ethical, privacy, contractual, licensing, security, and institutional boundaries above. Do not rely on remembered requirements, an earlier submission checklist, or an undated local copy. If the target journal is not yet known, record that fact and repeat this review once a venue is selected.
 
 ## Step 2: What the Agent Must Do
 
@@ -107,6 +123,8 @@ Apply these safeguards whenever the relevant material or action is in scope:
 8. Do not hide failed scripts, warnings, stale outputs, or mismatches between the paper and replication outputs.
 9. Do not put raw or restricted data in Git or an Overleaf-synchronized folder, even when the repository is private.
 10. Do not include internal archives, submission snapshots, or readiness reports in the public package unless the journal requests them.
+11. Do not stage, commit, or push a dataset merely because it sits inside `analysis/`. Add data to Git only after confirming that it is intentionally public, redistributable, appropriately sized, and permitted by consent, license, ethics, institutional policy, and journal rules.
+12. Do not put protected content into logs or project history merely to make the record appear more transparent. Record a non-sensitive description of the restriction instead.
 
 ## Step 1: Start on Day 1
 
@@ -139,7 +157,7 @@ Research-Project/
 
 The common parent is the single AI workspace, not normally a third Git repository. Do not create nested-repository ambiguity by initializing a wrapper repository unless the user has a deliberate version-control design for it.
 
-Place the common project root inside an institutionally approved synchronized storage location—such as Dropbox, Google Drive, iCloud, SharePoint, Box, or another approved service—when the project's data agreements permit it. The service should synchronize the root instructions, project history, both repositories, optional materials, and permitted local data across the user's computers.
+Recommend placing the common project root inside an institutionally approved synchronized storage location—such as Dropbox, Google Drive, iCloud, SharePoint, Box, or another approved service—when the project's data agreements permit it. Explain the benefit: the service can synchronize the root instructions, project map, AI-use history, both repositories, optional materials, and permitted local files across the user's computers.
 
 Cloud synchronization and Git have different scopes. Synchronization covers the whole authorized working folder. Git versions only tracked files inside `manuscript/` and `analysis/`. Because the common parent is not a wrapper Git repository, no project-root `.gitignore` is needed merely to exclude data from a nonexistent parent Git index. The analysis repository must still ignore local, restricted, licensed, or intentionally untracked datasets within its own Git scope. If the selected storage service is prohibited for a dataset, keep it in the authorized secure location and document the expected path. Before a clean run or release audit, confirm synchronization is complete and make required files available locally. Treat online-only placeholders and unresolved conflict copies as release blockers. Synchronization is not a substitute for Git or backup.
 
@@ -150,6 +168,22 @@ Keep a root `README.md` as the private project map. It should identify the proje
 The manuscript repository should contain only LaTeX and bibliography sources, manuscript tables and figures, active supplementary-material sources, small compile-time assets, and manuscript-specific documentation. It can connect to Overleaf through GitHub integration. Exclude raw data, R intermediate files, complete replication-package staging, archives, and submission snapshots.
 
 The private analysis repository should contain scripts and functions, data-construction and analysis code, codebooks, replication-package staging, validation scripts, generated results, and internal project documentation. Restricted raw data must remain outside Git. Add ignore rules and document the expected authorized secure local paths.
+
+### Data and GitHub Policy
+
+Keep data out of Git and GitHub by default. This applies even when the GitHub repository is private. The `analysis/.gitignore` should exclude raw, received, restricted, licensed, confidential, secure-local, and working data paths, along with temporary extracts and unapproved analysis-ready files.
+
+Do not assume that every file under the synchronized project root or `analysis/` belongs in Git. Cloud synchronization and Git/GitHub have separate scopes: permitted data may remain synchronized locally while being excluded from version control.
+
+Before staging, committing, or pushing:
+
+1. Inspect `.gitignore` without replacing existing project-specific rules.
+2. Inspect tracked files with `git ls-files`.
+3. Inspect staged files with `git diff --cached --name-only`.
+4. Check dataset extensions and known data directories for accidental inclusion.
+5. Stop and ask the user before untracking a previously committed dataset or changing repository history.
+
+Only deliberately approved, redistributable public replication inputs may be tracked, and only when law, regulation, consent, privacy, confidentiality, security, license, ethics/IRB approval, contract, data-use agreement, institutional policy, repository limits, and journal rules permit it. Prefer the final replication archive, Dataverse, or another appropriate data repository over GitHub for large public release data. Document every intentional exception in the root README, package README, and project history as applicable.
 
 A file-capable AI assistant should open or receive access to the common parent folder so it can inspect both repositories. Before changing either repository, check its branch, commit, remote, synchronization, review, protection, and dirty-state conventions independently. If an assistant cannot access local files, the user must provide the relevant instructions and materials and manually save its substantive work record.
 

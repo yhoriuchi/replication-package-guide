@@ -11,6 +11,8 @@ This is the common local workspace for the manuscript, analysis, AI collaboratio
 - Instructions accessed: [Date]
 - Synchronized storage service: [Dropbox / Google Drive / iCloud / SharePoint / Box / another institutionally approved service]
 - Cloud-data restrictions: [Any files that must remain outside the sync service]
+- Storage recommendation status: [Common root synchronized / secure exception documented / decision pending]
+- Governing requirements: [Law/regulation, consent, ethics/IRB, privacy/security, contract/license, data-use agreement, funder, and institutional rules]
 - AI Collaboration Guide: `https://yhoriuchi.github.io/ai-collaboration-guide/`
 - AI Collaboration Guide accessed: [Date]
 
@@ -48,6 +50,7 @@ Research-Project/
 - Default branch: [Branch]
 - Secure local data: [Expected path or policy]
 - Analysis Git data exclusions: [Expected ignored paths]
+- Intentionally Git-tracked public data: [Approved paths or none]
 - Public replication-package staging: [Path or not yet created]
 - Main execution entry point: [Path or not yet created]
 
@@ -74,5 +77,6 @@ The optional `others/` folder contains [presentations, DAG sources, reading mate
 - Manuscript synchronization:
 - Analysis reproducibility:
 - Data classification:
+- Privacy/legal/ethics compliance:
 - Public replication package:
 - Known risks or open tasks:

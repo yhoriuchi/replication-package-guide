@@ -13,6 +13,10 @@ Record both sources and their access dates. Then inspect the project and identif
 
 If the root already contains `AGENTS.md`, preserve it and append or carefully merge the new instructions. Never replace, overwrite, truncate, or discard an existing `AGENTS.md`. The analysis repository/root is named `analysis/` regardless of whether the project uses R, Python, Stata, Julia, MATLAB, or another toolchain.
 
+Recommend placing the common root in an institutionally approved synchronized storage service when the project's rules permit it. Keep data out of Git and GitHub by default. Inspect `.gitignore`, tracked files, and staged files before committing or pushing. Add only deliberately approved, redistributable public replication data; prefer an appropriate release archive or data repository for large public data.
+
+Promote transparency and reproducibility only within applicable law, regulation, consent, ethics/IRB requirements, privacy, confidentiality, security, contracts, licenses, data-use agreements, funder rules, and institutional policy. These obligations take priority over journal requirements and this guide. When disclosure is prohibited, document the restriction and reproducibility limit without revealing protected content. Stop and ask before transferring or disclosing material when governing requirements are unclear or conflict.
+
 Project context:
 - Common research-project parent: [path]
 - Synchronized storage service and restrictions: [Dropbox / Google Drive / iCloud / SharePoint / Box / another approved service, or none; list any prohibited data]
@@ -48,6 +52,8 @@ Required outcome:
 13. Create the release ZIP, extract it into a new temporary directory, verify it, and run the extracted package without outside files.
 14. Keep internal readiness reports outside the public package unless the journal requires them.
 15. Return a readiness report summarizing what changed, what was verified, and what could not be verified.
+16. Confirm that raw, received, restricted, licensed, confidential, working, and unapproved analysis-ready data are not tracked or staged in Git.
+17. Confirm that the public package, logs, and project history contain no protected content prohibited by law, regulation, consent, ethics/IRB requirements, privacy, confidentiality, security, contract, license, data-use agreement, or institutional policy.
 
 Do not use absolute personal paths in public scripts, create competing README files within the same scope, silently delete raw data or manuscript source files, hide failed scripts or warnings, or treat previews as a substitute for a figure/table crosswalk.
 ```
